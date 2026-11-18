@@ -461,9 +461,17 @@
         max-height: 85%;
         max-width: 85%;
     }
-    .bank-card img.bmo-larger-logo {
-        max-height: 92%;
-        max-width: 92%;
+    
+    /* Agrandissement spécifique et sur mesure pour le logo BMO */
+    .bank-card img.bmo-custom-logo {
+        max-height: 95%;
+        max-width: 95%;
+    }
+    @media (min-width: 768px) {
+        .bank-card img.bmo-custom-logo {
+            max-height: 105%;
+            max-width: 105%;
+        }
     }
     
     /* Agrandissement spécifique et sur mesure pour le logo Scotiabank (plus grand sur ordinateur, un peu plus grand sur téléphone) */
@@ -1048,7 +1056,7 @@
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="bmo bank of montreal">
                         <input type="radio" id="bmo" name="bank" value="bmo" />
-                        <div class="bank-logo-wrapper"><img src="bmo.jpeg" alt="BMO" class="bmo-larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="bmo.jpeg" alt="BMO" class="bmo-custom-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="cibc">
                         <input type="radio" id="cibc" name="bank" value="cibc" />
