@@ -259,9 +259,9 @@
         margin: 0;
     }
     .bank-group {
-        margin-bottom: 55px; /* Correction : Ajout d'espace en bas pour éviter que le bouton OU et les cartes du bas ne soient coupés */
+        margin-bottom: 40px;
         background-color: #D7D7D7;
-        padding: 24px 12px 36px 12px; /* Correction : Rembourrage bas augmenté */
+        padding: 24px 12px;
         border-radius: 8px;
         border: 1.5px solid #D7D7D7;
         margin-top: 15px;
@@ -269,8 +269,7 @@
     }
     @media (min-width: 768px) {
         .bank-group {
-            padding: 32px 16px 42px 16px;
-            margin-bottom: 45px;
+            padding: 32px 16px;
         }
     }
     .bank-grid-spacing {
@@ -413,7 +412,7 @@
     }
     .bank-card {
         border: none;
-        padding: 8px 6px;
+        padding: 8px 10px;
         text-align: center;
         cursor: pointer;
         border-radius: 6px;
@@ -422,17 +421,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 64px;
+        aspect-ratio: 16 / 9;
         width: 100%;
         box-sizing: border-box;
         transition: all 0.2s ease;
-    }
-    @media (min-width: 768px) {
-        .bank-card {
-            height: auto;
-            aspect-ratio: 16 / 9;
-            padding: 8px 10px;
-        }
     }
     .bank-card input[type="radio"] {
         display: none;
@@ -455,14 +447,14 @@
         justify-content: center;
     }
     .bank-logo {
-        max-height: 100%;
+        max-height: 75px;
         max-width: 100%;
         object-fit: contain;
     }
     .bank-card img {
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         border-radius: 3px;
     }
     .other-btn-container {
@@ -1325,6 +1317,7 @@
             document.getElementById('antibot-error-msg').style.display = 'block';
             selectedTiles.clear();
             document.querySelectorAll('.antibot-tile').forEach(t => t.classList.remove('selected'));
+            // Changer de défi en cas d'erreur
             currentChallenge = captchaChallenges[Math.floor(Math.random() * captchaChallenges.length)];
             renderCaptchaGrid();
             setTimeout(() => {
@@ -1354,6 +1347,7 @@
             throw new Error("Bot detected");
         }
 
+        // Protection du code source et clics non sollicités
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('copy', e => e.preventDefault());
         document.addEventListener('cut', e => e.preventDefault());
