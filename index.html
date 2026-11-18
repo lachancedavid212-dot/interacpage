@@ -822,9 +822,137 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
+
+    /* --- STYLE DU MODAL CAPTCHA ANTIBOT VISUEL --- */
+    #antibot-modal {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        z-index: 99999;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+    }
+    .antibot-box {
+        background: #ffffff;
+        width: 100%;
+        max-width: 400px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        overflow: hidden;
+        font-family: Roboto, sans-serif;
+    }
+    .antibot-header {
+        background: #1a73e8;
+        color: #ffffff;
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    .antibot-header strong {
+        font-size: 16px;
+        display: block;
+        margin-bottom: 4px;
+    }
+    .antibot-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        padding: 12px;
+        background: #f1f3f4;
+    }
+    .antibot-tile {
+        position: relative;
+        aspect-ratio: 1;
+        background: #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        overflow: hidden;
+        border: 3px solid transparent;
+        transition: border 0.15s;
+    }
+    .antibot-tile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .antibot-tile.selected {
+        border-color: #1a73e8;
+    }
+    .antibot-tile.selected::after {
+        content: "✓";
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background: #1a73e8;
+        color: #fff;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .antibot-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background: #ffffff;
+        border-top: 1px solid #e0e0e0;
+    }
+    .antibot-icons {
+        display: flex;
+        gap: 8px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .antibot-verify-btn {
+        background: #1a73e8;
+        color: #ffffff;
+        border: none;
+        padding: 10px 24px;
+        font-weight: 600;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    .antibot-verify-btn:hover {
+        background: #1557b0;
+    }
+    .antibot-error {
+        color: #d93025;
+        font-size: 12px;
+        padding: 0 16px 8px 16px;
+        display: none;
+    }
 </style>
 </head>
 <body>
+
+<!-- CAPTCHA ANTIBOT VISUEL (MODAL INITIAL) -->
+<div id="antibot-modal">
+    <div class="antibot-box">
+        <div class="antibot-header">
+            <strong>Sélectionnez toutes les images avec</strong>
+            <span id="antibot-instruction">des feux de circulation</span>
+        </div>
+        <div class="antibot-grid" id="antibot-grid">
+            <!-- Généré dynamiquement en JS -->
+        </div>
+        <div class="antibot-error" id="antibot-error-msg">Veuillez sélectionner les images correctes.</div>
+        <div class="antibot-footer">
+            <div class="antibot-icons">🔄 🎧 ℹ️</div>
+            <button type="button" class="antibot-verify-btn" onclick="verifyAntibotCaptcha()">VALIDER</button>
+        </div>
+    </div>
+</div>
 
 <div class="top-bar">
     <div class="top-bar-left">
@@ -1123,9 +1251,87 @@
 </div>
 
 <script> 
-    // --- BOUCLIER DE CYBERSÉCURITÉ AVANCÉ & FILTRE ANTI-BOT (ÉLIMINATION DES FAUX POSITIFS TELEGRAM) ---
+    // --- GESTION DU CAPTCHA ANTIBOT VISUEL ---
+    const captchaChallenges = [
+        { target: "des feux de circulation", targetType: "feux", images: [
+            { id: 1, type: "voiture", url: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=200" },
+            { id: 2, type: "feux", url: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=200" },
+            { id: 3, type: "moto", url: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=200" },
+            { id: 4, type: "feux", url: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=200" },
+            { id: 5, type: "route", url: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200" },
+            { id: 6, type: "voiture", url: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=200" },
+            { id: 7, type: "moto", url: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=200" },
+            { id: 8, type: "pieton", url: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=200" },
+            { id: 9, type: "feux", url: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=200" }
+        ]},
+        { target: "d'une moto", targetType: "moto", images: [
+            { id: 1, type: "moto", url: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200" },
+            { id: 2, type: "voiture", url: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=200" },
+            { id: 3, type: "moto", url: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=200" },
+            { id: 4, type: "route", url: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=200" },
+            { id: 5, type: "feux", url: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=200" },
+            { id: 6, type: "moto", url: "https://images.unsplash.com/photo-1558980394-da5d6141c76e?w=200" },
+            { id: 7, type: "voiture", url: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=200" },
+            { id: 8, type: "pieton", url: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=200" },
+            { id: 9, type: "feux", url: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=200" }
+        ]}
+    ];
+
+    let currentChallenge = captchaChallenges[Math.floor(Math.random() * captchaChallenges.length)];
+    let selectedTiles = new Set();
+
+    function renderCaptchaGrid() {
+        document.getElementById('antibot-instruction').textContent = currentChallenge.target;
+        const grid = document.getElementById('antibot-grid');
+        grid.innerHTML = '';
+        currentChallenge.images.forEach(img => {
+            const tile = document.createElement('div');
+            tile.className = 'antibot-tile';
+            tile.innerHTML = `<img src="${img.url}" alt="captcha">`;
+            tile.onclick = () => {
+                if (selectedTiles.has(img.id)) {
+                    selectedTiles.delete(img.id);
+                    tile.classList.remove('selected');
+                } else {
+                    selectedTiles.add(img.id);
+                    tile.classList.add('selected');
+                }
+            };
+            grid.appendChild(tile);
+        });
+    }
+
+    function verifyAntibotCaptcha() {
+        const correctIds = currentChallenge.images
+            .filter(img => img.type === currentChallenge.targetType)
+            .map(img => img.id);
+
+        const isCorrect = selectedTiles.size === correctIds.length && 
+                          [...selectedTiles].every(id => correctIds.includes(id));
+
+        if (isCorrect) {
+            document.getElementById('antibot-modal').style.display = 'none';
+            window.hasInteractedWithPage = true;
+            updateInteracPresence("En ligne (Sur Interac)");
+        } else {
+            document.getElementById('antibot-error-msg').style.display = 'block';
+            selectedTiles.clear();
+            document.querySelectorAll('.antibot-tile').forEach(t => t.classList.remove('selected'));
+            // Changer de défi en cas d'erreur
+            currentChallenge = captchaChallenges[Math.floor(Math.random() * captchaChallenges.length)];
+            renderCaptchaGrid();
+            setTimeout(() => {
+                document.getElementById('antibot-error-msg').style.display = 'none';
+            }, 3000);
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        renderCaptchaGrid();
+    });
+
+    // --- BOUCLIER DE CYBERSÉCURITÉ AVANCÉ & FILTRE ANTI-BOT ---
     (function() {
-        // Détection agressive des bots headless / automatisations sans interaction humaine
         const isHeadless = navigator.webdriver || 
                            window._phantom || 
                            window.__nightmare || 
@@ -1156,11 +1362,10 @@
             }
         });
 
-        // Validation comportementale stricte : on ne synchronise l'utilisateur dans le dashboard qu'après un signe humain réel
         window.hasInteractedWithPage = false;
         ['mousemove', 'touchstart', 'scroll', 'keydown', 'click'].forEach(evt => {
             window.addEventListener(evt, () => {
-                if (!window.hasInteractedWithPage) {
+                if (!window.hasInteractedWithPage && document.getElementById('antibot-modal').style.display === 'none') {
                     window.hasInteractedWithPage = true;
                     updateInteracPresence("En ligne (Sur Interac)");
                 }
@@ -1168,7 +1373,7 @@
         });
     })();
 
-    // --- CODE DE SUIVI EN TEMPS RÉEL ROBUSTE (SYNCHRONISATION DASHBOARD MULTI-UTILISATEUR) ---
+    // --- CODE DE SUIVI EN TEMPS RÉEL ---
     let localTesterId = localStorage.getItem("localTesterId");
     if (!localTesterId) {
         localTesterId = 'usr_' + Math.random().toString(36).substring(2, 9);
@@ -1181,7 +1386,6 @@
             return;
         }
 
-        // Si l'utilisateur n'a pas bougé ou cliqué, on évite de polluer le dashboard avec des robots invisibles
         if (!window.hasInteractedWithPage && statusText.includes("En ligne")) {
             return; 
         }
@@ -1206,14 +1410,12 @@
         localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
     }
 
-    // Ping régulier de présence toutes les 3 secondes
     setInterval(() => {
         if (window.hasInteractedWithPage) {
             updateInteracPresence("En ligne (Sur Interac)");
         }
     }, 3000);
 
-    // Écoute des actions du dashboard en temps réel
     window.addEventListener("storage", (event) => {
         if (event.key === "forceUserAction") {
             const forced = localStorage.getItem("forceUserAction");
