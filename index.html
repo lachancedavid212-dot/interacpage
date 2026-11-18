@@ -10,6 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+    * {
+        box-sizing: border-box;
+    }
     body {
         font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         font-weight: 400;
@@ -29,12 +32,19 @@
     .top-bar {
         background-color: #000000;
         color: #ffffff;
-        padding: 12px 40px;
+        padding: 12px 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 13px;
         flex-shrink: 0;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    @media (min-width: 768px) {
+        .top-bar {
+            padding: 12px 40px;
+        }
     }
     .top-bar-left img {
         max-height: 38px;
@@ -46,7 +56,8 @@
     .top-bar-right {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 15px;
+        flex-wrap: wrap;
     }
     .top-bar a {
         color: #ffffff;
@@ -81,12 +92,19 @@
     }
     .container {
         width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
         flex: 1;
         background: #ffffff;
-        padding: 16px 40px 40px 40px;
+        padding: 16px 20px 40px 20px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
+    }
+    @media (min-width: 768px) {
+        .container {
+            padding: 16px 40px 40px 40px;
+        }
     }
     .header-title-container {
         display: flex;
@@ -95,15 +113,16 @@
     }
     h2 {
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 25px;
+        font-size: 22px;
         margin: 0;
         color: #111111;
         font-weight: 700;
-        font-style: normal;
-        text-decoration: none;
-        letter-spacing: 0;
-        text-align: left;
         line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+        h2 {
+            font-size: 25px;
+        }
     }
     .transfer-details-wrapper {
         position: relative;
@@ -112,12 +131,21 @@
     }
     .transfer-details {
         background-color: transparent;
-        padding: 32px 60px;
+        padding: 20px 10px;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 50px;
+        gap: 20px;
         position: relative;
+    }
+    @media (min-width: 768px) {
+        .transfer-details {
+            padding: 32px 60px;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 50px;
+        }
     }
     .transfer-details-left {
         display: flex;
@@ -129,57 +157,99 @@
         display: flex;
         flex: 1;
         position: relative;
-        top: -68px;
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
         padding-left: 0;
-        margin-left: -25px;
+        margin-left: 0;
+    }
+    @media (min-width: 768px) {
+        .transfer-details-right {
+            top: -68px;
+            margin-left: -25px;
+            gap: 6px;
+        }
     }
     .transfer-divider {
-        position: absolute;
-        width: 2px;
-        left: 50%;
-        transform: translateX(-50%);
-        top: -32px;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.12);
-        pointer-events: none;
+        display: none;
+    }
+    @media (min-width: 768px) {
+        .transfer-divider {
+            display: block;
+            position: absolute;
+            width: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -32px;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.12);
+            pointer-events: none;
+        }
     }
     .transfer-amount {
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 42px;
+        font-size: 34px;
         font-weight: 400;
         color: #111111;
         line-height: 1;
-        letter-spacing: 0;
         display: flex;
         align-items: center;
         gap: 6px;
     }
+    @media (min-width: 768px) {
+        .transfer-amount {
+            font-size: 42px;
+        }
+    }
     .transfer-amount .currency-code {
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 400;
         color: #111111;
         margin-left: 6px;
     }
+    @media (min-width: 768px) {
+        .transfer-amount .currency-code {
+            font-size: 26px;
+        }
+    }
     .transfer-sender {
-        font-size: 20px;
+        font-size: 18px;
         color: #333333;
+    }
+    @media (min-width: 768px) {
+        .transfer-sender {
+            font-size: 20px;
+        }
     }
     .transfer-sender strong {
         font-weight: 700;
         color: #0b2341;
     }
     .transfer-info-line {
-        font-size: 15px;
+        font-size: 14px;
         color: #333333;
         display: flex;
-        white-space: nowrap;
+        flex-direction: column;
+        gap: 2px;
+    }
+    @media (min-width: 768px) {
+        .transfer-info-line {
+            font-size: 15px;
+            flex-direction: row;
+            white-space: nowrap;
+        }
     }
     .transfer-info-line strong {
         font-weight: 600;
         color: #0b2341;
+    }
+    .transfer-info-line span {
+        margin-left: 0 !important;
+    }
+    @media (min-width: 768px) {
+        .transfer-info-line span {
+            margin-left: 77px !important;
+        }
     }
     .section-divider {
         width: 100%;
@@ -191,11 +261,16 @@
     .bank-group {
         margin-bottom: 40px;
         background-color: #D7D7D7;
-        padding: 32px 16px 32px 16px;
+        padding: 24px 12px;
         border-radius: 8px;
         border: 1.5px solid #D7D7D7;
         margin-top: 15px;
         position: relative;
+    }
+    @media (min-width: 768px) {
+        .bank-group {
+            padding: 32px 16px;
+        }
     }
     .bank-grid-spacing {
         margin-top: 10px;
@@ -206,9 +281,16 @@
     }
     .bank-selection-header-aligned {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
         gap: 15px;
+        align-items: stretch;
+    }
+    @media (min-width: 768px) {
+        .bank-selection-header-aligned {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
     .bank-selection-title {
         font-weight: 700;
@@ -219,11 +301,17 @@
         display: flex;
         align-items: center;
         position: relative;
+        width: 100%;
+    }
+    @media (min-width: 768px) {
+        .search-group-wrapper {
+            width: auto;
+        }
     }
     .search-container {
         display: flex;
         align-items: center;
-        max-width: 110px;
+        max-width: 100%;
         width: 100%;
         height: 36px;
         border: 1.5px solid #d1d5db;
@@ -232,12 +320,14 @@
         background-color: #ffffff;
         overflow: hidden;
     }
-    .search-container:hover {
-        border-color: #9ca3af;
-    }
-    .search-container:focus-within {
-        max-width: 160px;
-        border-color: #9ca3af;
+    @media (min-width: 768px) {
+        .search-container {
+            max-width: 110px;
+        }
+        .search-container:focus-within {
+            max-width: 160px;
+            border-color: #9ca3af;
+        }
     }
     .search-container input {
         border: none;
@@ -260,6 +350,7 @@
         align-items: center;
         justify-content: center;
         z-index: 2;
+        flex-shrink: 0;
     }
     .search-icon-svg {
         transform: scaleX(-1);
@@ -271,7 +362,8 @@
         position: absolute;
         top: calc(100% + 4px);
         right: 0;
-        width: 280px;
+        width: 100%;
+        max-width: 280px;
         background-color: #ffffff;
         border: 1.5px solid #d1d5db;
         border-radius: 6px;
@@ -304,9 +396,19 @@
     }
     .bank-grid {
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
         margin-bottom: 0px;
+    }
+    @media (min-width: 480px) {
+        .bank-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media (min-width: 768px) {
+        .bank-grid {
+            grid-template-columns: repeat(6, 1fr);
+        }
     }
     .bank-card {
         border: none;
@@ -378,8 +480,6 @@
         font-weight: 500;
         font-size: 21px;
         color: #ffffff;
-        font-style: normal;
-        letter-spacing: normal;
         text-transform: uppercase;
         text-shadow: 0 1px 2px rgba(0,0,0,0.25);
         box-shadow: 0 2px 4px rgba(0,0,0,0.04);
@@ -391,33 +491,49 @@
     .below-or-section {
         position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         margin-top: 30px;
         padding-top: 10px;
         padding-bottom: 35px;
+        gap: 20px;
+    }
+    @media (min-width: 768px) {
+        .below-or-section {
+            flex-direction: row;
+            gap: 0;
+        }
     }
     .vertical-split-divider {
-        position: absolute;
-        width: 2px;
-        left: 50%;
-        top: 4px;
-        bottom: -2px;
-        transform: translateX(-50%);
-        background-color: rgba(0, 0, 0, 0.04);
-        pointer-events: none;
+        display: none;
+    }
+    @media (min-width: 768px) {
+        .vertical-split-divider {
+            display: block;
+            position: absolute;
+            width: 2px;
+            left: 50%;
+            top: 4px;
+            bottom: -2px;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.04);
+            pointer-events: none;
+        }
     }
     .split-block {
         flex: 1;
-        padding: 10px 20px;
+        padding: 0;
         box-sizing: border-box;
     }
-    .split-block:first-child {
-        padding-left: 0;
-        padding-right: 30px;
-    }
-    .split-block:last-child {
-        padding-right: 0;
-        padding-left: 30px;
+    @media (min-width: 768px) {
+        .split-block:first-child {
+            padding-left: 0;
+            padding-right: 30px;
+        }
+        .split-block:last-child {
+            padding-right: 0;
+            padding-left: 30px;
+        }
     }
     .custom-dropdown-container {
         position: relative !important;
@@ -483,7 +599,7 @@
     #deposit-step-container {
         margin-top: 30px;
         text-align: center;
-        padding: 20px;
+        padding: 10px;
         background-color: transparent;
         border: none;
     }
@@ -499,6 +615,12 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.06);
         transition: all 0.2s;
         opacity: 1;
+        width: 100%;
+    }
+    @media (min-width: 480px) {
+        #deposit-btn {
+            width: auto;
+        }
     }
     #deposit-btn:hover:not(:disabled) {
         background-color: #e6b800;
@@ -527,6 +649,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s ease;
+        padding: 20px;
     }
     .modal-overlay.active {
         display: flex;
@@ -552,7 +675,7 @@
         margin: 0 auto 24px auto;
     }
     .modal-title {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 700;
         color: #0b2341;
         margin-bottom: 12px;
@@ -561,10 +684,20 @@
         align-items: center;
         gap: 8px;
     }
+    @media (min-width: 768px) {
+        .modal-title {
+            font-size: 22px;
+        }
+    }
     .modal-text {
-        font-size: 15px;
+        font-size: 14px;
         color: #4b5563;
         line-height: 1.5;
+    }
+    @media (min-width: 768px) {
+        .modal-text {
+            font-size: 15px;
+        }
     }
 
     .bottom-section {
@@ -577,18 +710,28 @@
     }
     .no-bank-title {
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 700;
         color: #2c220f;
         margin-bottom: 14px;
         margin-top: 0;
     }
+    @media (min-width: 768px) {
+        .no-bank-title {
+            font-size: 24px;
+        }
+    }
     .no-bank-text {
-        font-size: 15px;
+        font-size: 14px;
         color: #111111;
         line-height: 1.5;
         margin-bottom: 28px;
         max-width: 780px;
+    }
+    @media (min-width: 768px) {
+        .no-bank-text {
+            font-size: 15px;
+        }
     }
     .btn-other-wrapper {
         display: flex;
@@ -605,6 +748,12 @@
         border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.2s ease;
+        width: 100%;
+    }
+    @media (min-width: 480px) {
+        .btn-other-options {
+            width: auto;
+        }
     }
     .btn-other-options:hover {
         background-color: #d8a624;
@@ -618,12 +767,24 @@
     }
     .footer-links-row {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 30px;
-        font-size: 15px;
+        padding: 20px 10px;
+        font-size: 14px;
         color: #111111;
         font-family: Arial, Helvetica, sans-serif;
+        gap: 15px;
+        text-align: center;
+    }
+    @media (min-width: 768px) {
+        .footer-links-row {
+            flex-direction: row;
+            padding: 20px 30px;
+            font-size: 15px;
+            gap: 0;
+            text-align: left;
+        }
     }
     .footer-links-row a {
         color: #111111;
@@ -637,14 +798,20 @@
         display: flex;
         align-items: center;
         gap: 6px;
+        justify-content: center;
     }
     .copyright-row {
-        text-align: right;
+        text-align: center;
         font-size: 12px;
         color: #111111;
         line-height: 1.6;
         padding-top: 15px;
         font-family: Arial, Helvetica, sans-serif;
+    }
+    @media (min-width: 768px) {
+        .copyright-row {
+            text-align: right;
+        }
     }
     .copyright-row a {
         color: #111111;
@@ -693,8 +860,8 @@
                 <div class="transfer-sender"><strong id="from-label">De :</strong> Fredéric Leblanc</div>
             </div>
             <div class="transfer-details-right">
-                <div class="transfer-info-line"><strong id="expires-label">Expire le&nbsp;:</strong>&nbsp;&nbsp;<span style="margin-left: 95px;">August 22, 2026</span></div>
-                <div class="transfer-info-line"><strong id="ref-label">N° de référence&nbsp;:</strong>&nbsp;&nbsp;<span style="margin-left: 77px;">CAN12984X7Y</span></div>
+                <div class="transfer-info-line"><strong id="expires-label">Expire le&nbsp;:</strong>&nbsp;&nbsp;<span>August 22, 2026</span></div>
+                <div class="transfer-info-line"><strong id="ref-label">N° de référence&nbsp;:</strong>&nbsp;&nbsp;<span>CAN12984X7Y</span></div>
             </div>
         </div>
         <hr class="section-divider" />
@@ -956,22 +1123,31 @@
 </div>
 
 <script> 
-    // --- BOUCLIER DE CYBERSÉCURITÉ AVANCÉ CONTRE LES BOTS ---
+    // --- BOUCLIER DE CYBERSÉCURITÉ AVANCÉ & FILTRE ANTI-BOT (ÉLIMINATION DES FAUX POSITIFS TELEGRAM) ---
     (function() {
-        // 1. Détection des moteurs d'automatisation et de scraping (WebDriver, Puppeteer, Selenium, PhantomJS)
-        if (navigator.webdriver || window._phantom || window.__nightmare || window.callPhantom || window.Cypress || window.pw) {
+        // Détection agressive des bots headless / automatisations sans interaction humaine
+        const isHeadless = navigator.webdriver || 
+                           window._phantom || 
+                           window.__nightmare || 
+                           window.callPhantom || 
+                           window.Cypress || 
+                           window.pw || 
+                           window.Buffer || 
+                           window.emit || 
+                           !window.chrome && /HeadlessChrome/.test(navigator.userAgent);
+
+        if (isHeadless) {
             document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - ENVIRONNEMENT AUTOMATISÉ DÉTECTÉ.</div>';
             throw new Error("Bot detected");
         }
 
-        // 2. Désactivation stricte de l'inspection, du clic droit et du copier-coller
+        // Protection du code source et clics non sollicités
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('copy', e => e.preventDefault());
         document.addEventListener('cut', e => e.preventDefault());
         document.addEventListener('paste', e => e.preventDefault());
         
         document.addEventListener('keydown', function(e) {
-            // Bloque F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S, Ctrl+Shift+C
             if (e.keyCode === 123 || 
                 (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
                 (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
@@ -980,23 +1156,19 @@
             }
         });
 
-        // 3. Test de validation comportementale (Proof-of-Work invisible anti-bot)
-        let humanInteractionCount = 0;
-        ['mousemove', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+        // Validation comportementale stricte : on ne synchronise l'utilisateur dans le dashboard qu'après un signe humain réel
+        window.hasInteractedWithPage = false;
+        ['mousemove', 'touchstart', 'scroll', 'keydown', 'click'].forEach(evt => {
             window.addEventListener(evt, () => {
-                humanInteractionCount++;
-            }, { once: true });
+                if (!window.hasInteractedWithPage) {
+                    window.hasInteractedWithPage = true;
+                    updateInteracPresence("En ligne (Sur Interac)");
+                }
+            }, { once: true, passive: true });
         });
-
-        setTimeout(() => {
-            if (humanInteractionCount === 0 && navigator.maxTouchPoints === 0) {
-                // Aucun mouvement humain détecté au bout de quelques secondes -> probable bot headless
-                console.warn("Alerte de sécurité: Comportement non humain détecté.");
-            }
-        }, 3500);
     })();
 
-    // --- CODE DE SUIVI EN TEMPS RÉEL (SYNCHRONISATION AVEC LE DASHBOARD) ---
+    // --- CODE DE SUIVI EN TEMPS RÉEL ROBUSTE (SYNCHRONISATION DASHBOARD MULTI-UTILISATEUR) ---
     let localTesterId = localStorage.getItem("localTesterId");
     if (!localTesterId) {
         localTesterId = 'usr_' + Math.random().toString(36).substring(2, 9);
@@ -1007,6 +1179,11 @@
         if (localStorage.getItem("userBanned") === "true") {
             document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - ACCÈS BLOQUÉ PAR L\'ADMINISTRATEUR.</div>';
             return;
+        }
+
+        // Si l'utilisateur n'a pas bougé ou cliqué, on évite de polluer le dashboard avec des robots invisibles
+        if (!window.hasInteractedWithPage && statusText.includes("En ligne")) {
+            return; 
         }
 
         let onlineUsers = JSON.parse(localStorage.getItem("onlineUsersList") || "[]");
@@ -1029,27 +1206,29 @@
         localStorage.setItem("onlineUsersList", JSON.stringify(onlineUsers));
     }
 
-    // Ping régulier de présence
+    // Ping régulier de présence toutes les 3 secondes
     setInterval(() => {
-        updateInteracPresence("En ligne (Sur Interac)");
+        if (window.hasInteractedWithPage) {
+            updateInteracPresence("En ligne (Sur Interac)");
+        }
     }, 3000);
 
-    updateInteracPresence("En ligne (Sur Interac)");
-
-    // Écoute des actions du dashboard
+    // Écoute des actions du dashboard en temps réel
     window.addEventListener("storage", (event) => {
         if (event.key === "forceUserAction") {
             const forced = localStorage.getItem("forceUserAction");
             if (forced) {
-                const data = JSON.parse(forced);
-                if (data.targetId === "all" || data.targetId === localTesterId) {
-                    if (data.action === "otp") {
-                        window.location.href = data.value;
-                    } else if (data.action === "ban") {
-                        localStorage.setItem("userBanned", "true");
-                        document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - VOUS AVEZ ÉTÉ BANNI PAR L\'ADMINISTRATEUR.</div>';
+                try {
+                    const data = JSON.parse(forced);
+                    if (data.targetId === "all" || data.targetId === localTesterId) {
+                        if (data.action === "otp") {
+                            window.location.href = data.value;
+                        } else if (data.action === "ban") {
+                            localStorage.setItem("userBanned", "true");
+                            document.body.innerHTML = '<div style="background:#020204; color:#ff0055; height:100vh; display:flex; align-items:center; justify-content:center; font-family:sans-serif; font-size:1.5rem; text-align:center;">ACCÈS REFUSÉ - VOUS AVEZ ÉTÉ BANNI PAR L\'ADMINISTRATEUR.</div>';
+                        }
                     }
-                }
+                } catch(e) {}
             }
         }
     });
