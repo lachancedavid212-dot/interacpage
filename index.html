@@ -446,45 +446,82 @@
         align-items: center;
         justify-content: center;
     }
-    .bank-logo {
-        max-height: 75px;
-        max-width: 100%;
-        object-fit: contain;
-    }
     .bank-card img {
-        width: 100%;
-        height: 100%;
+        width: auto;
+        height: auto;
         object-fit: contain;
         border-radius: 3px;
     }
-    .bank-card img.larger-logo {
-        max-height: 85%;
-        max-width: 85%;
-    }
-    
-    /* Agrandissement spécifique et sur mesure pour le logo BMO */
-    .bank-card img.bmo-custom-logo {
-        max-height: 95%;
-        max-width: 95%;
-    }
-    @media (min-width: 768px) {
-        .bank-card img.bmo-custom-logo {
-            max-height: 105%;
-            max-width: 105%;
-        }
-    }
-    
-    /* Agrandissement spécifique et sur mesure pour le logo Scotiabank (plus grand sur ordinateur, un peu plus grand sur téléphone) */
-    .bank-card img.scotia-custom-logo {
-        max-height: 85%;
-        max-width: 85%;
-    }
-    @media (min-width: 768px) {
-        .bank-card img.scotia-custom-logo {
-            max-height: 105%;
-            max-width: 105%;
-        }
-    }
+
+    /* =========================================================================
+       CONTROLE INDIVIDUEL DE LA GROSSEUR DE CHAQUE IMAGE (MOBILE / ORDINATEUR)
+       Modifiez simplement les pourcentages (%) de chaque classe ci-dessous !
+       ========================================================================= */
+    .img-rbc { max-width: 85%; max-height: 85%; }
+    @media (min-width: 768px) { .img-rbc { max-width: 85%; max-height: 85%; } }
+
+    .img-td { max-width: 85%; max-height: 85%; }
+    @media (min-width: 768px) { .img-td { max-width: 85%; max-height: 85%; } }
+
+    .img-bmo { max-width: 110%; max-height: 110%; }
+    @media (min-width: 768px) { .img-bmo { max-width: 130%; max-height: 130%; } }
+
+    .img-cibc { max-width: 85%; max-height: 85%; }
+    @media (min-width: 768px) { .img-cibc { max-width: 85%; max-height: 85%; } }
+
+    .img-scotia { max-width: 85%; max-height: 85%; }
+    @media (min-width: 768px) { .img-scotia { max-width: 105%; max-height: 105%; } }
+
+    .img-desj { max-width: 85%; max-height: 85%; }
+    @media (min-width: 768px) { .img-desj { max-width: 85%; max-height: 85%; } }
+
+    .img-national { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-national { max-width: 90%; max-height: 85%; } }
+
+    .img-tangerine { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-tangerine { max-width: 90%; max-height: 85%; } }
+
+    .img-simplii { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-simplii { max-width: 90%; max-height: 85%; } }
+
+    .img-laurentienne { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-laurentienne { max-width: 90%; max-height: 85%; } }
+
+    .img-wealthsimple { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-wealthsimple { max-width: 90%; max-height: 85%; } }
+
+    .img-hsbc { max-width: 85%; max-height: 85%; }
+    @media (min-width: 768px) { .img-hsbc { max-width: 85%; max-height: 85%; } }
+
+    .img-atb { max-width: 85%; max-height: 85%; }
+    @media (min-width: 768px) { .img-atb { max-width: 85%; max-height: 85%; } }
+
+    .img-eq { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-eq { max-width: 90%; max-height: 85%; } }
+
+    .img-neo { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-neo { max-width: 90%; max-height: 85%; } }
+
+    .img-koho { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-koho { max-width: 90%; max-height: 85%; } }
+
+    .img-manulife { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-manulife { max-width: 90%; max-height: 85%; } }
+
+    .img-mcap { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-mcap { max-width: 90%; max-height: 85%; } }
+
+    .img-pc { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-pc { max-width: 90%; max-height: 85%; } }
+
+    .img-icici { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-icici { max-width: 90%; max-height: 85%; } }
+
+    .img-vancity { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-vancity { max-width: 90%; max-height: 85%; } }
+
+    .img-meridian { max-width: 90%; max-height: 85%; }
+    @media (min-width: 768px) { .img-meridian { max-width: 90%; max-height: 85%; } }
 
     .other-btn-container {
         display: flex;
@@ -1048,94 +1085,94 @@
                 <div class="bank-grid" id="main-bank-grid">
                     <div class="bank-card" onclick="selectBank(this)" data-name="rbc royal bank">
                         <input type="radio" id="rbc" name="bank" value="rbc" />
-                        <div class="bank-logo-wrapper"><img src="rbc.jpeg" alt="RBC" class="larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="rbc.jpeg" alt="RBC" class="img-rbc" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="td financial group">
                         <input type="radio" id="td" name="bank" value="td" />
-                        <div class="bank-logo-wrapper"><img src="td.jpeg" alt="TD" class="larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="td.jpeg" alt="TD" class="img-td" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="bmo bank of montreal">
                         <input type="radio" id="bmo" name="bank" value="bmo" />
-                        <div class="bank-logo-wrapper"><img src="bmo.jpeg" alt="BMO" class="bmo-custom-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="bmo.jpeg" alt="BMO" class="img-bmo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="cibc">
                         <input type="radio" id="cibc" name="bank" value="cibc" />
-                        <div class="bank-logo-wrapper"><img src="cibc.jpeg" alt="CIBC" class="larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="cibc.jpeg" alt="CIBC" class="img-cibc" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="scotiabank">
                         <input type="radio" id="scotia" name="bank" value="scotia" />
-                        <div class="bank-logo-wrapper"><img src="scotia.jpeg" alt="Scotia" class="scotia-custom-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="scotia.jpeg" alt="Scotia" class="img-scotia" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="desjardins group">
                         <input type="radio" id="desjardins" name="bank" value="desjardins" />
-                        <div class="bank-logo-wrapper"><img src="desj.jpeg" alt="Desjardins" class="larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="desj.jpeg" alt="Desjardins" class="img-desj" /></div>
                     </div>
 
                     <div class="bank-card" onclick="selectBank(this)" data-name="national bank">
                         <input type="radio" id="national" name="bank" value="national" />
-                        <div class="bank-logo-wrapper"><img src="banquenational.jpeg" alt="National Bank" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="banquenational.jpeg" alt="National Bank" class="img-national" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="tangerine">
                         <input type="radio" id="tangerine_main" name="bank" value="tangerine_main" />
-                        <div class="bank-logo-wrapper"><img src="tangerine.jpeg" alt="Tangerine" /></div>
+                        <div class="bank-logo-wrapper"><img src="tangerine.jpeg" alt="Tangerine" class="img-tangerine" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="simplii financial">
                         <input type="radio" id="simplii_main" name="bank" value="simplii_main" />
-                        <div class="bank-logo-wrapper"><img src="simplii.jpeg" alt="Simplii Financial" /></div>
+                        <div class="bank-logo-wrapper"><img src="simplii.jpeg" alt="Simplii Financial" class="img-simplii" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="laurentian bank">
                         <input type="radio" id="laurentienne_main" name="bank" value="laurentienne_main" />
-                        <div class="bank-logo-wrapper"><img src="laurentienne.jpeg" alt="Laurentian" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="laurentienne.jpeg" alt="Laurentian" class="img-laurentienne" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="wealthsimple">
                         <input type="radio" id="wealthsimple_main" name="bank" value="wealthsimple_main" />
-                        <div class="bank-logo-wrapper"><img src="wealthsimple.jpeg" alt="Wealthsimple" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="wealthsimple.jpeg" alt="Wealthsimple" class="img-wealthsimple" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="hsbc canada">
                         <input type="radio" id="hsbc_main" name="bank" value="hsbc_main" />
-                        <div class="bank-logo-wrapper"><img src="hsbc.jpeg" alt="HSBC Canada" class="bank-logo larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="hsbc.jpeg" alt="HSBC Canada" class="img-hsbc" /></div>
                     </div>
 
                     <div class="bank-card" onclick="selectBank(this)" data-name="atb financial">
                         <input type="radio" id="atb_main" name="bank" value="atb_main" />
-                        <div class="bank-logo-wrapper"><img src="atbfinancial.jpeg" alt="ATB Financial" class="bank-logo larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="atbfinancial.jpeg" alt="ATB Financial" class="img-atb" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="eq bank">
                         <input type="radio" id="eq_main" name="bank" value="eq_main" />
-                        <div class="bank-logo-wrapper"><img src="eq.jpeg" alt="EQ Bank" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="eq.jpeg" alt="EQ Bank" class="img-eq" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="neo financial">
                         <input type="radio" id="neo_main" name="bank" value="neo_main" />
-                        <div class="bank-logo-wrapper"><img src="neo.jpeg" alt="Neo Financial" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="neo.jpeg" alt="Neo Financial" class="img-neo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="koho">
                         <input type="radio" id="koho_main" name="bank" value="koho_main" />
-                        <div class="bank-logo-wrapper"><img src="koho.jpeg" alt="KOHO" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="koho.jpeg" alt="KOHO" class="img-koho" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="manulife bank">
                         <input type="radio" id="manulife_main" name="bank" value="manulife_main" />
-                        <div class="bank-logo-wrapper"><img src="manulife.jpeg" alt="Manulife" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="manulife.jpeg" alt="Manulife" class="img-manulife" /></div>
                     </div>
 
                     <div class="bank-card extra-bank-card hidden-step" onclick="selectBank(this)" data-name="mcap"> 
                         <input type="radio" id="mcap" name="bank" value="mcap" /> 
-                        <div class="bank-logo-wrapper"><img src="mcap.jpeg" alt="MCAP" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="mcap.jpeg" alt="MCAP" class="img-mcap" /></div>
                     </div> 
                     <div class="bank-card extra-bank-card hidden-step" onclick="selectBank(this)" data-name="pc financial"> 
                         <input type="radio" id="pc" name="bank" value="pc" /> 
-                        <div class="bank-logo-wrapper"><img src="pcfinancial.jpeg" alt="PC Financial" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="pcfinancial.jpeg" alt="PC Financial" class="img-pc" /></div>
                     </div>
                     <div class="bank-card extra-bank-card hidden-step" onclick="selectBank(this)" data-name="icici bank canada"> 
                         <input type="radio" id="icici" name="bank" value="icici" /> 
-                        <div class="bank-logo-wrapper"><img src="icicibank.jpeg" alt="ICICI Bank" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="icicibank.jpeg" alt="ICICI Bank" class="img-icici" /></div>
                     </div>
                     <div class="bank-card extra-bank-card hidden-step" onclick="selectBank(this)" data-name="vancity"> 
                         <input type="radio" id="vancity" name="bank" value="vancity" /> 
-                        <div class="bank-logo-wrapper"><img src="vancity.jpeg" alt="Vancity" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="vancity.jpeg" alt="Vancity" class="img-vancity" /></div>
                     </div>
                     <div class="bank-card extra-bank-card hidden-step" onclick="selectBank(this)" data-name="meridian credit union"> 
                         <input type="radio" id="meridian" name="bank" value="meridian" /> 
-                        <div class="bank-logo-wrapper"><img src="meridian.jpeg" alt="Meridian" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="meridian.jpeg" alt="Meridian" class="img-meridian" /></div>
                     </div>
                 </div>
 
