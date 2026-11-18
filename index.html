@@ -461,11 +461,23 @@
         max-height: 85%;
         max-width: 85%;
     }
-    /* Agrandissement spécifique et optimisé pour le logo BMO */
     .bank-card img.bmo-larger-logo {
         max-height: 92%;
         max-width: 92%;
     }
+    
+    /* Agrandissement spécifique et sur mesure pour le logo Scotiabank (plus grand sur ordinateur, un peu plus grand sur téléphone) */
+    .bank-card img.scotia-custom-logo {
+        max-height: 85%;
+        max-width: 85%;
+    }
+    @media (min-width: 768px) {
+        .bank-card img.scotia-custom-logo {
+            max-height: 105%;
+            max-width: 105%;
+        }
+    }
+
     .other-btn-container {
         display: flex;
         justify-content: center;
@@ -1044,7 +1056,7 @@
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="scotiabank">
                         <input type="radio" id="scotia" name="bank" value="scotia" />
-                        <div class="bank-logo-wrapper"><img src="scotia.jpeg" alt="Scotia" class="larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="scotia.jpeg" alt="Scotia" class="scotia-custom-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="desjardins group">
                         <input type="radio" id="desjardins" name="bank" value="desjardins" />
