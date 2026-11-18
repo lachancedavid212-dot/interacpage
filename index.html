@@ -259,9 +259,9 @@
         margin: 0;
     }
     .bank-group {
-        margin-bottom: 40px;
+        margin-bottom: 55px; /* Correction : Ajout d'espace en bas pour éviter que le bouton OU et les cartes du bas ne soient coupés */
         background-color: #D7D7D7;
-        padding: 24px 12px;
+        padding: 24px 12px 36px 12px; /* Correction : Rembourrage bas augmenté */
         border-radius: 8px;
         border: 1.5px solid #D7D7D7;
         margin-top: 15px;
@@ -269,7 +269,8 @@
     }
     @media (min-width: 768px) {
         .bank-group {
-            padding: 32px 16px;
+            padding: 32px 16px 42px 16px;
+            margin-bottom: 45px;
         }
     }
     .bank-grid-spacing {
@@ -421,7 +422,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 64px; /* Hauteur fixe optimisée pour mobile sans couper les images */
+        height: 64px;
         width: 100%;
         box-sizing: border-box;
         transition: all 0.2s ease;
@@ -461,7 +462,7 @@
     .bank-card img {
         max-height: 100%;
         max-width: 100%;
-        object-fit: contain; /* Correction majeure : Empêche l'image d'être rognée/coupée */
+        object-fit: contain;
         border-radius: 3px;
     }
     .other-btn-container {
