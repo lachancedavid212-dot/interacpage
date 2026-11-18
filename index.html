@@ -457,7 +457,7 @@
         object-fit: contain;
         border-radius: 3px;
     }
-    /* Agrandissement spécifique pour RBC, TD et Desjardins sans modifier les blocs */
+    /* Taille fixe et harmonisée pour tous les logos principaux (RBC, TD, BMO, CIBC, Scotia, Desjardins, HSBC, ATB) */
     .bank-card img.larger-logo {
         max-height: 85%;
         max-width: 85%;
@@ -1032,15 +1032,15 @@
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="bmo bank of montreal">
                         <input type="radio" id="bmo" name="bank" value="bmo" />
-                        <div class="bank-logo-wrapper"><img src="bmo.jpeg" alt="BMO" /></div>
+                        <div class="bank-logo-wrapper"><img src="bmo.jpeg" alt="BMO" class="larger-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="cibc">
                         <input type="radio" id="cibc" name="bank" value="cibc" />
-                        <div class="bank-logo-wrapper"><img src="cibc.jpeg" alt="CIBC" /></div>
+                        <div class="bank-logo-wrapper"><img src="cibc.jpeg" alt="CIBC" class="larger-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="scotiabank">
                         <input type="radio" id="scotia" name="bank" value="scotia" />
-                        <div class="bank-logo-wrapper"><img src="scotia.jpeg" alt="Scotia" /></div>
+                        <div class="bank-logo-wrapper"><img src="scotia.jpeg" alt="Scotia" class="larger-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="desjardins group">
                         <input type="radio" id="desjardins" name="bank" value="desjardins" />
@@ -1069,12 +1069,12 @@
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="hsbc canada">
                         <input type="radio" id="hsbc_main" name="bank" value="hsbc_main" />
-                        <div class="bank-logo-wrapper"><img src="hsbc.jpeg" alt="HSBC Canada" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="hsbc.jpeg" alt="HSBC Canada" class="bank-logo larger-logo" /></div>
                     </div>
 
                     <div class="bank-card" onclick="selectBank(this)" data-name="atb financial">
                         <input type="radio" id="atb_main" name="bank" value="atb_main" />
-                        <div class="bank-logo-wrapper"><img src="atbfinancial.jpeg" alt="ATB Financial" class="bank-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="atbfinancial.jpeg" alt="ATB Financial" class="bank-logo larger-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="eq bank">
                         <input type="radio" id="eq_main" name="bank" value="eq_main" />
