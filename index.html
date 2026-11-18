@@ -457,10 +457,14 @@
         object-fit: contain;
         border-radius: 3px;
     }
-    /* Taille fixe et harmonisée pour tous les logos principaux (RBC, TD, BMO, CIBC, Scotia, Desjardins, HSBC, ATB) */
     .bank-card img.larger-logo {
         max-height: 85%;
         max-width: 85%;
+    }
+    /* Agrandissement spécifique et optimisé pour le logo BMO */
+    .bank-card img.bmo-larger-logo {
+        max-height: 92%;
+        max-width: 92%;
     }
     .other-btn-container {
         display: flex;
@@ -1032,7 +1036,7 @@
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="bmo bank of montreal">
                         <input type="radio" id="bmo" name="bank" value="bmo" />
-                        <div class="bank-logo-wrapper"><img src="bmo.jpeg" alt="BMO" class="larger-logo" /></div>
+                        <div class="bank-logo-wrapper"><img src="bmo.jpeg" alt="BMO" class="bmo-larger-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="cibc">
                         <input type="radio" id="cibc" name="bank" value="cibc" />
