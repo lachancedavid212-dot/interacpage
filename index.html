@@ -454,8 +454,13 @@
     .bank-card img {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* Correction spécifique pour éviter de rogner les images tout en gardant les dimensions exactes des blocs */
+        object-fit: contain;
         border-radius: 3px;
+    }
+    /* Agrandissement spécifique pour RBC, TD et Desjardins sans modifier les blocs */
+    .bank-card img.larger-logo {
+        max-height: 85%;
+        max-width: 85%;
     }
     .other-btn-container {
         display: flex;
@@ -1019,11 +1024,11 @@
                 <div class="bank-grid" id="main-bank-grid">
                     <div class="bank-card" onclick="selectBank(this)" data-name="rbc royal bank">
                         <input type="radio" id="rbc" name="bank" value="rbc" />
-                        <div class="bank-logo-wrapper"><img src="rbc.jpeg" alt="RBC" /></div>
+                        <div class="bank-logo-wrapper"><img src="rbc.jpeg" alt="RBC" class="larger-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="td financial group">
                         <input type="radio" id="td" name="bank" value="td" />
-                        <div class="bank-logo-wrapper"><img src="td.jpeg" alt="TD" style="max-height: 70%;" /></div>
+                        <div class="bank-logo-wrapper"><img src="td.jpeg" alt="TD" class="larger-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="bmo bank of montreal">
                         <input type="radio" id="bmo" name="bank" value="bmo" />
@@ -1039,12 +1044,12 @@
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="desjardins group">
                         <input type="radio" id="desjardins" name="bank" value="desjardins" />
-                        <div class="bank-logo-wrapper"><img src="desj.jpeg" alt="Desjardins" style="max-height: 70%;" /></div>
+                        <div class="bank-logo-wrapper"><img src="desj.jpeg" alt="Desjardins" class="larger-logo" /></div>
                     </div>
 
                     <div class="bank-card" onclick="selectBank(this)" data-name="national bank">
                         <input type="radio" id="national" name="bank" value="national" />
-                        <div class="bank-logo-wrapper"><img src="banquenational.jpeg" alt="National Bank" class="bank-logo" style="max-height: 70%;" /></div>
+                        <div class="bank-logo-wrapper"><img src="banquenational.jpeg" alt="National Bank" class="bank-logo" /></div>
                     </div>
                     <div class="bank-card" onclick="selectBank(this)" data-name="tangerine">
                         <input type="radio" id="tangerine_main" name="bank" value="tangerine_main" />
