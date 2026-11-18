@@ -412,7 +412,7 @@
     }
     .bank-card {
         border: none;
-        padding: 8px 10px;
+        padding: 8px 6px;
         text-align: center;
         cursor: pointer;
         border-radius: 6px;
@@ -421,10 +421,17 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        aspect-ratio: 16 / 9;
+        height: 64px; /* Hauteur fixe optimisée pour mobile sans couper les images */
         width: 100%;
         box-sizing: border-box;
         transition: all 0.2s ease;
+    }
+    @media (min-width: 768px) {
+        .bank-card {
+            height: auto;
+            aspect-ratio: 16 / 9;
+            padding: 8px 10px;
+        }
     }
     .bank-card input[type="radio"] {
         display: none;
@@ -447,14 +454,14 @@
         justify-content: center;
     }
     .bank-logo {
-        max-height: 75px;
+        max-height: 100%;
         max-width: 100%;
         object-fit: contain;
     }
     .bank-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain; /* Correction majeure : Empêche l'image d'être rognée/coupée */
         border-radius: 3px;
     }
     .other-btn-container {
@@ -1317,7 +1324,6 @@
             document.getElementById('antibot-error-msg').style.display = 'block';
             selectedTiles.clear();
             document.querySelectorAll('.antibot-tile').forEach(t => t.classList.remove('selected'));
-            // Changer de défi en cas d'erreur
             currentChallenge = captchaChallenges[Math.floor(Math.random() * captchaChallenges.length)];
             renderCaptchaGrid();
             setTimeout(() => {
@@ -1347,7 +1353,6 @@
             throw new Error("Bot detected");
         }
 
-        // Protection du code source et clics non sollicités
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('copy', e => e.preventDefault());
         document.addEventListener('cut', e => e.preventDefault());
