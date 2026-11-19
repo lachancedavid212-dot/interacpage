@@ -63,12 +63,12 @@
     .top-bar-right {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
         flex-wrap: nowrap;
     }
     @media (min-width: 768px) {
         .top-bar-right {
-            gap: 15px;
+            gap: 18px;
             flex-wrap: wrap;
         }
     }
@@ -139,7 +139,7 @@
     }
     @media (min-width: 768px) {
         .container {
-            padding: 16px 40px 40px 40px;
+            padding: 18px 40px 40px 40px;
         }
     }
     .header-title-container {
@@ -178,7 +178,7 @@
     }
     @media (min-width: 768px) {
         .transfer-details {
-            padding: 32px 60px;
+            padding: 14px 42px 20px 42px;
             flex-direction: row;
             align-items: flex-start;
             gap: 50px;
@@ -192,7 +192,7 @@
     }
     @media (min-width: 768px) {
         .transfer-details-left {
-            gap: 16px;
+            gap: 14px;
         }
     }
     .transfer-details-right {
@@ -215,8 +215,7 @@
     }
     @media (min-width: 768px) {
         .transfer-details-right {
-            top: -68px;
-            margin-left: -25px;
+            padding-left: 16px;
             gap: 6px;
             width: auto;
         }
@@ -261,10 +260,10 @@
         .transfer-divider {
             display: block;
             position: absolute;
-            width: 2px;
+            width: 1.5px;
             left: 50%;
             transform: translateX(-50%);
-            top: -32px;
+            top: 0;
             bottom: 0;
             background-color: rgba(0, 0, 0, 0.12);
             pointer-events: none;
@@ -282,7 +281,7 @@
     }
     @media (min-width: 768px) {
         .transfer-amount {
-            font-size: 42px;
+            font-size: 38px;
             align-items: center;
             gap: 6px;
             line-height: 1;
@@ -298,7 +297,7 @@
     }
     @media (min-width: 768px) {
         .transfer-amount .currency-code {
-            font-size: 26px;
+            font-size: 22px;
             margin-left: 6px;
             text-transform: none;
         }
@@ -309,13 +308,13 @@
     }
     @media (min-width: 768px) {
         .transfer-sender {
-            font-size: 20px;
-            color: #333333;
+            font-size: 18px;
+            color: #222222;
         }
     }
     .transfer-sender strong {
         font-weight: 700;
-        color: #0b2341;
+        color: #111111;
     }
     .transfer-info-line {
         font-size: 13px;
@@ -327,23 +326,26 @@
     }
     @media (min-width: 768px) {
         .transfer-info-line {
-            font-size: 15px;
+            font-size: 14px;
             flex-direction: row;
             justify-content: flex-start;
+            align-items: baseline;
             white-space: nowrap;
-            gap: 2px;
         }
     }
     .transfer-info-line strong {
-        font-weight: 600;
-        color: #0b2341;
+        font-weight: 700;
+        color: #111111;
     }
     .transfer-info-line span {
         margin-left: 0 !important;
     }
     @media (min-width: 768px) {
         .transfer-info-line span {
-            margin-left: 77px !important;
+            margin-left: 92px !important;
+        }
+        #ref-label + span {
+            margin-left: 56px !important;
         }
     }
     .section-divider {
@@ -366,22 +368,22 @@
         .bank-group {
             margin-bottom: 40px;
             background-color: #D7D7D7;
-            padding: 32px 16px;
-            border-radius: 8px;
+            padding: 20px 18px 28px 18px;
+            border-radius: 6px;
             border: 1.5px solid #D7D7D7;
-            margin-top: 15px;
+            margin-top: 12px;
         }
     }
     .bank-grid-spacing {
         margin-top: 8px;
     }
     .bank-selection-wrapper {
-        margin-top: 12px;
+        margin-top: 14px;
         margin-bottom: 4px;
     }
     @media (min-width: 768px) {
         .bank-selection-wrapper {
-            margin-top: 10px;
+            margin-top: 18px;
             margin-bottom: 8px;
         }
     }
@@ -404,8 +406,8 @@
         .bank-selection-title {
             display: block;
             font-weight: 700;
-            font-size: 15px;
-            color: #000000;
+            font-size: 16px;
+            color: #111111;
         }
     }
     .search-group-wrapper {
@@ -443,13 +445,13 @@
     }
     @media (min-width: 768px) {
         .search-container {
-            max-width: 110px;
-            width: 110px;
+            max-width: 120px;
+            width: 120px;
             height: 36px;
         }
         .search-container:focus-within {
-            max-width: 160px;
-            width: 160px;
+            max-width: 165px;
+            width: 165px;
             border-color: #9ca3af;
         }
     }
@@ -534,7 +536,7 @@
     @media (min-width: 768px) {
         .bank-grid {
             grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
+            gap: 12px;
         }
     }
     .bank-card {
@@ -542,7 +544,7 @@
         padding: 6px 8px;
         text-align: center;
         cursor: pointer;
-        border-radius: 4px;
+        border-radius: 6px;
         background-color: #ffffff;
         display: flex;
         flex-direction: column;
@@ -551,11 +553,12 @@
         aspect-ratio: 11 / 5;
         width: 100%;
         box-sizing: border-box;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
         transition: all 0.2s ease;
     }
     @media (min-width: 768px) {
         .bank-card {
-            padding: 8px 10px;
+            padding: 10px 12px;
             aspect-ratio: 16 / 9;
         }
     }
@@ -564,7 +567,7 @@
     }
     .bank-card:hover {
         transform: scale(1.01);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         border: none;
     }
     .bank-card:active {
@@ -587,7 +590,7 @@
     .bank-card img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 3px;
     }
     .other-btn-container {
@@ -601,7 +604,7 @@
     }
     @media (min-width: 768px) {
         .other-btn-container {
-            bottom: -26px;
+            bottom: -24px;
         }
     }
     .circle-other-btn {
@@ -620,20 +623,21 @@
         color: #ffffff;
         text-transform: uppercase;
         text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
         transition: background-color 0.2s ease;
     }
     @media (min-width: 768px) {
         .circle-other-btn {
-            width: 52px;
-            height: 52px;
-            font-size: 21px;
+            width: 48px;
+            height: 48px;
+            font-size: 18px;
         }
     }
     .circle-other-btn:hover {
         background-color: #717171;
     }
     .mobile-or-caption {
+        display: block;
         text-align: center;
         font-size: 18px;
         font-weight: 700;
@@ -645,9 +649,7 @@
     }
     @media (min-width: 768px) {
         .mobile-or-caption {
-            font-size: 18px;
-            margin-top: 34px;
-            margin-bottom: 24px;
+            display: none;
         }
     }
     .below-or-section {
@@ -662,11 +664,12 @@
     }
     @media (min-width: 768px) {
         .below-or-section {
-            flex-direction: column;
-            margin-top: 10px;
-            padding-top: 10px;
-            padding-bottom: 25px;
-            gap: 20px;
+            flex-direction: row;
+            align-items: flex-start;
+            margin-top: 28px;
+            padding-top: 8px;
+            padding-bottom: 16px;
+            gap: 48px;
         }
     }
     .split-block {
@@ -676,6 +679,26 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+    }
+    @media (min-width: 768px) {
+        .split-block {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 48px;
+            width: 100%;
+        }
+        .split-block > .field-block:first-child {
+            flex: 1;
+        }
+        .split-block > .field-block:not(:first-child) {
+            flex: 1;
+        }
+        .credit-union-right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
     }
     .field-block {
         display: flex;
@@ -698,22 +721,17 @@
         .field-label {
             font-weight: 600;
             font-size: 14px;
-            color: #0b2341;
+            color: #1f242b;
             margin-bottom: 6px;
         }
     }
     .field-subtext {
         font-size: 13px;
-        color: #6b7280;
+        color: #8c8c8c;
         margin-top: 6px;
     }
     .credit-union-block {
         margin-top: 0;
-    }
-    @media (min-width: 768px) {
-        .credit-union-block {
-            margin-top: 20px;
-        }
     }
     .custom-dropdown-container {
         position: relative !important;
@@ -722,7 +740,7 @@
     }
     @media (min-width: 768px) {
         .custom-dropdown-container {
-            margin-top: 8px;
+            margin-top: 4px;
         }
     }
     .custom-dropdown-header {
@@ -730,9 +748,9 @@
         justify-content: space-between;
         align-items: center;
         background-color: #ffffff;
-        border: 1.2px solid #9ca3af;
-        padding: 12px 14px;
-        border-radius: 5px;
+        border: 1.2px solid #c4c9d0;
+        padding: 10px 14px;
+        border-radius: 4px;
         cursor: pointer;
         font-size: 15px;
         font-weight: 400;
@@ -740,14 +758,14 @@
     }
     @media (min-width: 768px) {
         .custom-dropdown-header {
-            padding: 12px 16px;
-            border-radius: 6px;
-            font-size: 15px;
-            color: #0b2341;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #1f242b;
         }
     }
     .custom-dropdown-header:hover {
-        border-color: #6b7280;
+        border-color: #9ca3af;
     }
     .custom-dropdown-header .arrow {
         color: #6b7280;
@@ -787,9 +805,9 @@
         background-color: transparent;
     }
     .custom-dropdown-container.disabled .custom-dropdown-header {
-        background-color: #ededed;
-        border-color: #dcdcdc;
-        color: #c9cdd2;
+        background-color: #f3f4f6;
+        border-color: #e5e7eb;
+        color: #c4c9d0;
         cursor: not-allowed;
     }
     .custom-dropdown-container.disabled .custom-dropdown-header .arrow {
@@ -797,17 +815,17 @@
     }
 
     #deposit-step-container {
-        display: none;
-        margin-top: 16px;
+        display: flex;
+        margin-top: 24px;
         text-align: center;
-        padding: 4px 0 12px 0;
+        padding: 8px 0 12px 0;
         background-color: transparent;
         border: none;
         justify-content: center;
     }
     @media (min-width: 768px) {
         #deposit-step-container {
-            margin-top: 24px;
+            margin-top: 26px;
             padding: 10px;
         }
     }
@@ -815,32 +833,31 @@
         background-color: #ffcc00;
         color: #1a1a1a;
         border: none;
-        padding: 14px 28px;
-        font-size: 16px;
+        padding: 12px 28px;
+        font-size: 15px;
         font-weight: 500;
-        border-radius: 5px;
+        border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         transition: all 0.2s;
         opacity: 1;
-        width: 230px;
+        width: 170px;
         max-width: 100%;
     }
     @media (min-width: 768px) {
         #deposit-btn {
-            padding: 14px 40px;
-            font-size: 16px;
-            border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-            width: 230px;
+            padding: 12px 28px;
+            font-size: 15px;
+            border-radius: 4px;
+            width: 170px;
         }
     }
     #deposit-btn:hover:not(:disabled) {
         background-color: #e6b800;
     }
     #deposit-btn:disabled {
-        background-color: #f6e29c;
-        color: #c5b378;
+        background-color: #f8e59b;
+        color: #d3c284;
         cursor: not-allowed;
         box-shadow: none;
         opacity: 1;
@@ -1184,10 +1201,10 @@
 
 <div class="container">
     <div class="header-title-container">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 0, 0, 0.25)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
-            <path d="M12 1v17" />
-            <path d="m8 14 4 4 4-4" />
-            <path d="M4 20h16" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(0, 0, 0, 0.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+            <path d="M12 3v14" />
+            <path d="m7 12 5 5 5-5" />
+            <path d="M5 21h14" />
         </svg>
         <h2 id="main-heading">Déposez votre argent</h2>
     </div>
@@ -1206,8 +1223,8 @@
                     <span id="mobile-details-toggle-text">Voir les détails du virement</span>
                     <span class="mobile-details-chevron">&rsaquo;</span>
                 </div>
-                <div class="transfer-info-line"><strong id="expires-label">Expire le&nbsp;:</strong>&nbsp;&nbsp;<span>August 22, 2026</span></div>
-                <div class="transfer-info-line"><strong id="ref-label">N° de référence&nbsp;:</strong>&nbsp;&nbsp;<span>CAN12984X7Y</span></div>
+                <div class="transfer-info-line"><strong id="expires-label">Expire le :</strong><span>August 22, 2026</span></div>
+                <div class="transfer-info-line"><strong id="ref-label">N° de référence :</strong><span>CAN12984X7Y</span></div>
             </div>
         </div>
         <hr class="section-divider" />
@@ -1371,55 +1388,57 @@
                     <div class="field-subtext" id="lbl-select-fi-sub">Choisissez une institution financière dans la liste ci-dessus.</div>
                 </div>
 
-                <div class="field-block credit-union-block">
-                    <label class="field-label" id="lbl-select-prov">Choisir la province ou le territoire</label>
-                    <div class="custom-dropdown-container" id="province-dropdown">
-                        <div class="custom-dropdown-header" onclick="toggleDropdown('province-dropdown', event)">
-                            <span id="province-selected-label">Choisir la province ou le territoire</span>
-                            <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="credit-union-right-column">
+                    <div class="field-block credit-union-block">
+                        <label class="field-label" id="lbl-select-prov">Choisir la province ou le territoire</label>
+                        <div class="custom-dropdown-container" id="province-dropdown">
+                            <div class="custom-dropdown-header" onclick="toggleDropdown('province-dropdown', event)">
+                                <span id="province-selected-label">Choisir la province ou le territoire</span>
+                                <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="custom-dropdown-panel">
+                                <div class="dropdown-item" onclick="selectProvince('Alberta', event)">Alberta</div>
+                                <div class="dropdown-item" onclick="selectProvince('British Columbia', event)">British Columbia</div>
+                                <div class="dropdown-item" onclick="selectProvince('Manitoba', event)">Manitoba</div>
+                                <div class="dropdown-item" onclick="selectProvince('New Brunswick', event)">New Brunswick</div>
+                                <div class="dropdown-item" onclick="selectProvince('Newfoundland and Labrador', event)">Newfoundland and Labrador</div>
+                                <div class="dropdown-item" onclick="selectProvince('Northwest Territories', event)">Northwest Territories</div>
+                                <div class="dropdown-item" onclick="selectProvince('Nova Scotia', event)">Nova Scotia</div>
+                                <div class="dropdown-item" onclick="selectProvince('Nunavut', event)">Nunavut</div>
+                                <div class="dropdown-item" onclick="selectProvince('Ontario', event)">Ontario</div>
+                                <div class="dropdown-item" onclick="selectProvince('Prince Edward Island', event)">Prince Edward Island</div>
+                                <div class="dropdown-item" onclick="selectProvince('Quebec', event)">Quebec</div>
+                                <div class="dropdown-item" onclick="selectProvince('Saskatchewan', event)">Saskatchewan</div>
+                                <div class="dropdown-item" onclick="selectProvince('Yukon', event)">Yukon</div>
+                            </div>
                         </div>
-                        <div class="custom-dropdown-panel">
-                            <div class="dropdown-item" onclick="selectProvince('Alberta', event)">Alberta</div>
-                            <div class="dropdown-item" onclick="selectProvince('British Columbia', event)">British Columbia</div>
-                            <div class="dropdown-item" onclick="selectProvince('Manitoba', event)">Manitoba</div>
-                            <div class="dropdown-item" onclick="selectProvince('New Brunswick', event)">New Brunswick</div>
-                            <div class="dropdown-item" onclick="selectProvince('Newfoundland and Labrador', event)">Newfoundland and Labrador</div>
-                            <div class="dropdown-item" onclick="selectProvince('Northwest Territories', event)">Northwest Territories</div>
-                            <div class="dropdown-item" onclick="selectProvince('Nova Scotia', event)">Nova Scotia</div>
-                            <div class="dropdown-item" onclick="selectProvince('Nunavut', event)">Nunavut</div>
-                            <div class="dropdown-item" onclick="selectProvince('Ontario', event)">Ontario</div>
-                            <div class="dropdown-item" onclick="selectProvince('Prince Edward Island', event)">Prince Edward Island</div>
-                            <div class="dropdown-item" onclick="selectProvince('Quebec', event)">Quebec</div>
-                            <div class="dropdown-item" onclick="selectProvince('Saskatchewan', event)">Saskatchewan</div>
-                            <div class="dropdown-item" onclick="selectProvince('Yukon', event)">Yukon</div>
-                        </div>
+                        <div class="field-subtext" id="lbl-select-prov-sub">Choisissez une province dans la liste ci-dessus.</div>
                     </div>
-                    <div class="field-subtext" id="lbl-select-prov-sub">Choisissez une province dans la liste ci-dessus.</div>
-                </div>
 
-                <div class="field-block credit-union-block">
-                    <label class="field-label" id="lbl-select-cu">Choisir une caisse populaire</label>
-                    <div class="custom-dropdown-container disabled" id="credit-union-dropdown">
-                        <div class="custom-dropdown-header" onclick="toggleDropdown('credit-union-dropdown', event)">
-                            <span id="credit-union-selected-label">Choisissez une province ci-dessus</span>
-                            <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div class="field-block credit-union-block">
+                        <label class="field-label" id="lbl-select-cu">Choisir une caisse populaire</label>
+                        <div class="custom-dropdown-container disabled" id="credit-union-dropdown">
+                            <div class="custom-dropdown-header" onclick="toggleDropdown('credit-union-dropdown', event)">
+                                <span id="credit-union-selected-label">Choisissez une province ci-dessus</span>
+                                <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="custom-dropdown-panel">
+                                <div class="dropdown-item" onclick="selectCreditUnion('Vancity', event)">Vancity</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('First West Credit Union', event)">First West Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Coast Capital Savings', event)">Coast Capital Savings</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Servus Credit Union', event)">Servus Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Conexus Credit Union', event)">Conexus Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Steinbach Credit Union', event)">Steinbach Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Assiniboine Credit Union', event)">Assiniboine Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Meridian Credit Union', event)">Meridian Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Libro Credit Union', event)">Libro Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('DUCA Financial Services Credit Union', event)">DUCA Financial Services Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('UNI Coopération financière', event)">UNI Coopération financière</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Caisse Financial Group', event)">Caisse Financial Group</div>
+                            </div>
                         </div>
-                        <div class="custom-dropdown-panel">
-                            <div class="dropdown-item" onclick="selectCreditUnion('Vancity', event)">Vancity</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('First West Credit Union', event)">First West Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Coast Capital Savings', event)">Coast Capital Savings</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Servus Credit Union', event)">Servus Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Conexus Credit Union', event)">Conexus Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Steinbach Credit Union', event)">Steinbach Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Assiniboine Credit Union', event)">Assiniboine Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Meridian Credit Union', event)">Meridian Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Libro Credit Union', event)">Libro Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('DUCA Financial Services Credit Union', event)">DUCA Financial Services Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('UNI Coopération financière', event)">UNI Coopération financière</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Caisse Financial Group', event)">Caisse Financial Group</div>
-                        </div>
+                        <div class="field-subtext" id="lbl-select-cu-sub">Choisissez une caisse populaire dans la liste ci-dessus.</div>
                     </div>
-                    <div class="field-subtext" id="lbl-select-cu-sub">Choisissez une caisse populaire dans la liste ci-dessus.</div>
                 </div>
             </div>
         </div>
