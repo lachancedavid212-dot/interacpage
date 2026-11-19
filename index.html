@@ -629,11 +629,11 @@
     }
     .mobile-or-caption {
         text-align: center;
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 700;
         color: #111111;
-        margin-top: 28px;
-        margin-bottom: 14px;
+        margin-top: 30px;
+        margin-bottom: 18px;
         line-height: 1.35;
     }
     @media (min-width: 768px) {
@@ -647,9 +647,9 @@
         flex-direction: column;
         justify-content: space-between;
         margin-top: 4px;
-        padding-top: 4px;
-        padding-bottom: 14px;
-        gap: 16px;
+        padding-top: 2px;
+        padding-bottom: 18px;
+        gap: 20px;
     }
     @media (min-width: 768px) {
         .below-or-section {
@@ -682,7 +682,7 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 20px;
     }
     @media (min-width: 768px) {
         .split-block {
@@ -704,10 +704,10 @@
     }
     .field-label {
         font-weight: 700;
-        font-size: 14px;
+        font-size: 15px;
         color: #111111;
         display: block;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
     }
     @media (min-width: 768px) {
         .field-label {
@@ -719,8 +719,8 @@
     }
     .field-subtext {
         font-size: 12px;
-        color: #9ca3af;
-        margin-top: 5px;
+        color: #a8b0bc;
+        margin-top: 6px;
     }
     .credit-union-block {
         margin-top: 0;
@@ -733,7 +733,7 @@
     .custom-dropdown-container {
         position: relative !important;
         width: 100%;
-        margin-top: 2px;
+        margin-top: 0;
     }
     @media (min-width: 768px) {
         .custom-dropdown-container {
@@ -745,8 +745,8 @@
         justify-content: space-between;
         align-items: center;
         background-color: #ffffff;
-        border: 1.5px solid #d1d5db;
-        padding: 11px 14px;
+        border: 1.5px solid #cfd5de;
+        padding: 12px 14px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 14px;
@@ -793,14 +793,14 @@
         color: #1a1a1a;
     }
     .custom-dropdown-container.disabled {
-        opacity: 0.85;
+        opacity: 1;
         pointer-events: none;
-        background-color: #fafafa;
+        background-color: #ffffff;
     }
     .custom-dropdown-container.disabled .custom-dropdown-header {
-        background-color: #fafafa;
-        border-color: #e5e7eb;
-        color: #c4c9d2;
+        background-color: #ffffff;
+        border-color: #e5e8ee;
+        color: #c7cdd6;
         cursor: not-allowed;
     }
 
@@ -821,7 +821,7 @@
         background-color: #ffcc00;
         color: #1a1a1a;
         border: none;
-        padding: 12px 24px;
+        padding: 13px 24px;
         font-size: 15px;
         font-weight: 700;
         border-radius: 5px;
@@ -844,11 +844,11 @@
         background-color: #e6b800;
     }
     #deposit-btn:disabled {
-        background-color: #f6dc7a;
-        color: #9e8a45;
+        background-color: #f7e396;
+        color: #b7a461;
         cursor: not-allowed;
         box-shadow: none;
-        opacity: 0.85;
+        opacity: 1;
     }
     .hidden-step {
         display: none !important;
@@ -1415,8 +1415,7 @@
                     <label class="field-label" id="lbl-select-cu">Choisir une caisse populaire</label>
                     <div class="custom-dropdown-container disabled" id="credit-union-dropdown">
                         <div class="custom-dropdown-header" onclick="toggleDropdown('credit-union-dropdown', event)">
-                            <span id="credit-union-selected-label">Choisir une caisse populaire</span>
-                            <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span id="credit-union-selected-label">Choisissez une province ci-dessus</span>
                         </div>
                         <div class="custom-dropdown-panel">
                             <div class="dropdown-item" onclick="selectCreditUnion('Vancity', event)">Vancity</div>
@@ -1699,6 +1698,7 @@
             selectProvDefault: "Choisir la province ou le territoire",
             selectProvSub: "Choisissez une province ou un territoire dans la liste ci-dessus.",
             selectCuLabel: "Choisir une caisse populaire",
+            selectCuDisabled: "Choisissez une province ci-dessus",
             selectCuDefault: "Choisir une caisse populaire",
             selectCuSub: "Choisissez une caisse populaire dans la liste ci-dessus.",
             depositBtn: "Déposer >",
@@ -1735,6 +1735,7 @@
             selectProvDefault: "Choose province or territory",
             selectProvSub: "Choose a province or territory from the list above.",
             selectCuLabel: "Choose a credit union",
+            selectCuDisabled: "Choose a province above",
             selectCuDefault: "Choose a credit union",
             selectCuSub: "Choose a credit union from the list above.",
             depositBtn: "Deposit >",
@@ -1756,6 +1757,7 @@
     function toggleLanguage() {
         currentLang = currentLang === 'fr' ? 'en' : 'fr';
         const t = translations[currentLang];
+        const prevLang = currentLang === 'fr' ? 'en' : 'fr';
 
         document.getElementById('page-title').textContent = t.pageTitle;
         document.getElementById('nav-contact').textContent = t.contactUs;
@@ -1772,7 +1774,7 @@
         document.getElementById('lbl-select-fi').textContent = t.selectFiLabel;
 
         const dropdownLabel = document.getElementById('dropdown-selected-label');
-        if (dropdownLabel.textContent === translations[currentLang === 'fr' ? 'en' : 'fr'].selectFiDefault) {
+        if (dropdownLabel.textContent === translations[prevLang].selectFiDefault) {
             dropdownLabel.textContent = t.selectFiDefault;
         }
 
@@ -1780,15 +1782,18 @@
         document.getElementById('lbl-select-prov').textContent = t.selectProvLabel;
 
         const provLabel = document.getElementById('province-selected-label');
-        if (provLabel.textContent === translations[currentLang === 'fr' ? 'en' : 'fr'].selectProvDefault) {
+        if (provLabel.textContent === translations[prevLang].selectProvDefault) {
             provLabel.textContent = t.selectProvDefault;
         }
 
         document.getElementById('lbl-select-prov-sub').textContent = t.selectProvSub;
         document.getElementById('lbl-select-cu').textContent = t.selectCuLabel;
 
+        const cuDropdown = document.getElementById('credit-union-dropdown');
         const cuLabel = document.getElementById('credit-union-selected-label');
-        if (cuLabel.textContent === translations[currentLang === 'fr' ? 'en' : 'fr'].selectCuDefault) {
+        if (cuDropdown.classList.contains('disabled') || cuLabel.textContent === translations[prevLang].selectCuDisabled) {
+            cuLabel.textContent = t.selectCuDisabled;
+        } else if (cuLabel.textContent === translations[prevLang].selectCuDefault) {
             cuLabel.textContent = t.selectCuDefault;
         }
 
@@ -1814,7 +1819,7 @@
         const provinceLabel = document.getElementById('province-selected-label').textContent;
         const cuLabel = document.getElementById('credit-union-selected-label').textContent;
         const hasProvince = provinceLabel !== translations[currentLang].selectProvDefault;
-        const hasCreditUnion = cuLabel !== translations[currentLang].selectCuDefault;
+        const hasCreditUnion = cuLabel !== translations[currentLang].selectCuDefault && cuLabel !== translations[currentLang].selectCuDisabled;
 
         const isValid = hasProvince && (hasDropdownBank || hasCreditUnion);
 
@@ -1979,7 +1984,7 @@
         document.getElementById('dropdown-selected-label').textContent = bankName;
         document.getElementById('bank-dropdown').classList.remove('open');
 
-        document.getElementById('credit-union-selected-label').textContent = translations[currentLang].selectCuDefault;
+        document.getElementById('credit-union-selected-label').textContent = translations[currentLang].selectCuDisabled;
         document.getElementById('credit-union-dropdown').classList.add('disabled');
 
         checkFormCompletion();
@@ -2020,7 +2025,7 @@
             dropdownLabel.textContent = bankName;
         }
 
-        document.getElementById('credit-union-selected-label').textContent = translations[currentLang].selectCuDefault;
+        document.getElementById('credit-union-selected-label').textContent = translations[currentLang].selectCuDisabled;
         document.getElementById('credit-union-dropdown').classList.add('disabled');
 
         const bankDropdownSection = document.getElementById('bank-dropdown');
@@ -2135,7 +2140,7 @@
 
         if (dropdownText !== translations[currentLang].selectFiDefault) {
             bankLogoHTML = `<strong>${dropdownText}</strong>`;
-        } else if (cuText !== translations[currentLang].selectCuDefault) {
+        } else if (cuText !== translations[currentLang].selectCuDefault && cuText !== translations[currentLang].selectCuDisabled) {
             bankLogoHTML = `<strong>${cuText}</strong>`;
         }
 
