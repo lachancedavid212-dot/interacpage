@@ -639,7 +639,9 @@
     }
     @media (min-width: 768px) {
         .mobile-or-caption {
-            display: none;
+            font-size: 18px;
+            margin-top: 34px;
+            margin-bottom: 24px;
         }
     }
     .below-or-section {
@@ -654,27 +656,11 @@
     }
     @media (min-width: 768px) {
         .below-or-section {
-            flex-direction: row;
-            margin-top: 30px;
+            flex-direction: column;
+            margin-top: 10px;
             padding-top: 10px;
-            padding-bottom: 35px;
-            gap: 0;
-        }
-    }
-    .vertical-split-divider {
-        display: none;
-    }
-    @media (min-width: 768px) {
-        .vertical-split-divider {
-            display: block;
-            position: absolute;
-            width: 2px;
-            left: 50%;
-            top: 4px;
-            bottom: -2px;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.04);
-            pointer-events: none;
+            padding-bottom: 25px;
+            gap: 20px;
         }
     }
     .split-block {
@@ -684,20 +670,6 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-    }
-    @media (min-width: 768px) {
-        .split-block {
-            display: block;
-            gap: 0;
-        }
-        .split-block:first-child {
-            padding-left: 0;
-            padding-right: 30px;
-        }
-        .split-block:last-child {
-            padding-right: 0;
-            padding-left: 30px;
-        }
     }
     .field-block {
         display: flex;
@@ -823,7 +795,7 @@
     }
     @media (min-width: 768px) {
         #deposit-step-container {
-            margin-top: 30px;
+            margin-top: 24px;
             padding: 10px;
         }
     }
@@ -848,7 +820,7 @@
             font-size: 16px;
             border-radius: 6px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-            width: auto;
+            width: 230px;
         }
     }
     #deposit-btn:hover:not(:disabled) {
@@ -949,7 +921,7 @@
         font-weight: 700;
         color: #2c220f;
         margin-bottom: 14px;
-        margin-top: 0;
+        margin-top: 20px;
     }
     @media (min-width: 768px) {
         .no-bank-title {
@@ -1360,8 +1332,6 @@
         </div>
 
         <div class="below-or-section" id="other-dropdowns-section">
-            <div class="vertical-split-divider"></div>
-
             <div class="split-block">
                 <div class="field-block">
                     <label class="field-label" id="lbl-select-fi">Choisir votre institution financière</label>
@@ -1445,8 +1415,6 @@
                     <div class="field-subtext" id="lbl-select-cu-sub">Choisissez une caisse populaire dans la liste ci-dessus.</div>
                 </div>
             </div>
-
-            <div class="split-block" style="display: none;"></div>
         </div>
 
         <div id="deposit-step-container">
@@ -1455,11 +1423,27 @@
     </form>
 
     <div class="bottom-section">
+        <hr class="footer-divider-thin" />
+
         <div class="footer-links-row">
             <a href="#" id="footer-link-etransfer">Virement <i>Interac</i></a>
             <a href="#" id="footer-link-privacy">Politique de confidentialité</a>
             <a href="#" id="footer-link-security">Sécurité</a>
-            <span class="secure-text" style="display: none;">
+        </div>
+
+        <hr class="footer-divider-thin" />
+
+        <h3 class="no-bank-title" id="no-bank-title">Vous ne faites pas parti de banque en ligne ?</h3>
+        <p class="no-bank-text" id="no-bank-text">Si vous ne vous êtes pas inscrit à la banque en ligne auprès de votre institution financière ou si vous ne trouvez pas votre banque dans la liste ci-dessus, il existe d'autres moyens de déposer votre argent.</p>
+
+        <div class="btn-other-wrapper">
+            <button type="button" class="btn-other-options" id="btn-other-options" onclick="redirectToForm()">Autres Options</button>
+        </div>
+
+        <hr class="footer-divider-thin" />
+
+        <div class="footer-links-row">
+            <span class="secure-text">
                 <span id="secure-text">Cette transaction est sécurisée</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -1468,7 +1452,9 @@
             </span>
         </div>
 
-        <div class="copyright-row" style="display: none;">
+        <hr class="footer-divider-thin" />
+
+        <div class="copyright-row">
             <span id="copyright-text-1">© 2000 à 2026 Interac Corp. Tous droits réservés <a href="#">Conditions d'utilisation</a></span><br>
             <span id="copyright-text-2">® Marque déposée d'Interac Corp.</span>
         </div>
