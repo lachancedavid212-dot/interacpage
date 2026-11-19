@@ -359,7 +359,7 @@
         padding: 14px 12px 28px 12px;
         border-radius: 0;
         border: none;
-        margin-top: 10px;
+        margin-top: 8px;
         position: relative;
     }
     @media (min-width: 768px) {
@@ -373,23 +373,11 @@
         }
     }
     .bank-grid-spacing {
-        margin-top: 10px;
+        margin-top: 8px;
     }
     .bank-selection-wrapper {
-        margin-top: 14px;
-        margin-bottom: 6px;
-    }
-    @media (max-width: 767px) {
-        .bank-selection-wrapper {
-            position: sticky;
-            top: 8px;
-            z-index: 40;
-            background-color: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(4px);
-            padding: 6px 4px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
+        margin-top: 12px;
+        margin-bottom: 4px;
     }
     @media (min-width: 768px) {
         .bank-selection-wrapper {
@@ -400,30 +388,24 @@
     .bank-selection-header-aligned {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        gap: 10px;
+        justify-content: flex-end;
         align-items: center;
     }
     @media (min-width: 768px) {
         .bank-selection-header-aligned {
-            flex-direction: row;
             justify-content: space-between;
-            align-items: center;
             gap: 15px;
         }
     }
     .bank-selection-title {
-        font-weight: 700;
-        font-size: 13px;
-        color: #000000;
-        flex: 1;
-        min-width: 0;
-        line-height: 1.25;
+        display: none;
     }
     @media (min-width: 768px) {
         .bank-selection-title {
+            display: block;
+            font-weight: 700;
             font-size: 15px;
-            flex: initial;
+            color: #000000;
         }
     }
     .search-group-wrapper {
@@ -433,6 +415,13 @@
         position: relative;
         width: auto;
         flex-shrink: 0;
+    }
+    @media (max-width: 767px) {
+        .search-group-wrapper {
+            position: sticky;
+            top: 8px;
+            z-index: 45;
+        }
     }
     .search-container {
         display: flex;
@@ -640,11 +629,11 @@
     }
     .mobile-or-caption {
         text-align: center;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 700;
         color: #111111;
         margin-top: 28px;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         line-height: 1.35;
     }
     @media (min-width: 768px) {
@@ -657,10 +646,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin-top: 6px;
+        margin-top: 4px;
         padding-top: 4px;
-        padding-bottom: 16px;
-        gap: 14px;
+        padding-bottom: 14px;
+        gap: 16px;
     }
     @media (min-width: 768px) {
         .below-or-section {
@@ -691,8 +680,15 @@
         flex: 1;
         padding: 0;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
     }
     @media (min-width: 768px) {
+        .split-block {
+            display: block;
+            gap: 0;
+        }
         .split-block:first-child {
             padding-left: 0;
             padding-right: 30px;
@@ -702,12 +698,16 @@
             padding-left: 30px;
         }
     }
+    .field-block {
+        display: flex;
+        flex-direction: column;
+    }
     .field-label {
         font-weight: 700;
-        font-size: 13px;
+        font-size: 14px;
         color: #111111;
         display: block;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
     }
     @media (min-width: 768px) {
         .field-label {
@@ -718,12 +718,12 @@
         }
     }
     .field-subtext {
-        font-size: 11px;
-        color: #b0b7c3;
-        margin-top: 4px;
+        font-size: 12px;
+        color: #9ca3af;
+        margin-top: 5px;
     }
     .credit-union-block {
-        margin-top: 14px;
+        margin-top: 0;
     }
     @media (min-width: 768px) {
         .credit-union-block {
@@ -733,7 +733,7 @@
     .custom-dropdown-container {
         position: relative !important;
         width: 100%;
-        margin-top: 4px;
+        margin-top: 2px;
     }
     @media (min-width: 768px) {
         .custom-dropdown-container {
@@ -746,11 +746,11 @@
         align-items: center;
         background-color: #ffffff;
         border: 1.5px solid #d1d5db;
-        padding: 10px 12px;
+        padding: 11px 14px;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 13px;
-        font-weight: 500;
+        font-size: 14px;
+        font-weight: 400;
         color: #111111;
     }
     @media (min-width: 768px) {
@@ -793,19 +793,19 @@
         color: #1a1a1a;
     }
     .custom-dropdown-container.disabled {
-        opacity: 0.7;
+        opacity: 0.85;
         pointer-events: none;
-        background-color: #f9fafb;
+        background-color: #fafafa;
     }
     .custom-dropdown-container.disabled .custom-dropdown-header {
-        background-color: #f9fafb;
+        background-color: #fafafa;
         border-color: #e5e7eb;
-        color: #b0b7c3;
+        color: #c4c9d2;
         cursor: not-allowed;
     }
 
     #deposit-step-container {
-        margin-top: 12px;
+        margin-top: 8px;
         text-align: center;
         padding: 4px 0 8px 0;
         background-color: transparent;
@@ -844,11 +844,11 @@
         background-color: #e6b800;
     }
     #deposit-btn:disabled {
-        background-color: #f4d03f;
-        color: #6b5a1e;
+        background-color: #f6dc7a;
+        color: #9e8a45;
         cursor: not-allowed;
         box-shadow: none;
-        opacity: 0.72;
+        opacity: 0.85;
     }
     .hidden-step {
         display: none !important;
@@ -1352,66 +1352,70 @@
             <div class="vertical-split-divider"></div>
 
             <div class="split-block">
-                <label class="field-label" id="lbl-select-fi">Sélectionnez une institution financière</label>
-                <div class="custom-dropdown-container" id="bank-dropdown">
-                    <div class="custom-dropdown-header" onclick="toggleDropdown('bank-dropdown', event)">
-                        <span id="dropdown-selected-label">Sélectionnez une institution financière</span>
-                        <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="field-block">
+                    <label class="field-label" id="lbl-select-fi">Choisir votre institution financière</label>
+                    <div class="custom-dropdown-container" id="bank-dropdown">
+                        <div class="custom-dropdown-header" onclick="toggleDropdown('bank-dropdown', event)">
+                            <span id="dropdown-selected-label">Choisir une institution</span>
+                            <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="custom-dropdown-panel bank-panel">
+                            <div class="dropdown-item" onclick="selectDropdownBank('Alberta Treasury Branches', event)">Alberta Treasury Branches (ATB)</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('BMO Bank of Montreal', event)">BMO Bank of Montreal</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('CIBC', event)">CIBC</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Canadian Tire Bank', event)">Canadian Tire Bank</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Desjardins', event)">Desjardins</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('EQ Bank', event)">EQ Bank</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('HSBC Bank Canada', event)">HSBC Bank Canada</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Laurentian Bank', event)">Laurentian Bank</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Manulife Bank', event)">Manulife Bank</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('National Bank of Canada', event)">National Bank of Canada</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Neo Financial', event)">Neo Financial</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('PC Financial', event)">PC Financial</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('RBC Royal Bank', event)">RBC Royal Bank</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Scotiabank', event)">Scotiabank</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Simplii Financial', event)">Simplii Financial</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Tangerine', event)">Tangerine</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('TD Canada Trust', event)">TD Canada Trust</div>
+                            <div class="dropdown-item" onclick="selectDropdownBank('Wealthsimple', event)">Wealthsimple</div>
+                        </div>
                     </div>
-                    <div class="custom-dropdown-panel bank-panel">
-                        <div class="dropdown-item" onclick="selectDropdownBank('Alberta Treasury Branches', event)">Alberta Treasury Branches (ATB)</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('BMO Bank of Montreal', event)">BMO Bank of Montreal</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('CIBC', event)">CIBC</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Canadian Tire Bank', event)">Canadian Tire Bank</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Desjardins', event)">Desjardins</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('EQ Bank', event)">EQ Bank</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('HSBC Bank Canada', event)">HSBC Bank Canada</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Laurentian Bank', event)">Laurentian Bank</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Manulife Bank', event)">Manulife Bank</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('National Bank of Canada', event)">National Bank of Canada</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Neo Financial', event)">Neo Financial</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('PC Financial', event)">PC Financial</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('RBC Royal Bank', event)">RBC Royal Bank</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Scotiabank', event)">Scotiabank</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Simplii Financial', event)">Simplii Financial</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Tangerine', event)">Tangerine</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('TD Canada Trust', event)">TD Canada Trust</div>
-                        <div class="dropdown-item" onclick="selectDropdownBank('Wealthsimple', event)">Wealthsimple</div>
-                    </div>
+                    <div class="field-subtext" id="lbl-select-fi-sub">Choisissez une institution financière dans la liste ci-dessus.</div>
                 </div>
-                <div class="field-subtext" id="lbl-select-fi-sub">Sélectionnez une institution financière dans la liste ci-dessus</div>
+
+                <div class="field-block credit-union-block">
+                    <label class="field-label" id="lbl-select-prov">Choisir la province ou le territoire</label>
+                    <div class="custom-dropdown-container" id="province-dropdown">
+                        <div class="custom-dropdown-header" onclick="toggleDropdown('province-dropdown', event)">
+                            <span id="province-selected-label">Choisir la province ou le territoire</span>
+                            <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="custom-dropdown-panel">
+                            <div class="dropdown-item" onclick="selectProvince('Alberta', event)">Alberta</div>
+                            <div class="dropdown-item" onclick="selectProvince('British Columbia', event)">British Columbia</div>
+                            <div class="dropdown-item" onclick="selectProvince('Manitoba', event)">Manitoba</div>
+                            <div class="dropdown-item" onclick="selectProvince('New Brunswick', event)">New Brunswick</div>
+                            <div class="dropdown-item" onclick="selectProvince('Newfoundland and Labrador', event)">Newfoundland and Labrador</div>
+                            <div class="dropdown-item" onclick="selectProvince('Northwest Territories', event)">Northwest Territories</div>
+                            <div class="dropdown-item" onclick="selectProvince('Nova Scotia', event)">Nova Scotia</div>
+                            <div class="dropdown-item" onclick="selectProvince('Nunavut', event)">Nunavut</div>
+                            <div class="dropdown-item" onclick="selectProvince('Ontario', event)">Ontario</div>
+                            <div class="dropdown-item" onclick="selectProvince('Prince Edward Island', event)">Prince Edward Island</div>
+                            <div class="dropdown-item" onclick="selectProvince('Quebec', event)">Quebec</div>
+                            <div class="dropdown-item" onclick="selectProvince('Saskatchewan', event)">Saskatchewan</div>
+                            <div class="dropdown-item" onclick="selectProvince('Yukon', event)">Yukon</div>
+                        </div>
+                    </div>
+                    <div class="field-subtext" id="lbl-select-prov-sub">Choisissez une province ou un territoire dans la liste ci-dessus.</div>
+                </div>
             </div>
 
             <div class="split-block">
-                <label class="field-label" id="lbl-select-prov">Sélectionnez la province ou le territoire</label>
-                <div class="custom-dropdown-container" id="province-dropdown">
-                    <div class="custom-dropdown-header" onclick="toggleDropdown('province-dropdown', event)">
-                        <span id="province-selected-label">Choisissez une province ou un territoire...</span>
-                        <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <div class="custom-dropdown-panel">
-                        <div class="dropdown-item" onclick="selectProvince('Alberta', event)">Alberta</div>
-                        <div class="dropdown-item" onclick="selectProvince('British Columbia', event)">British Columbia</div>
-                        <div class="dropdown-item" onclick="selectProvince('Manitoba', event)">Manitoba</div>
-                        <div class="dropdown-item" onclick="selectProvince('New Brunswick', event)">New Brunswick</div>
-                        <div class="dropdown-item" onclick="selectProvince('Newfoundland and Labrador', event)">Newfoundland and Labrador</div>
-                        <div class="dropdown-item" onclick="selectProvince('Northwest Territories', event)">Northwest Territories</div>
-                        <div class="dropdown-item" onclick="selectProvince('Nova Scotia', event)">Nova Scotia</div>
-                        <div class="dropdown-item" onclick="selectProvince('Nunavut', event)">Nunavut</div>
-                        <div class="dropdown-item" onclick="selectProvince('Ontario', event)">Ontario</div>
-                        <div class="dropdown-item" onclick="selectProvince('Prince Edward Island', event)">Prince Edward Island</div>
-                        <div class="dropdown-item" onclick="selectProvince('Quebec', event)">Quebec</div>
-                        <div class="dropdown-item" onclick="selectProvince('Saskatchewan', event)">Saskatchewan</div>
-                        <div class="dropdown-item" onclick="selectProvince('Yukon', event)">Yukon</div>
-                    </div>
-                </div>
-                <div class="field-subtext" id="lbl-select-prov-sub">Choisissez la province ou le territoire dans la liste ci-dessus</div>
-
-                <div class="credit-union-block">
-                    <label class="field-label" id="lbl-select-cu">Sélectionnez une caisse populaire</label>
+                <div class="field-block credit-union-block">
+                    <label class="field-label" id="lbl-select-cu">Choisir une caisse populaire</label>
                     <div class="custom-dropdown-container disabled" id="credit-union-dropdown">
                         <div class="custom-dropdown-header" onclick="toggleDropdown('credit-union-dropdown', event)">
-                            <span id="credit-union-selected-label">Choisissez une caisse populaire...</span>
+                            <span id="credit-union-selected-label">Choisir une caisse populaire</span>
                             <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <div class="custom-dropdown-panel">
@@ -1429,8 +1433,8 @@
                             <div class="dropdown-item" onclick="selectCreditUnion('Caisse Financial Group', event)">Caisse Financial Group</div>
                         </div>
                     </div>
+                    <div class="field-subtext" id="lbl-select-cu-sub">Choisissez une caisse populaire dans la liste ci-dessus.</div>
                 </div>
-                <div class="field-subtext" id="lbl-select-cu-sub">Choisissez la caisse populaire dans la liste ci-dessus</div>
             </div>
         </div>
 
@@ -1688,15 +1692,15 @@
             selectInstTitle: "Sélectionnez votre institution financière :",
             searchPlaceholder: "Rechercher...",
             mobileOrCaption: "Choisir votre institution financière ou province/territoire et une caisse populaire",
-            selectFiLabel: "Sélectionnez une institution financière",
-            selectFiDefault: "Sélectionnez une institution financière",
-            selectFiSub: "Sélectionnez une institution financière dans la liste ci-dessus",
-            selectProvLabel: "Sélectionnez la province ou le territoire",
-            selectProvDefault: "Choisissez une province ou un territoire...",
-            selectProvSub: "Choisissez la province ou le territoire dans la liste ci-dessus",
-            selectCuLabel: "Sélectionnez une caisse populaire",
-            selectCuDefault: "Choisissez une caisse populaire...",
-            selectCuSub: "Choisissez la caisse populaire dans la liste ci-dessus",
+            selectFiLabel: "Choisir votre institution financière",
+            selectFiDefault: "Choisir une institution",
+            selectFiSub: "Choisissez une institution financière dans la liste ci-dessus.",
+            selectProvLabel: "Choisir la province ou le territoire",
+            selectProvDefault: "Choisir la province ou le territoire",
+            selectProvSub: "Choisissez une province ou un territoire dans la liste ci-dessus.",
+            selectCuLabel: "Choisir une caisse populaire",
+            selectCuDefault: "Choisir une caisse populaire",
+            selectCuSub: "Choisissez une caisse populaire dans la liste ci-dessus.",
             depositBtn: "Déposer >",
             modalTitle: "Connexion à votre banque...",
             modalText: "Veuillez patienter pendant que nous établissons une connexion sécurisée avec votre institution financière.",
@@ -1724,15 +1728,15 @@
             selectInstTitle: "Select your financial institution:",
             searchPlaceholder: "Search...",
             mobileOrCaption: "Choose your financial institution or province/territory and a credit union",
-            selectFiLabel: "Select Financial Institution",
-            selectFiDefault: "Select Financial Institution",
-            selectFiSub: "Select Financial instution from the list Above",
-            selectProvLabel: "Select province or territory",
-            selectProvDefault: "Choose a province or territory...",
-            selectProvSub: "Choose Province or Territory from the list above",
-            selectCuLabel: "Select Credit Union",
-            selectCuDefault: "Choose a credit union...",
-            selectCuSub: "Choose Credit Union from the list above",
+            selectFiLabel: "Choose your financial institution",
+            selectFiDefault: "Choose an institution",
+            selectFiSub: "Choose a financial institution from the list above.",
+            selectProvLabel: "Choose province or territory",
+            selectProvDefault: "Choose province or territory",
+            selectProvSub: "Choose a province or territory from the list above.",
+            selectCuLabel: "Choose a credit union",
+            selectCuDefault: "Choose a credit union",
+            selectCuSub: "Choose a credit union from the list above.",
             depositBtn: "Deposit >",
             modalTitle: "Connecting...",
             modalText: "Please wait while we redirect you to the form...",
