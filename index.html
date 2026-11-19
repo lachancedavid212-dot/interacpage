@@ -379,6 +379,18 @@
         margin-top: 14px;
         margin-bottom: 6px;
     }
+    @media (max-width: 767px) {
+        .bank-selection-wrapper {
+            position: sticky;
+            top: 8px;
+            z-index: 40;
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(4px);
+            padding: 6px 4px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+    }
     @media (min-width: 768px) {
         .bank-selection-wrapper {
             margin-top: 10px;
@@ -387,9 +399,10 @@
     }
     .bank-selection-header-aligned {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
         gap: 10px;
-        align-items: stretch;
+        align-items: center;
     }
     @media (min-width: 768px) {
         .bank-selection-header-aligned {
@@ -401,53 +414,59 @@
     }
     .bank-selection-title {
         font-weight: 700;
-        font-size: 14px;
+        font-size: 13px;
         color: #000000;
+        flex: 1;
+        min-width: 0;
+        line-height: 1.25;
     }
     @media (min-width: 768px) {
         .bank-selection-title {
             font-size: 15px;
+            flex: initial;
         }
     }
     .search-group-wrapper {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: flex-end;
         position: relative;
-        width: 100%;
-    }
-    @media (min-width: 768px) {
-        .search-group-wrapper {
-            width: auto;
-            justify-content: flex-start;
-        }
+        width: auto;
+        flex-shrink: 0;
     }
     .search-container {
         display: flex;
         align-items: center;
-        max-width: 120px;
-        width: 120px;
+        max-width: 112px;
+        width: 112px;
         height: 34px;
         border: 1.5px solid #d1d5db;
         border-right: none;
         border-radius: 4px 0 0 4px;
         background-color: #ffffff;
         overflow: hidden;
+        transition: width 0.2s ease, max-width 0.2s ease, border-color 0.2s ease;
+    }
+    .search-container:focus-within {
+        max-width: 155px;
+        width: 155px;
+        border-color: #9ca3af;
     }
     @media (min-width: 768px) {
         .search-container {
             max-width: 110px;
-            width: 100%;
+            width: 110px;
             height: 36px;
         }
         .search-container:focus-within {
             max-width: 160px;
+            width: 160px;
             border-color: #9ca3af;
         }
     }
     .search-container input {
         border: none;
-        padding: 0 10px;
+        padding: 0 8px 0 10px;
         font-size: 13px;
         outline: none;
         width: 100%;
@@ -460,7 +479,7 @@
         width: 34px;
         height: 34px;
         border-radius: 50%;
-        margin-left: -6px;
+        margin-left: -4px;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -472,6 +491,7 @@
         .search-btn {
             width: 36px;
             height: 36px;
+            margin-left: -6px;
         }
     }
     .search-icon-svg {
@@ -484,7 +504,7 @@
         position: absolute;
         top: calc(100% + 4px);
         right: 0;
-        width: 100%;
+        width: 240px;
         max-width: 280px;
         background-color: #ffffff;
         border: 1.5px solid #d1d5db;
@@ -640,7 +660,7 @@
         margin-top: 6px;
         padding-top: 4px;
         padding-bottom: 16px;
-        gap: 16px;
+        gap: 14px;
     }
     @media (min-width: 768px) {
         .below-or-section {
@@ -682,10 +702,38 @@
             padding-left: 30px;
         }
     }
+    .field-label {
+        font-weight: 700;
+        font-size: 13px;
+        color: #111111;
+        display: block;
+        margin-bottom: 5px;
+    }
+    @media (min-width: 768px) {
+        .field-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #0b2341;
+            margin-bottom: 6px;
+        }
+    }
+    .field-subtext {
+        font-size: 11px;
+        color: #b0b7c3;
+        margin-top: 4px;
+    }
+    .credit-union-block {
+        margin-top: 14px;
+    }
+    @media (min-width: 768px) {
+        .credit-union-block {
+            margin-top: 20px;
+        }
+    }
     .custom-dropdown-container {
         position: relative !important;
         width: 100%;
-        margin-top: 6px;
+        margin-top: 4px;
     }
     @media (min-width: 768px) {
         .custom-dropdown-container {
@@ -698,18 +746,19 @@
         align-items: center;
         background-color: #ffffff;
         border: 1.5px solid #d1d5db;
-        padding: 10px 14px;
+        padding: 10px 12px;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
-        color: #0b2341;
+        color: #111111;
     }
     @media (min-width: 768px) {
         .custom-dropdown-header {
             padding: 12px 16px;
             border-radius: 6px;
             font-size: 15px;
+            color: #0b2341;
         }
     }
     .custom-dropdown-header:hover {
@@ -726,7 +775,7 @@
         border-radius: 8px;
         padding: 8px 0;
         box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        z-index: 10;
+        z-index: 30;
         max-height: 250px;
         overflow-y: auto;
     }
@@ -744,19 +793,19 @@
         color: #1a1a1a;
     }
     .custom-dropdown-container.disabled {
-        opacity: 0.65;
+        opacity: 0.7;
         pointer-events: none;
-        background-color: #f7f9fa;
+        background-color: #f9fafb;
     }
     .custom-dropdown-container.disabled .custom-dropdown-header {
-        background-color: #f7f9fa;
+        background-color: #f9fafb;
         border-color: #e5e7eb;
         color: #b0b7c3;
         cursor: not-allowed;
     }
 
     #deposit-step-container {
-        margin-top: 14px;
+        margin-top: 12px;
         text-align: center;
         padding: 4px 0 8px 0;
         background-color: transparent;
@@ -1303,7 +1352,7 @@
             <div class="vertical-split-divider"></div>
 
             <div class="split-block">
-                <label style="font-weight: 600; font-size: 14px; color: #0b2341; display: block; margin-bottom: 6px;" id="lbl-select-fi">Sélectionnez une institution financière</label>
+                <label class="field-label" id="lbl-select-fi">Sélectionnez une institution financière</label>
                 <div class="custom-dropdown-container" id="bank-dropdown">
                     <div class="custom-dropdown-header" onclick="toggleDropdown('bank-dropdown', event)">
                         <span id="dropdown-selected-label">Sélectionnez une institution financière</span>
@@ -1330,11 +1379,11 @@
                         <div class="dropdown-item" onclick="selectDropdownBank('Wealthsimple', event)">Wealthsimple</div>
                     </div>
                 </div>
-                <div style="font-size: 11px; color: #a0aec0; margin-top: 5px;" id="lbl-select-fi-sub">Sélectionnez une institution financière dans la liste ci-dessus</div>
+                <div class="field-subtext" id="lbl-select-fi-sub">Sélectionnez une institution financière dans la liste ci-dessus</div>
             </div>
 
             <div class="split-block">
-                <label style="font-weight: 600; font-size: 14px; color: #0b2341; display: block; margin-bottom: 6px;" id="lbl-select-prov">Sélectionnez la province ou le territoire</label>
+                <label class="field-label" id="lbl-select-prov">Sélectionnez la province ou le territoire</label>
                 <div class="custom-dropdown-container" id="province-dropdown">
                     <div class="custom-dropdown-header" onclick="toggleDropdown('province-dropdown', event)">
                         <span id="province-selected-label">Choisissez une province ou un territoire...</span>
@@ -1356,10 +1405,10 @@
                         <div class="dropdown-item" onclick="selectProvince('Yukon', event)">Yukon</div>
                     </div>
                 </div>
-                <div style="font-size: 11px; color: #a0aec0; margin-top: 5px;" id="lbl-select-prov-sub">Choisissez la province ou le territoire dans la liste ci-dessus</div>
+                <div class="field-subtext" id="lbl-select-prov-sub">Choisissez la province ou le territoire dans la liste ci-dessus</div>
 
-                <div style="margin-top: 16px;">
-                    <label style="font-weight: 600; font-size: 14px; color: #0b2341; display: block; margin-bottom: 6px;" id="lbl-select-cu">Sélectionnez une caisse populaire</label>
+                <div class="credit-union-block">
+                    <label class="field-label" id="lbl-select-cu">Sélectionnez une caisse populaire</label>
                     <div class="custom-dropdown-container disabled" id="credit-union-dropdown">
                         <div class="custom-dropdown-header" onclick="toggleDropdown('credit-union-dropdown', event)">
                             <span id="credit-union-selected-label">Choisissez une caisse populaire...</span>
@@ -1381,7 +1430,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="font-size: 11px; color: #a0aec0; margin-top: 5px;" id="lbl-select-cu-sub">Choisissez la caisse populaire dans la liste ci-dessus</div>
+                <div class="field-subtext" id="lbl-select-cu-sub">Choisissez la caisse populaire dans la liste ci-dessus</div>
             </div>
         </div>
 
