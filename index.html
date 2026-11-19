@@ -785,12 +785,12 @@
     }
 
     #deposit-step-container {
+        display: none;
         margin-top: 16px;
         text-align: center;
         padding: 4px 0 12px 0;
         background-color: transparent;
         border: none;
-        display: flex;
         justify-content: center;
     }
     @media (min-width: 768px) {
@@ -904,15 +904,15 @@
     .bottom-section {
         margin-top: 12px;
         padding-top: 14px;
-        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        border-top: none;
         display: flex;
         flex-direction: column;
         background-color: #ffffff;
     }
     @media (min-width: 768px) {
         .bottom-section {
-            margin-top: 40px;
-            padding-top: 30px;
+            margin-top: 24px;
+            padding-top: 20px;
         }
     }
     .no-bank-title {
@@ -955,12 +955,7 @@
         border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.2s ease;
-        width: 100%;
-    }
-    @media (min-width: 768px) {
-        .btn-other-options {
-            width: auto;
-        }
+        width: auto;
     }
     .btn-other-options:hover {
         background-color: #d8a624;
