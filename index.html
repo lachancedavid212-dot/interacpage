@@ -629,12 +629,13 @@
     }
     .mobile-or-caption {
         text-align: center;
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 700;
-        color: #111111;
-        margin-top: 30px;
-        margin-bottom: 18px;
+        color: #1f242b;
+        margin-top: 32px;
+        margin-bottom: 24px;
         line-height: 1.35;
+        padding: 0 8px;
     }
     @media (min-width: 768px) {
         .mobile-or-caption {
@@ -646,9 +647,9 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin-top: 4px;
-        padding-top: 2px;
-        padding-bottom: 18px;
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 12px;
         gap: 20px;
     }
     @media (min-width: 768px) {
@@ -703,9 +704,9 @@
         flex-direction: column;
     }
     .field-label {
-        font-weight: 700;
-        font-size: 15px;
-        color: #111111;
+        font-weight: 500;
+        font-size: 16px;
+        color: #2b3038;
         display: block;
         margin-bottom: 8px;
     }
@@ -718,8 +719,8 @@
         }
     }
     .field-subtext {
-        font-size: 12px;
-        color: #a8b0bc;
+        font-size: 13px;
+        color: #6b7280;
         margin-top: 6px;
     }
     .credit-union-block {
@@ -745,13 +746,13 @@
         justify-content: space-between;
         align-items: center;
         background-color: #ffffff;
-        border: 1.5px solid #cfd5de;
+        border: 1.2px solid #9ca3af;
         padding: 12px 14px;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 400;
-        color: #111111;
+        color: #1f242b;
     }
     @media (min-width: 768px) {
         .custom-dropdown-header {
@@ -762,7 +763,11 @@
         }
     }
     .custom-dropdown-header:hover {
-        border-color: #9ca3af;
+        border-color: #6b7280;
+    }
+    .custom-dropdown-header .arrow {
+        color: #6b7280;
+        flex-shrink: 0;
     }
     .custom-dropdown-panel {
         display: none;
@@ -795,21 +800,26 @@
     .custom-dropdown-container.disabled {
         opacity: 1;
         pointer-events: none;
-        background-color: #ffffff;
+        background-color: transparent;
     }
     .custom-dropdown-container.disabled .custom-dropdown-header {
-        background-color: #ffffff;
-        border-color: #e5e8ee;
-        color: #c7cdd6;
+        background-color: #ededed;
+        border-color: #dcdcdc;
+        color: #c9cdd2;
         cursor: not-allowed;
+    }
+    .custom-dropdown-container.disabled .custom-dropdown-header .arrow {
+        color: #d1d5db;
     }
 
     #deposit-step-container {
-        margin-top: 8px;
+        margin-top: 16px;
         text-align: center;
-        padding: 4px 0 8px 0;
+        padding: 4px 0 12px 0;
         background-color: transparent;
         border: none;
+        display: flex;
+        justify-content: center;
     }
     @media (min-width: 768px) {
         #deposit-step-container {
@@ -821,15 +831,16 @@
         background-color: #ffcc00;
         color: #1a1a1a;
         border: none;
-        padding: 13px 24px;
-        font-size: 15px;
-        font-weight: 700;
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: 500;
         border-radius: 5px;
         cursor: pointer;
         box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         transition: all 0.2s;
         opacity: 1;
-        width: 100%;
+        width: 230px;
+        max-width: 100%;
     }
     @media (min-width: 768px) {
         #deposit-btn {
@@ -844,8 +855,8 @@
         background-color: #e6b800;
     }
     #deposit-btn:disabled {
-        background-color: #f7e396;
-        color: #b7a461;
+        background-color: #f6e29c;
+        color: #c5b378;
         cursor: not-allowed;
         box-shadow: none;
         opacity: 1;
@@ -919,8 +930,8 @@
     }
 
     .bottom-section {
-        margin-top: 24px;
-        padding-top: 18px;
+        margin-top: 12px;
+        padding-top: 14px;
         border-top: 1px solid rgba(0, 0, 0, 0.12);
         display: flex;
         flex-direction: column;
@@ -994,11 +1005,11 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        padding: 14px 10px;
-        font-size: 13px;
-        color: #111111;
+        padding: 26px 10px 24px 10px;
+        font-size: 17px;
+        color: #1f242b;
         font-family: Arial, Helvetica, sans-serif;
-        gap: 12px;
+        gap: 28px;
         text-align: center;
     }
     @media (min-width: 768px) {
@@ -1011,7 +1022,7 @@
         }
     }
     .footer-links-row a {
-        color: #111111;
+        color: #1f242b;
         text-decoration: none;
     }
     .footer-links-row a:hover {
@@ -1357,7 +1368,7 @@
                     <div class="custom-dropdown-container" id="bank-dropdown">
                         <div class="custom-dropdown-header" onclick="toggleDropdown('bank-dropdown', event)">
                             <span id="dropdown-selected-label">Choisir une institution</span>
-                            <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <div class="custom-dropdown-panel bank-panel">
                             <div class="dropdown-item" onclick="selectDropdownBank('Alberta Treasury Branches', event)">Alberta Treasury Branches (ATB)</div>
@@ -1388,7 +1399,7 @@
                     <div class="custom-dropdown-container" id="province-dropdown">
                         <div class="custom-dropdown-header" onclick="toggleDropdown('province-dropdown', event)">
                             <span id="province-selected-label">Choisir la province ou le territoire</span>
-                            <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <div class="custom-dropdown-panel">
                             <div class="dropdown-item" onclick="selectProvince('Alberta', event)">Alberta</div>
@@ -1406,16 +1417,15 @@
                             <div class="dropdown-item" onclick="selectProvince('Yukon', event)">Yukon</div>
                         </div>
                     </div>
-                    <div class="field-subtext" id="lbl-select-prov-sub">Choisissez une province ou un territoire dans la liste ci-dessus.</div>
+                    <div class="field-subtext" id="lbl-select-prov-sub">Choisissez une province dans la liste ci-dessus.</div>
                 </div>
-            </div>
 
-            <div class="split-block">
                 <div class="field-block credit-union-block">
                     <label class="field-label" id="lbl-select-cu">Choisir une caisse populaire</label>
                     <div class="custom-dropdown-container disabled" id="credit-union-dropdown">
                         <div class="custom-dropdown-header" onclick="toggleDropdown('credit-union-dropdown', event)">
                             <span id="credit-union-selected-label">Choisissez une province ci-dessus</span>
+                            <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <div class="custom-dropdown-panel">
                             <div class="dropdown-item" onclick="selectCreditUnion('Vancity', event)">Vancity</div>
@@ -1435,6 +1445,8 @@
                     <div class="field-subtext" id="lbl-select-cu-sub">Choisissez une caisse populaire dans la liste ci-dessus.</div>
                 </div>
             </div>
+
+            <div class="split-block" style="display: none;"></div>
         </div>
 
         <div id="deposit-step-container">
@@ -1443,20 +1455,11 @@
     </form>
 
     <div class="bottom-section">
-        <h3 class="no-bank-title" id="no-bank-title">Vous ne faites pas parti de banque en ligne ?</h3>
-        <p class="no-bank-text" id="no-bank-text">Si vous ne vous êtes pas inscrit à la banque en ligne auprès de votre institution financière ou si vous ne trouvez pas votre banque dans la liste ci-dessus, il existe d'autres moyens de déposer votre argent.</p>
-
-        <div class="btn-other-wrapper">
-            <button type="button" class="btn-other-options" id="btn-other-options" onclick="redirectToForm()">Autres Options</button>
-        </div>
-
-        <hr class="footer-divider-thin" />
-
         <div class="footer-links-row">
-            <a href="#"><i>Interac</i> e-Transfer</a>
-            <a href="#" id="footer-link-privacy">Politique de Confidentialité</a>
+            <a href="#" id="footer-link-etransfer">Virement <i>Interac</i></a>
+            <a href="#" id="footer-link-privacy">Politique de confidentialité</a>
             <a href="#" id="footer-link-security">Sécurité</a>
-            <span class="secure-text">
+            <span class="secure-text" style="display: none;">
                 <span id="secure-text">Cette transaction est sécurisée</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -1465,9 +1468,7 @@
             </span>
         </div>
 
-        <hr class="footer-divider-thin" />
-
-        <div class="copyright-row">
+        <div class="copyright-row" style="display: none;">
             <span id="copyright-text-1">© 2000 à 2026 Interac Corp. Tous droits réservés <a href="#">Conditions d'utilisation</a></span><br>
             <span id="copyright-text-2">® Marque déposée d'Interac Corp.</span>
         </div>
@@ -1696,7 +1697,7 @@
             selectFiSub: "Choisissez une institution financière dans la liste ci-dessus.",
             selectProvLabel: "Choisir la province ou le territoire",
             selectProvDefault: "Choisir la province ou le territoire",
-            selectProvSub: "Choisissez une province ou un territoire dans la liste ci-dessus.",
+            selectProvSub: "Choisissez une province dans la liste ci-dessus.",
             selectCuLabel: "Choisir une caisse populaire",
             selectCuDisabled: "Choisissez une province ci-dessus",
             selectCuDefault: "Choisir une caisse populaire",
@@ -1709,7 +1710,8 @@
             noBankTitle: "Vous ne faites pas parti de banque en ligne ?",
             noBankText: "Si vous ne vous êtes pas inscrit à la banque en ligne auprès de votre institution financière ou si vous ne trouvez pas votre banque dans la liste ci-dessus, il existe d'autres moyens de déposer votre argent.",
             btnOtherOptions: "Autres Options",
-            footerPrivacy: "Politique de Confidentialité",
+            footerEtransfer: "Virement <i>Interac</i>",
+            footerPrivacy: "Politique de confidentialité",
             footerSecurity: "Sécurité",
             secureText: "Cette transaction est sécurisée",
             copyright1: "© 2000 à 2026 Interac Corp. Tous droits réservés <a href='#'>Conditions d'utilisation</a>",
@@ -1733,7 +1735,7 @@
             selectFiSub: "Choose a financial institution from the list above.",
             selectProvLabel: "Choose province or territory",
             selectProvDefault: "Choose province or territory",
-            selectProvSub: "Choose a province or territory from the list above.",
+            selectProvSub: "Choose a province from the list above.",
             selectCuLabel: "Choose a credit union",
             selectCuDisabled: "Choose a province above",
             selectCuDefault: "Choose a credit union",
@@ -1746,6 +1748,7 @@
             noBankTitle: "Not registered for online banking?",
             noBankText: "If you are not registered for online banking with your financial institution or if you cannot find your bank in the list above, there are other ways to deposit your money.",
             btnOtherOptions: "Other Options",
+            footerEtransfer: "<i>Interac</i> e-Transfer",
             footerPrivacy: "Privacy Policy",
             footerSecurity: "Security",
             secureText: "This transaction is secure",
@@ -1803,6 +1806,7 @@
         document.getElementById('no-bank-title').textContent = t.noBankTitle;
         document.getElementById('no-bank-text').textContent = t.noBankText;
         document.getElementById('btn-other-options').textContent = t.btnOtherOptions;
+        document.getElementById('footer-link-etransfer').innerHTML = t.footerEtransfer;
         document.getElementById('footer-link-privacy').textContent = t.footerPrivacy;
         document.getElementById('footer-link-security').textContent = t.footerSecurity;
         document.getElementById('secure-text').textContent = t.secureText;
