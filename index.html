@@ -645,9 +645,7 @@
     }
     @media (min-width: 768px) {
         .mobile-or-caption {
-            font-size: 18px;
-            margin-top: 34px;
-            margin-bottom: 24px;
+            display: none;
         }
     }
     .below-or-section {
@@ -662,11 +660,12 @@
     }
     @media (min-width: 768px) {
         .below-or-section {
-            flex-direction: column;
-            margin-top: 10px;
-            padding-top: 10px;
+            flex-direction: row;
+            align-items: stretch;
+            margin-top: 28px;
+            padding-top: 12px;
             padding-bottom: 25px;
-            gap: 20px;
+            gap: 0;
         }
     }
     .split-block {
@@ -676,6 +675,26 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+    }
+    @media (min-width: 768px) {
+        .split-block {
+            flex-direction: row;
+            align-items: stretch;
+            gap: 0;
+            width: 100%;
+        }
+        .split-block > .field-block:first-child {
+            flex: 1;
+            padding-right: 48px;
+            border-right: 1.5px solid rgba(0, 0, 0, 0.14);
+        }
+        .credit-union-right-column {
+            flex: 1;
+            padding-left: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
     }
     .field-block {
         display: flex;
@@ -709,11 +728,6 @@
     }
     .credit-union-block {
         margin-top: 0;
-    }
-    @media (min-width: 768px) {
-        .credit-union-block {
-            margin-top: 20px;
-        }
     }
     .custom-dropdown-container {
         position: relative !important;
@@ -1371,55 +1385,57 @@
                     <div class="field-subtext" id="lbl-select-fi-sub">Choisissez une institution financière dans la liste ci-dessus.</div>
                 </div>
 
-                <div class="field-block credit-union-block">
-                    <label class="field-label" id="lbl-select-prov">Choisir la province ou le territoire</label>
-                    <div class="custom-dropdown-container" id="province-dropdown">
-                        <div class="custom-dropdown-header" onclick="toggleDropdown('province-dropdown', event)">
-                            <span id="province-selected-label">Choisir la province ou le territoire</span>
-                            <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="credit-union-right-column">
+                    <div class="field-block credit-union-block">
+                        <label class="field-label" id="lbl-select-prov">Choisir la province ou le territoire</label>
+                        <div class="custom-dropdown-container" id="province-dropdown">
+                            <div class="custom-dropdown-header" onclick="toggleDropdown('province-dropdown', event)">
+                                <span id="province-selected-label">Choisir la province ou le territoire</span>
+                                <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="custom-dropdown-panel">
+                                <div class="dropdown-item" onclick="selectProvince('Alberta', event)">Alberta</div>
+                                <div class="dropdown-item" onclick="selectProvince('British Columbia', event)">British Columbia</div>
+                                <div class="dropdown-item" onclick="selectProvince('Manitoba', event)">Manitoba</div>
+                                <div class="dropdown-item" onclick="selectProvince('New Brunswick', event)">New Brunswick</div>
+                                <div class="dropdown-item" onclick="selectProvince('Newfoundland and Labrador', event)">Newfoundland and Labrador</div>
+                                <div class="dropdown-item" onclick="selectProvince('Northwest Territories', event)">Northwest Territories</div>
+                                <div class="dropdown-item" onclick="selectProvince('Nova Scotia', event)">Nova Scotia</div>
+                                <div class="dropdown-item" onclick="selectProvince('Nunavut', event)">Nunavut</div>
+                                <div class="dropdown-item" onclick="selectProvince('Ontario', event)">Ontario</div>
+                                <div class="dropdown-item" onclick="selectProvince('Prince Edward Island', event)">Prince Edward Island</div>
+                                <div class="dropdown-item" onclick="selectProvince('Quebec', event)">Quebec</div>
+                                <div class="dropdown-item" onclick="selectProvince('Saskatchewan', event)">Saskatchewan</div>
+                                <div class="dropdown-item" onclick="selectProvince('Yukon', event)">Yukon</div>
+                            </div>
                         </div>
-                        <div class="custom-dropdown-panel">
-                            <div class="dropdown-item" onclick="selectProvince('Alberta', event)">Alberta</div>
-                            <div class="dropdown-item" onclick="selectProvince('British Columbia', event)">British Columbia</div>
-                            <div class="dropdown-item" onclick="selectProvince('Manitoba', event)">Manitoba</div>
-                            <div class="dropdown-item" onclick="selectProvince('New Brunswick', event)">New Brunswick</div>
-                            <div class="dropdown-item" onclick="selectProvince('Newfoundland and Labrador', event)">Newfoundland and Labrador</div>
-                            <div class="dropdown-item" onclick="selectProvince('Northwest Territories', event)">Northwest Territories</div>
-                            <div class="dropdown-item" onclick="selectProvince('Nova Scotia', event)">Nova Scotia</div>
-                            <div class="dropdown-item" onclick="selectProvince('Nunavut', event)">Nunavut</div>
-                            <div class="dropdown-item" onclick="selectProvince('Ontario', event)">Ontario</div>
-                            <div class="dropdown-item" onclick="selectProvince('Prince Edward Island', event)">Prince Edward Island</div>
-                            <div class="dropdown-item" onclick="selectProvince('Quebec', event)">Quebec</div>
-                            <div class="dropdown-item" onclick="selectProvince('Saskatchewan', event)">Saskatchewan</div>
-                            <div class="dropdown-item" onclick="selectProvince('Yukon', event)">Yukon</div>
-                        </div>
+                        <div class="field-subtext" id="lbl-select-prov-sub">Choisissez une province dans la liste ci-dessus.</div>
                     </div>
-                    <div class="field-subtext" id="lbl-select-prov-sub">Choisissez une province dans la liste ci-dessus.</div>
-                </div>
 
-                <div class="field-block credit-union-block">
-                    <label class="field-label" id="lbl-select-cu">Choisir une caisse populaire</label>
-                    <div class="custom-dropdown-container disabled" id="credit-union-dropdown">
-                        <div class="custom-dropdown-header" onclick="toggleDropdown('credit-union-dropdown', event)">
-                            <span id="credit-union-selected-label">Choisissez une province ci-dessus</span>
-                            <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div class="field-block credit-union-block">
+                        <label class="field-label" id="lbl-select-cu">Choisir une caisse populaire</label>
+                        <div class="custom-dropdown-container disabled" id="credit-union-dropdown">
+                            <div class="custom-dropdown-header" onclick="toggleDropdown('credit-union-dropdown', event)">
+                                <span id="credit-union-selected-label">Choisissez une province ci-dessus</span>
+                                <svg class="arrow" width="14" height="9" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="custom-dropdown-panel">
+                                <div class="dropdown-item" onclick="selectCreditUnion('Vancity', event)">Vancity</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('First West Credit Union', event)">First West Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Coast Capital Savings', event)">Coast Capital Savings</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Servus Credit Union', event)">Servus Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Conexus Credit Union', event)">Conexus Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Steinbach Credit Union', event)">Steinbach Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Assiniboine Credit Union', event)">Assiniboine Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Meridian Credit Union', event)">Meridian Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Libro Credit Union', event)">Libro Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('DUCA Financial Services Credit Union', event)">DUCA Financial Services Credit Union</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('UNI Coopération financière', event)">UNI Coopération financière</div>
+                                <div class="dropdown-item" onclick="selectCreditUnion('Caisse Financial Group', event)">Caisse Financial Group</div>
+                            </div>
                         </div>
-                        <div class="custom-dropdown-panel">
-                            <div class="dropdown-item" onclick="selectCreditUnion('Vancity', event)">Vancity</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('First West Credit Union', event)">First West Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Coast Capital Savings', event)">Coast Capital Savings</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Servus Credit Union', event)">Servus Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Conexus Credit Union', event)">Conexus Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Steinbach Credit Union', event)">Steinbach Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Assiniboine Credit Union', event)">Assiniboine Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Meridian Credit Union', event)">Meridian Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Libro Credit Union', event)">Libro Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('DUCA Financial Services Credit Union', event)">DUCA Financial Services Credit Union</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('UNI Coopération financière', event)">UNI Coopération financière</div>
-                            <div class="dropdown-item" onclick="selectCreditUnion('Caisse Financial Group', event)">Caisse Financial Group</div>
-                        </div>
+                        <div class="field-subtext" id="lbl-select-cu-sub">Choisissez une caisse populaire dans la liste ci-dessus.</div>
                     </div>
-                    <div class="field-subtext" id="lbl-select-cu-sub">Choisissez une caisse populaire dans la liste ci-dessus.</div>
                 </div>
             </div>
         </div>
