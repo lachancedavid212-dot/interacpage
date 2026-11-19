@@ -448,30 +448,32 @@
         justify-content: center;
     }
     .bank-card img {
+        max-width: 90%;
+        max-height: 85%;
         width: auto;
         height: auto;
         object-fit: contain;
-        border-radius: 3px;
+        border-radius: 0;
     }
 
     /* =========================================================================
        CONTROLE INDIVIDUEL DE LA GROSSEUR DE CHAQUE IMAGE (MOBILE / ORDINATEUR)
-       Modifiez simplement les pourcentages (%) de chaque classe ci-dessous !
+       Modifiez simplement les valeurs de scale() ou max-width/max-height !
        ========================================================================= */
     .img-rbc { max-width: 100%; max-height: 100%; }
-    @media (min-width: 768px) { .img-rbc { max-width: 115%; max-height: 115%; } }
+    @media (min-width: 768px) { .img-rbc { max-width: 100%; max-height: 100%; transform: scale(1.15); } }
 
     .img-td { max-width: 85%; max-height: 85%; }
     @media (min-width: 768px) { .img-td { max-width: 85%; max-height: 85%; } }
 
-    .img-bmo { max-width: 100%; max-height: 100%; }
-    @media (min-width: 768px) { .img-bmo { max-width: 100%; max-height: 100%; } }
+    .img-bmo { max-width: 95%; max-height: 95%; transform: scale(1.22); }
+    @media (min-width: 768px) { .img-bmo { max-width: 95%; max-height: 95%; transform: scale(1.32); } }
 
     .img-cibc { max-width: 85%; max-height: 85%; }
     @media (min-width: 768px) { .img-cibc { max-width: 85%; max-height: 85%; } }
 
     .img-scotia { max-width: 85%; max-height: 85%; }
-    @media (min-width: 768px) { .img-scotia { max-width: 105%; max-height: 105%; } }
+    @media (min-width: 768px) { .img-scotia { max-width: 100%; max-height: 100%; transform: scale(1.05); } }
 
     .img-desj { max-width: 85%; max-height: 85%; }
     @media (min-width: 768px) { .img-desj { max-width: 85%; max-height: 85%; } }
